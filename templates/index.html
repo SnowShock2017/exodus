@@ -26,11 +26,12 @@
 
 <section class="card">
   <h2>{{ t('calories_target') }}</h2>
-  <p class="big-number">{{ targets.target_calories }} kcal</p>
+  <p class="big-number">{{ totals.kcal }} <span class="of-target">/ {{ targets.target_calories }} kcal</span></p>
+  <div class="bar"><div class="bar-fill {{ 'over' if kcal_pct >= 100 else '' }}" style="width: {{ kcal_pct }}%"></div></div>
   <p>{{ t('protein_target') }}: {{ targets.protein_g }} g &nbsp;|&nbsp;
      {{ t('carbs_target') }}: {{ targets.carb_g }} g &nbsp;|&nbsp;
      {{ t('fat_target') }}: {{ targets.fat_g }} g</p>
-  <a class="btn" href="{{ url_for('meals') }}">{{ t('nav_meals') }}</a>
+  <a class="btn" href="{{ url_for('meals') }}">{{ t('log_food') }}</a>
 </section>
 
 <section class="card">

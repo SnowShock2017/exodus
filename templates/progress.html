@@ -26,6 +26,11 @@
 </section>
 
 <section class="card">
+  <h2>{{ t('calorie_history') }}</h2>
+  <canvas id="kcalChart" height="180"></canvas>
+</section>
+
+<section class="card">
   <h2>Workout log</h2>
   {% if workout_log %}
     <table class="log-table">
@@ -42,8 +47,8 @@
   {% endif %}
 </section>
 
-{% if weight_log %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+{% if weight_log %}
 <script>
   const labels = {{ weight_log | map(attribute='date') | list | tojson }};
   const data = {{ weight_log | map(attribute='weight_kg') | list | tojson }};
@@ -55,4 +60,21 @@
   });
 </script>
 {% endif %}
+<script>
+  const kcalLabels = {{ kcal_history | map(attribute='date') | list | tojson }};
+  const kcalData = {{ kcal_history | map(attribute='kcal') | list | tojson }};
+  const kcalCtx = document.getElementById('kcalChart').getContext('2d');
+  new Chart(kcalCtx, {
+    type: 'bar',
+    data: {
+      labels: kcalLabels,
+      datasets: [
+        { label: 'kcal logged', data: kcalData, backgroundColor: '#3fa9f5' },
+        { label: 'target', data: kcalLabels.map(() => {{ target_calories }}), type: 'line',
+          borderColor: '#f5a83f', borderDash: [6, 4], pointRadius: 0 },
+      ],
+    },
+    options: { plugins: { legend: { display: true, labels: { color: '#9aa4b2' } } } },
+  });
+</script>
 {% endblock %}

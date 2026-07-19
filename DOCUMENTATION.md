@@ -58,17 +58,20 @@ you log it on the Progress tab).
 **Dashboard** — today's prescribed workout (or "rest day"), your calorie/macro
 target for today, and a list of coach tips generated from your logged data.
 
-**Workout tab** — a fixed 4-day Upper/Lower split (explained below), with a
-log form for today's main lift (weight, reps per set, RPE), plus the full
-weekly schedule.
+**Workout tab** — a 4-day Upper/Lower split whose main lift stays fixed
+(that's what makes progression trackable) but whose *accessory* exercises
+rotate every calendar week so it doesn't feel like the same routine forever.
+Includes a log form for today's main lift (weight, reps per set, RPE) and a
+full weekly schedule showing every day's exercises, current and upcoming.
 
-**Meals tab** — your calorie and macro targets (protein/carbs/fat), a list of
-meal ideas using foods easy to find in Romania (in English or Romanian
-depending on your language setting), your supplement stack with doses, and a
-quick "on plan / off plan today" logger.
+**Meals tab** — your calorie/macro targets with live progress bars showing
+how much you've logged today vs. target, a food-logging form (type a food
+name, pick a quantity and meal type, hit Add), today's logged items with the
+ability to remove any of them, plus meal ideas and your supplement stack.
 
-**Progress tab** — log your body weight, see a history table + chart, and see
-your full workout log.
+**Progress tab** — log your body weight, see a weight history table + chart,
+a 14-day calorie history chart (bars vs. your target line), and your full
+workout log.
 
 **Settings tab** — edit your stats, PRs, goal, training days, and switch
 language. (There's also an EN/RO button in the top-right on every page.)
@@ -124,9 +127,28 @@ a small weight once you're past your old rep PR. This logic is in
 transparent — you can always see *why* a weight was suggested, and it costs
 nothing to run.
 
+### Weekly-rotating accessories
+
+The main lift (bench/squat/pull-ups/deadlift) never changes week to week —
+that consistency is what makes the progression math above work. But the
+*accessory* movements (the smaller exercises after the main lift) rotate
+automatically so the plan doesn't feel identical every week.
+
+Each accessory "slot" (e.g. chest, back, shoulders, calves, core) has 2-3
+interchangeable exercise options defined in `ACCESSORY_POOLS` in
+`workout_engine.py`. Which option shows up is `ISO calendar week number %
+pool size` — so it's fully deterministic (refreshing the page shows the same
+plan), guaranteed to differ from last week whenever a pool has 2+ options,
+and needs zero stored history to work. A 3-option pool repeats every 3 weeks,
+which is a normal rotation length even in real coaching programs.
+
+The Workout tab's "Weekly split" section shows the exercises for every day
+of the *current* week, main lift and rotating accessories included, so you
+can see your whole week at a glance.
+
 ---
 
-## 4. The nutrition logic
+## 4. The nutrition logic & daily food logging
 
 `logic/nutrition_engine.py` → `calculate_targets()`:
 
@@ -149,6 +171,28 @@ All numbers recalculate automatically whenever your logged weight changes.
 Meal ideas (`MEAL_IDEAS` in the same file) are simple, common Romanian-
 accessible foods (piept de pui, brânză de vaci, ouă, orez, cartofi, etc.),
 each with a bilingual label.
+
+### Logging what you actually eat
+
+The **Meals tab** has a food log, not just a meal-idea list. Type a food name
+into the box (it autocompletes from `data/food_db.json`, ~26 common foods
+with macros per 100g or per unit), enter a quantity, pick a meal type
+(breakfast/lunch/dinner/snack), and hit Add. Exodus looks the food up,
+scales its macros by your quantity, and stores the *computed* numbers in
+`data/meal_log.json` — so editing the food database later never rewrites
+your history.
+
+The top of the Meals tab shows today's running totals against your targets
+as progress bars (green under 100%, red once you've gone over) for calories,
+protein, carbs, and fat — and the Dashboard shows the same calorie bar at a
+glance. The Progress tab adds a 14-day bar chart of logged calories against
+your target line, so you can see trends, not just today.
+
+**Adding a food that isn't in the list:** open `data/food_db.json` and add
+an entry following the existing pattern (see section 8 below).
+
+**Correcting a mistake:** every logged item on the Meals tab has a Remove
+button next to it.
 
 ---
 
@@ -193,28 +237,29 @@ version, see the existing pattern).
 ```
 exodus/
 ├── app.py                     Flask routes — the only file that talks HTTP
-├── requirements.txt            Just "Flask"
+├── requirements.txt            Flask + gunicorn
 ├── data/                       Your actual data, plain JSON files
 │   ├── user_profile.json       Stats, goal, PRs, language — one dict
 │   ├── weight_log.json         List of {date, weight_kg}
 │   ├── workout_log.json        List of logged sets per exercise/date
-│   └── meal_log.json           List of {date, compliant, note}
+│   ├── meal_log.json           List of logged food entries (see section 4)
+│   └── food_db.json            ~26 foods with macros per 100g/unit
 ├── logic/                       All the "brain" — no Flask/HTTP code here
 │   ├── i18n.py                  EN/RO text dictionary + t(key, lang)
 │   ├── profile_store.py         Read/write the JSON files above
-│   ├── workout_engine.py        Split, ramp phase, progression math
-│   ├── nutrition_engine.py      TDEE/macros + meal idea list
+│   ├── workout_engine.py        Split, ramp phase, progression, accessory rotation
+│   ├── nutrition_engine.py      TDEE/macros, meal ideas, food lookup + logging math
 │   ├── supplement_engine.py     Supplement list + doses
 │   └── coach_engine.py          Rule-based tips from your logs
 ├── templates/                   HTML pages (Jinja2, rendered by Flask)
 │   ├── base.html                Shared header/nav, all pages extend this
-│   ├── index.html                Dashboard
-│   ├── workout.html              Today's workout + log form + week view
-│   ├── meals.html                Targets + meal ideas + supplements
-│   ├── progress.html             Weight log/chart + workout log
+│   ├── index.html                Dashboard incl. today's calorie bar
+│   ├── workout.html              Today's workout + log form + full week view
+│   ├── meals.html                Targets/bars + food log form + food history + supplements
+│   ├── progress.html             Weight chart + calorie history chart + workout log
 │   └── settings.html             Edit profile form
 └── static/
-    ├── css/style.css             All styling (dark theme, mobile-first)
+    ├── css/style.css             All styling (dark theme, mobile-first, progress bars)
     ├── js/app.js                 Currently unused placeholder
     ├── manifest.json             PWA metadata (Home Screen icon/name)
     └── icons/icon.png            Home Screen icon
@@ -243,6 +288,21 @@ history.
 **Add/change a supplement**
 → Add a new dict to the list returned by `get_recommendations()` in
 `logic/supplement_engine.py`.
+
+**Add a food to the log's autocomplete list**
+→ Add an entry to `data/food_db.json`: `key` (unique id), `name_en`,
+`name_ro`, `unit` (`"g"` or `"unit"`), `per` (100 for grams, 1 for units),
+and `kcal`/`protein`/`carb`/`fat` for that amount. Look at an existing entry
+for the exact shape.
+
+**Change accessory exercise options / add more variety**
+→ Edit `ACCESSORY_POOLS` in `logic/workout_engine.py`. Each slot's `options`
+list can have as many exercises as you want — more options means a longer
+rotation before anything repeats.
+
+**Change how many days the calorie history chart shows**
+→ Change `days=14` in the `calorie_history()` call inside the `/progress`
+route in `app.py`.
 
 **Add a new coach rule**
 → Add a new `if` block inside `analyze()` in `logic/coach_engine.py`,

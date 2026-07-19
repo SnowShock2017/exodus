@@ -32,7 +32,7 @@
     <button class="btn" type="submit">{{ t('save') }}</button>
   </form>
 
-  <h3>Accessories</h3>
+  <h3>Accessories <span class="hint">({{ t('this_weeks_accessories') }})</span></h3>
   <ul>
     {% for acc in plan.accessories %}
       <li>{{ acc.exercise }} — {{ acc.sets }} x {{ acc.reps }}</li>
@@ -45,10 +45,20 @@
 
 <section class="card">
   <h2>Weekly split</h2>
-  <ul class="week-list">
-    {% for d in overview %}
-      <li>{{ ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][d.weekday_index] }} — {{ d.label }}</li>
-    {% endfor %}
-  </ul>
+  {% for d in overview %}
+    <div class="week-day">
+      <div class="week-day-header">
+        <strong>{{ ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][d.weekday_index] }}</strong>
+        <span>{{ d.label }}</span>
+      </div>
+      {% if d.accessories %}
+        <ul class="week-day-accessories">
+          {% for acc in d.accessories %}
+            <li>{{ acc.exercise }} — {{ acc.sets }}x{{ acc.reps }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  {% endfor %}
 </section>
 {% endblock %}

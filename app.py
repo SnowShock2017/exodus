@@ -16,9 +16,12 @@ GET  /                 -> dashboard: today's workout summary, today's
                           nutrition targets, coach tips
 GET  /workout          -> full weekly split + today's prescribed sets
 POST /workout/log      -> save logged sets for today
-GET  /meals            -> calorie/macro targets + meal ideas + supplements
-POST /meals/log        -> mark today as "on plan" or add a note
-GET  /progress         -> weight history table + simple chart
+GET  /meals            -> calorie/macro targets, today's logged food + totals,
+                          meal ideas + supplements
+POST /meals/log        -> log one food item (looked up in data/food_db.json,
+                          scaled by quantity) for today
+POST /meals/delete/<id> -> remove a logged food item
+GET  /progress         -> weight history table/chart + calorie history chart
 POST /progress/log     -> save a new body-weight entry
 GET  /settings         -> edit profile (stats, PRs, language, goal)
 POST /settings/save    -> persist profile edits
@@ -32,7 +35,10 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from logic import profile_store as store
 from logic.i18n import t
 from logic.workout_engine import get_today_plan, get_week_overview, get_phase
-from logic.nutrition_engine import calculate_targets, get_meal_ideas
+from logic.nutrition_engine import (
+    calculate_targets, get_meal_ideas, MEAL_TYPES,
+    find_food, build_log_entry, daily_totals, progress_pct, calorie_history,
+)
 from logic.supplement_engine import get_recommendations, DISCLAIMER_EN, DISCLAIMER_RO
 from logic.coach_engine import analyze
 
@@ -62,6 +68,10 @@ def dashboard():
     targets = calculate_targets(profile)
     tips = analyze(profile, weight_log, workout_log, lang)
 
+    meal_log = store.get_meal_log()
+    totals, _ = daily_totals(meal_log)
+    kcal_pct = progress_pct(totals["kcal"], targets["target_calories"])
+
     return render_template(
         "index.html",
         profile=profile,
@@ -70,6 +80,8 @@ def dashboard():
         week=week,
         targets=targets,
         tips=tips,
+        totals=totals,
+        kcal_pct=kcal_pct,
     )
 
 
@@ -109,29 +121,70 @@ def log_workout():
 @app.route("/meals")
 def meals():
     profile = store.get_profile()
-    targets = calculate_targets(profile)
-    meal_ideas = get_meal_ideas(profile.get("language", "en"))
-    supplements = get_recommendations(profile)
     lang = profile.get("language", "en")
+    targets = calculate_targets(profile)
+    meal_ideas = get_meal_ideas(lang)
+    supplements = get_recommendations(profile)
     disclaimer = DISCLAIMER_RO if lang == "ro" else DISCLAIMER_EN
-    return render_template("meals.html", profile=profile, targets=targets,
-                            meal_ideas=meal_ideas, supplements=supplements,
-                            disclaimer=disclaimer)
+
+    food_db = store.get_food_db()
+    meal_log = store.get_meal_log()
+    totals, todays_entries = daily_totals(meal_log)
+    todays_entries.sort(key=lambda e: e.get("id", ""))
+
+    progress = {
+        "kcal": progress_pct(totals["kcal"], targets["target_calories"]),
+        "protein_g": progress_pct(totals["protein_g"], targets["protein_g"]),
+        "carb_g": progress_pct(totals["carb_g"], targets["carb_g"]),
+        "fat_g": progress_pct(totals["fat_g"], targets["fat_g"]),
+    }
+
+    return render_template(
+        "meals.html", profile=profile, targets=targets, meal_ideas=meal_ideas,
+        supplements=supplements, disclaimer=disclaimer, food_db=food_db,
+        meal_types=MEAL_TYPES, todays_entries=todays_entries, totals=totals,
+        progress=progress,
+    )
 
 
 @app.route("/meals/log", methods=["POST"])
 def log_meal():
-    compliant = request.form.get("compliant") == "yes"
-    note = request.form.get("note", "")
-    store.add_meal_entry({"date": date.today().isoformat(), "compliant": compliant, "note": note})
+    profile = store.get_profile()
+    lang = profile.get("language", "en")
+    food_name = request.form.get("food_name")
+    qty = request.form.get("qty")
+    meal_type = request.form.get("meal_type", "snack")
+
+    food = find_food(food_name, lang)
+    if food and qty:
+        try:
+            qty_val = float(qty)
+        except ValueError:
+            qty_val = None
+        if qty_val and qty_val > 0:
+            entry = build_log_entry(food, qty_val, meal_type, lang)
+            store.add_meal_entry(entry)
+    return redirect(url_for("meals"))
+
+
+@app.route("/meals/delete/<entry_id>", methods=["POST"])
+def delete_meal(entry_id):
+    store.delete_meal_entry(entry_id)
     return redirect(url_for("meals"))
 
 
 @app.route("/progress")
 def progress():
+    profile = store.get_profile()
+    targets = calculate_targets(profile)
     weight_log = store.get_weight_log()
     workout_log = store.get_workout_log()
-    return render_template("progress.html", weight_log=weight_log, workout_log=workout_log)
+    meal_log = store.get_meal_log()
+    kcal_history = calorie_history(meal_log, days=14)
+    return render_template(
+        "progress.html", weight_log=weight_log, workout_log=workout_log,
+        kcal_history=kcal_history, target_calories=targets["target_calories"],
+    )
 
 
 @app.route("/progress/log", methods=["POST"])

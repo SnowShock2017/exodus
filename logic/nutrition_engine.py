@@ -1,11 +1,13 @@
 """
 nutrition_engine.py
 --------------------
-Calorie & macro targets, plus a small bilingual (EN/RO) list of meal ideas
-built around foods that are cheap and easy to find in Romania.
+Calorie & macro targets, a small bilingual (EN/RO) list of meal ideas built
+around foods that are cheap and easy to find in Romania, and the food-
+logging math (looking up a food, scaling it by quantity, and totalling up
+a day's logged entries against your targets).
 
-Method
-------
+Method for targets
+-------------------
 1. BMR via Mifflin-St Jeor (most accurate common formula, doesn't need
    body-fat %):
        men:  BMR = 10*weight_kg + 6.25*height_cm - 5*age + 5
@@ -18,6 +20,10 @@ Method
    Fat set to a sensible floor (0.8 g/kg, hormones need dietary fat).
    Remaining calories -> carbs, which fuel the actual training sessions.
 """
+
+from datetime import date, datetime, timedelta
+
+from logic.profile_store import get_food_db
 
 ACTIVITY_MULTIPLIERS = {
     "sedentary": 1.35,
@@ -75,6 +81,8 @@ MEAL_IDEAS = [
     },
 ]
 
+MEAL_TYPES = ["breakfast", "lunch", "dinner", "snack"]
+
 
 def calculate_targets(profile):
     weight = float(profile.get("weight_kg", 80))
@@ -115,3 +123,93 @@ def calculate_targets(profile):
 
 def get_meal_ideas(lang="en"):
     return MEAL_IDEAS
+
+
+# ---------------------------------------------------------------------------
+# Food logging
+# ---------------------------------------------------------------------------
+
+def find_food(name, lang="en"):
+    """Match a food by its displayed name (either language) or its key."""
+    if not name:
+        return None
+    name_lower = name.strip().lower()
+    for food in get_food_db():
+        if food["key"] == name_lower:
+            return food
+        if food["name_en"].lower() == name_lower:
+            return food
+        if food["name_ro"].lower() == name_lower:
+            return food
+    return None
+
+
+def compute_macros(food, qty):
+    """Scale a food_db entry's macros by quantity.
+
+    unit == "g"    -> qty is grams, food values are per `per` grams (usually 100)
+    unit == "unit" -> qty is a count (eggs, bananas, scoops), food values are per `per` units (usually 1)
+    """
+    qty = float(qty)
+    factor = qty / float(food.get("per", 100))
+    return {
+        "kcal": round(food["kcal"] * factor),
+        "protein_g": round(food["protein"] * factor, 1),
+        "carb_g": round(food["carb"] * factor, 1),
+        "fat_g": round(food["fat"] * factor, 1),
+    }
+
+
+def build_log_entry(food, qty, meal_type, lang="en"):
+    macros = compute_macros(food, qty)
+    return {
+        "meal_type": meal_type,
+        "food_key": food["key"],
+        "food_name": food["name_ro"] if lang == "ro" else food["name_en"],
+        "qty": qty,
+        "unit": food["unit"],
+        "kcal": macros["kcal"],
+        "protein_g": macros["protein_g"],
+        "carb_g": macros["carb_g"],
+        "fat_g": macros["fat_g"],
+    }
+
+
+def entries_for_date(meal_log, target_date=None):
+    target_date = target_date or date.today().isoformat()
+    return [e for e in meal_log if e.get("date") == target_date]
+
+
+def daily_totals(meal_log, target_date=None):
+    entries = entries_for_date(meal_log, target_date)
+    totals = {"kcal": 0, "protein_g": 0.0, "carb_g": 0.0, "fat_g": 0.0}
+    for e in entries:
+        totals["kcal"] += e.get("kcal", 0)
+        totals["protein_g"] += e.get("protein_g", 0)
+        totals["carb_g"] += e.get("carb_g", 0)
+        totals["fat_g"] += e.get("fat_g", 0)
+    totals["protein_g"] = round(totals["protein_g"], 1)
+    totals["carb_g"] = round(totals["carb_g"], 1)
+    totals["fat_g"] = round(totals["fat_g"], 1)
+    return totals, entries
+
+
+def progress_pct(logged, target):
+    if not target:
+        return 0
+    return max(0, min(100, round((logged / target) * 100)))
+
+
+def calorie_history(meal_log, days=14):
+    """List of {"date", "kcal"} for the last `days` days, oldest first,
+    including days with 0 logged (so the chart doesn't have gaps)."""
+    today = date.today()
+    by_date = {}
+    for e in meal_log:
+        d = e.get("date")
+        by_date[d] = by_date.get(d, 0) + e.get("kcal", 0)
+    history = []
+    for i in range(days - 1, -1, -1):
+        d = (today - timedelta(days=i)).isoformat()
+        history.append({"date": d, "kcal": by_date.get(d, 0)})
+    return history

@@ -30,6 +30,18 @@ target weight goes up by a small fixed increment. Otherwise it repeats.
 This is the same simple rule used in most beginner/intermediate strength
 programs (StrongLifts, GreyStress, etc.) -- easy to reason about, no
 guessing required.
+
+Weekly exercise variation
+--------------------------
+The main lift for each day never changes (bench/squat/pull-ups/deadlift --
+that consistency is what makes the progression math above possible). But
+the *accessory* exercises rotate every calendar week so the plan doesn't
+feel identical week after week, the way a real coach would swap movements
+for variety and joint-friendliness. Each accessory "slot" (e.g. "chest
+accessory", "calf accessory") has a small pool of interchangeable exercise
+options; which option shows up is `ISO week number % pool size`, so it's
+deterministic (same day always shows the same plan if you refresh) and it
+guarantees back-to-back weeks differ whenever a pool has 2+ options.
 """
 
 from datetime import date, datetime
@@ -50,34 +62,68 @@ MAIN_LIFT_INCREMENT_KG = {
     "deadlift": 5.0,
 }
 
-# generic accessory work -- same pool every week, sets/reps are by feel
-# (RPE 7-8), no weight prescription needed since it's not the focus lift.
-ACCESSORIES = {
+# Rotating accessory pools -- each "slot" lists interchangeable exercise
+# options. sets/reps are fixed per slot (by feel, RPE 7-8); the exercise
+# NAME rotates weekly via _pick_from_pool() below. No weight prescription
+# needed since accessories aren't the tracked/progressed lift.
+ACCESSORY_POOLS = {
     "upper_a": [
-        {"exercise": "Incline dumbbell press", "sets": 3, "reps": "8-10"},
-        {"exercise": "Chest-supported row", "sets": 3, "reps": "8-10"},
-        {"exercise": "Lateral raise", "sets": 3, "reps": "12-15"},
-        {"exercise": "Triceps pushdown", "sets": 3, "reps": "10-12"},
+        {"slot": "chest", "sets": 3, "reps": "8-10",
+         "options": ["Incline dumbbell press", "Machine chest press", "Weighted dips"]},
+        {"slot": "back", "sets": 3, "reps": "8-10",
+         "options": ["Chest-supported row", "Lat pulldown", "Seated cable row"]},
+        {"slot": "shoulders", "sets": 3, "reps": "12-15",
+         "options": ["Lateral raise", "Cable lateral raise", "Egyptian lateral raise"]},
+        {"slot": "arms", "sets": 3, "reps": "10-12",
+         "options": ["Triceps pushdown", "Overhead triceps extension", "Close-grip push-up"]},
     ],
     "upper_b": [
-        {"exercise": "Overhead press", "sets": 3, "reps": "6-8"},
-        {"exercise": "Barbell/DB row", "sets": 3, "reps": "8-10"},
-        {"exercise": "Face pull", "sets": 3, "reps": "12-15"},
-        {"exercise": "Biceps curl", "sets": 3, "reps": "10-12"},
+        {"slot": "press", "sets": 3, "reps": "6-8",
+         "options": ["Overhead press", "Arnold press", "Landmine press"]},
+        {"slot": "back", "sets": 3, "reps": "8-10",
+         "options": ["Barbell row", "Dumbbell row", "Meadows row"]},
+        {"slot": "rear_delts", "sets": 3, "reps": "12-15",
+         "options": ["Face pull", "Reverse pec-deck fly", "Band pull-apart"]},
+        {"slot": "arms", "sets": 3, "reps": "10-12",
+         "options": ["Barbell curl", "Incline dumbbell curl", "Hammer curl"]},
     ],
     "lower_a": [
-        {"exercise": "Romanian deadlift", "sets": 3, "reps": "8-10"},
-        {"exercise": "Leg press", "sets": 3, "reps": "10-12"},
-        {"exercise": "Calf raise", "sets": 4, "reps": "12-15"},
-        {"exercise": "Hanging leg raise", "sets": 3, "reps": "10-15"},
+        {"slot": "posterior_chain", "sets": 3, "reps": "8-10",
+         "options": ["Romanian deadlift", "Good morning", "45-degree back extension"]},
+        {"slot": "quads", "sets": 3, "reps": "10-12",
+         "options": ["Leg press", "Bulgarian split squat", "Hack squat"]},
+        {"slot": "calves", "sets": 4, "reps": "12-15",
+         "options": ["Standing calf raise", "Seated calf raise", "Leg press calf press"]},
+        {"slot": "core", "sets": 3, "reps": "10-15",
+         "options": ["Hanging leg raise", "Cable crunch", "Ab wheel rollout"]},
     ],
     "lower_b": [
-        {"exercise": "Front squat or leg press", "sets": 3, "reps": "8-10"},
-        {"exercise": "Leg curl", "sets": 3, "reps": "10-12"},
-        {"exercise": "Standing calf raise", "sets": 4, "reps": "12-15"},
-        {"exercise": "Plank", "sets": 3, "reps": "45-60s"},
+        {"slot": "quads", "sets": 3, "reps": "8-10",
+         "options": ["Front squat", "Leg press", "Walking lunge"]},
+        {"slot": "hamstrings", "sets": 3, "reps": "10-12",
+         "options": ["Leg curl", "Glute-ham raise", "Single-leg RDL"]},
+        {"slot": "calves", "sets": 4, "reps": "12-15",
+         "options": ["Standing calf raise", "Donkey calf raise", "Single-leg calf raise"]},
+        {"slot": "core", "sets": 3, "reps": "45-60s",
+         "options": ["Plank", "Pallof press", "Weighted sit-up"]},
     ],
 }
+
+
+def _week_rotation_index(today=None):
+    today = today or date.today()
+    return today.isocalendar()[1]  # ISO week number, changes every calendar week
+
+
+def _pick_from_pool(pool_slot, week_index):
+    options = pool_slot["options"]
+    choice = options[week_index % len(options)]
+    return {"exercise": choice, "sets": pool_slot["sets"], "reps": pool_slot["reps"]}
+
+
+def get_accessories_for_week(split_key, today=None):
+    week_index = _week_rotation_index(today)
+    return [_pick_from_pool(slot, week_index) for slot in ACCESSORY_POOLS[split_key]]
 
 SPLIT_LABEL_KEY = {
     "upper_a": "Upper A (Bench focus)",
@@ -164,7 +210,7 @@ def _ramp_pullups(profile, week_number):
     return max(3, round(pr * pct))
 
 
-def build_day_plan(profile, workout_log, split_key, phase, week_number):
+def build_day_plan(profile, workout_log, split_key, phase, week_number, today=None):
     """Returns dict describing one training day's exercises, or None for rest."""
     if split_key == "rest":
         return None
@@ -202,7 +248,7 @@ def build_day_plan(profile, workout_log, split_key, phase, week_number):
         "split_key": split_key,
         "label": SPLIT_LABEL_KEY[split_key],
         "main_lift": main,
-        "accessories": ACCESSORIES[split_key],
+        "accessories": get_accessories_for_week(split_key, today),
     }
     return day_plan
 
@@ -211,13 +257,14 @@ def get_today_plan(profile, workout_log, today=None):
     today = today or date.today()
     split_key = WEEKDAY_TO_SPLIT[today.weekday()]
     phase, week_number = get_phase(profile, today)
-    plan = build_day_plan(profile, workout_log, split_key, phase, week_number)
+    plan = build_day_plan(profile, workout_log, split_key, phase, week_number, today)
     return plan, phase, week_number
 
 
 def get_week_overview(profile, workout_log, today=None):
-    """Mon-Sun list of {weekday_index, split_key, label} for the weekly schedule view."""
-    phase, week_number = get_phase(profile, today or date.today())
+    """Mon-Sun list of {weekday_index, split_key, label, accessories} for the weekly schedule view."""
+    today = today or date.today()
+    phase, week_number = get_phase(profile, today)
     overview = []
     for idx in range(7):
         split_key = WEEKDAY_TO_SPLIT[idx]
@@ -225,5 +272,6 @@ def get_week_overview(profile, workout_log, today=None):
             "weekday_index": idx,
             "split_key": split_key,
             "label": SPLIT_LABEL_KEY[split_key],
+            "accessories": get_accessories_for_week(split_key, today) if split_key != "rest" else [],
         })
     return overview, phase, week_number

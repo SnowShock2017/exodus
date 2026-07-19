@@ -78,3 +78,39 @@ No credit card needed. Two accounts required: GitHub and Render. Total time:
   — ask if you want that built in.
 - **Updating the app later**: edit files in your GitHub repo (or push new
   ones), Render auto-redeploys within a minute or two of a new commit.
+
+---
+
+## Part 4 — Making a change and getting it live
+
+Render redeploys automatically on every commit to your repo's `main`
+branch — you never touch the Render dashboard for a normal update.
+
+**A) Small edit to one file (e.g. tweak a meal idea, change a percentage)**
+
+1. On GitHub, open the file (e.g. `logic/nutrition_engine.py`).
+2. Click the **pencil icon** (top-right of the file view) to edit in the browser.
+3. Make your change, scroll down, click **Commit changes** (commit directly
+   to `main`).
+4. Go to your Render dashboard → your service → **Events** tab. You'll see a
+   new deploy start within seconds, taking 1-3 minutes.
+5. Once it says **Live**, refresh the app on your phone.
+
+**B) Replacing whole files (e.g. after I help you edit code in a session
+like this one and hand you updated files)**
+
+1. On GitHub, go to the repo → **Add file** → **Upload files**.
+2. Drag in the changed file(s), keeping the same path (e.g. if
+   `logic/workout_engine.py` changed, upload it so it lands at
+   `logic/workout_engine.py`, not the repo root).
+3. Commit. Same auto-redeploy as above.
+
+**C) If auto-deploy doesn't seem to trigger**
+
+Render dashboard → your service → **Manual Deploy** button (top-right) →
+**Deploy latest commit**.
+
+**Good habit before uploading:** if you're not sure a change is correct,
+run `python app.py` locally first and click through the app in your own
+browser — catching a typo locally takes 10 seconds, catching it after a
+live deploy takes the 1-3 minute redeploy cycle each time.
