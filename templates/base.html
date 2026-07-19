@@ -15,7 +15,7 @@
   <header class="topbar">
     <div class="brand">{{ t('app_name') }}</div>
     <form method="post" action="{{ url_for('toggle_language') }}" class="lang-form">
-      <button type="submit" class="lang-btn">{{'Apasa sa schimbi limba' if lang =='ro' else 'Tap to change langauge'}} {{ 'EN' if lang == 'ro' else 'RO' }}</button>
+      <button type="submit" class="lang-btn">{{'Apasa sa schimbi limba in: ->' if lang =='ro' else 'Tap to change langauge to : ->'}} {{ 'EN' if lang == 'ro' else 'RO' }}</button>
     </form>
   </header>
 
