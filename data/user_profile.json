@@ -1,0 +1,23 @@
+{
+  "name": "Absalon",
+  "email": "torqm12@gmail.com",
+  "sex": "male",
+  "age": 21,
+  "birthday_month_day": "09-XX",
+  "height_cm": 190,
+  "weight_kg": 101,
+  "previous_weight_kg": 93,
+  "goal": "lean_maintain_strength",
+  "training_days_per_week": 4,
+  "activity_level": "moderate",
+  "language": "en",
+  "country": "Romania",
+  "prs_kg": {
+    "bench": 100,
+    "deadlift": 100,
+    "squat": 80,
+    "pullups_clean_reps": 12
+  },
+  "return_to_training_start_date": "2026-07-19",
+  "layoff_weeks": 4
+}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ t('today_is') }} {{ today }}</h1>
+
+<section class="card">
+  <h2>{{ t('todays_workout') }}</h2>
+  {% if plan %}
+    <p class="split-label">{{ plan.label }}</p>
+    {% if phase == 'ramp' %}
+      <p class="badge">{{ t('phase_ramp').replace('{week}', week|string) }}</p>
+    {% endif %}
+    <p><strong>{{ plan.main_lift.exercise }}</strong> —
+      {{ plan.main_lift.sets }} x {{ plan.main_lift.reps }}
+      {% if plan.main_lift.weight_kg %} @ {{ plan.main_lift.weight_kg }} kg{% endif %}
+    </p>
+    <ul>
+      {% for acc in plan.accessories %}
+        <li>{{ acc.exercise }} — {{ acc.sets }} x {{ acc.reps }}</li>
+      {% endfor %}
+    </ul>
+    <a class="btn" href="{{ url_for('workout') }}">{{ t('log_workout') }}</a>
+  {% else %}
+    <p>{{ t('rest_day') }}. {{ t('no_workout_today') }}</p>
+  {% endif %}
+</section>
+
+<section class="card">
+  <h2>{{ t('calories_target') }}</h2>
+  <p class="big-number">{{ targets.target_calories }} kcal</p>
+  <p>{{ t('protein_target') }}: {{ targets.protein_g }} g &nbsp;|&nbsp;
+     {{ t('carbs_target') }}: {{ targets.carb_g }} g &nbsp;|&nbsp;
+     {{ t('fat_target') }}: {{ targets.fat_g }} g</p>
+  <a class="btn" href="{{ url_for('meals') }}">{{ t('nav_meals') }}</a>
+</section>
+
+<section class="card">
+  <h2>{{ t('coach_says') }}</h2>
+  {% if tips %}
+    <ul>
+      {% for tip in tips %}<li>{{ tip }}</li>{% endfor %}
+    </ul>
+  {% else %}
+    <p>—</p>
+  {% endif %}
+</section>
+{% endblock %}

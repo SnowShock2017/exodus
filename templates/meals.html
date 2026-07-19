@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ t('nav_meals') }}</h1>
+
+<section class="card">
+  <h2>{{ t('calories_target') }}</h2>
+  <p class="big-number">{{ targets.target_calories }} kcal</p>
+  <p>BMR: {{ targets.bmr }} kcal &nbsp;|&nbsp; TDEE: {{ targets.tdee }} kcal
+     &nbsp;|&nbsp; Deficit: {{ targets.deficit_pct }}%</p>
+  <p>{{ t('protein_target') }}: <strong>{{ targets.protein_g }} g</strong> &nbsp;|&nbsp;
+     {{ t('carbs_target') }}: <strong>{{ targets.carb_g }} g</strong> &nbsp;|&nbsp;
+     {{ t('fat_target') }}: <strong>{{ targets.fat_g }} g</strong></p>
+
+  <form method="post" action="{{ url_for('log_meal') }}" class="inline-form">
+    <label><input type="radio" name="compliant" value="yes" checked> On plan today</label>
+    <label><input type="radio" name="compliant" value="no"> Off plan today</label>
+    <input type="text" name="note" placeholder="note (optional)">
+    <button class="btn" type="submit">{{ t('save') }}</button>
+  </form>
+</section>
+
+<section class="card">
+  <h2>{{ t('meal_ideas') }}</h2>
+  <ul>
+    {% for m in meal_ideas %}
+      <li><strong>{{ m.en if lang == 'en' else m.ro }}</strong><br>
+          <small>{{ m.protein_note }}</small></li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section class="card">
+  <h2>{{ t('supplements') }}</h2>
+  <ul>
+    {% for s in supplements %}
+      <li><strong>{{ s.en if lang == 'en' else s.ro }}</strong> — {{ s.dose }}<br>
+          <small>{{ s.why_en if lang == 'en' else s.why_ro }}</small></li>
+    {% endfor %}
+  </ul>
+  <p class="disclaimer">{{ disclaimer }}</p>
+</section>
+{% endblock %}

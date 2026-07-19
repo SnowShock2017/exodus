@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>{{ t('app_name') }}</title>
+  <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Exodus">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='icons/icon.png') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">{{ t('app_name') }}</div>
+    <form method="post" action="{{ url_for('toggle_language') }}" class="lang-form">
+      <button type="submit" class="lang-btn">{{ 'RO' if lang == 'en' else 'EN' }}</button>
+    </form>
+  </header>
+
+  <main class="content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <nav class="tabbar">
+    <a href="{{ url_for('dashboard') }}" class="{{ 'active' if request.path == '/' else '' }}">🏠<span>{{ t('nav_dashboard') }}</span></a>
+    <a href="{{ url_for('workout') }}" class="{{ 'active' if request.path == '/workout' else '' }}">🏋️<span>{{ t('nav_workout') }}</span></a>
+    <a href="{{ url_for('meals') }}" class="{{ 'active' if request.path == '/meals' else '' }}">🍽️<span>{{ t('nav_meals') }}</span></a>
+    <a href="{{ url_for('progress') }}" class="{{ 'active' if request.path == '/progress' else '' }}">📈<span>{{ t('nav_progress') }}</span></a>
+    <a href="{{ url_for('settings') }}" class="{{ 'active' if request.path == '/settings' else '' }}">⚙️<span>{{ t('nav_settings') }}</span></a>
+  </nav>
+</body>
+</html>
