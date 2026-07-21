@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ t('today_is') }} {{ today }}</h1>
+
+{% if phase == 'ramp' %}
+<p class="badge">{{ t('phase_ramp').replace('{week}', ramp_week|string) }}</p>
+{% endif %}
+
+<section class="card">
+  <h2>{{ t('calories_target') }}</h2>
+  <p class="big-number">{{ totals.kcal }} <span class="of-target">/ {{ targets.target_calories }} kcal</span></p>
+  <div class="bar"><div class="bar-fill {{ 'over' if kcal_pct >= 100 else '' }}" style="width: {{ kcal_pct }}%"></div></div>
+  <p>{{ t('protein_target') }}: {{ targets.protein_g }}g · {{ t('carbs_target') }}: {{ targets.carb_g }}g ·
+     {{ t('fat_target') }}: {{ targets.fat_g }}g · {{ t('fiber') }}: {{ targets.fiber_g }}g ·
+     {{ t('water') }}: {{ targets.water_ml }}ml</p>
+  {% if targets.in_transition %}<p class="hint">{{ t('goal_transitioning_hint') }}</p>{% endif %}
+  <a class="btn" href="{{ url_for('meals.index') }}">{{ t('log_food') }}</a>
+</section>
+
+<section class="card">
+  <h2>{{ t('todays_workout') }}</h2>
+  {% if not plan %}
+    <p>{{ t('no_active_plan') }}</p>
+    <a class="btn" href="{{ url_for('workouts.plan_view') }}">{{ t('generate_plan') }}</a>
+  {% elif not today_day or today_day.is_rest %}
+    <p>{{ t('rest_day') }}. {{ t('no_workout_today') }}</p>
+  {% else %}
+    <p class="split-label">{{ today_day.label }}</p>
+    <ul>
+      {% for pe in today_day.exercises %}
+        <li>{{ exercises_by_key.get(pe.exercise_key, {}).get('name_ro' if lang=='ro' else 'name_en', pe.exercise_key) }}
+          — {{ pe.sets }}x{{ pe.reps }}</li>
+      {% endfor %}
+    </ul>
+    <a class="btn" href="{{ url_for('workouts.today') }}">{{ t('log_workout') }}</a>
+  {% endif %}
+</section>
+
+<section class="card">
+  <h2>{{ t('weekly_progress') }}</h2>
+  <p>{{ week_progress.sessions }}/{{ week_progress.planned }} {{ t('sessions_this_week') }}</p>
+  {% if weight_trend is not none %}
+    <p>{{ t('weight_trend') }}: {{ '+' if weight_trend > 0 else '' }}{{ weight_trend }} kg</p>
+  {% endif %}
+</section>
+
+{% if recent_prs %}
+<section class="card">
+  <h2>{{ t('recent_prs') }}</h2>
+  <ul>
+    {% for pr in recent_prs %}
+      <li>{{ pr.exercise_name_ro if lang=='ro' else pr.exercise_name_en }} — e1RM ~{{ pr.e1rm }}kg</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+<section class="card">
+  <h2>{{ t('assistant_of_the_day') }}</h2>
+  <p>{{ t('assistant_dashboard_hint') }}</p>
+  <a class="btn" href="{{ url_for('assistant.index') }}">{{ t('nav_assistant') }}</a>
+</section>
+{% endblock %}

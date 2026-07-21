@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ t('nav_meals') }}</h1>
+
+<section class="card">
+  <h2>{{ t('goal') }}</h2>
+  <div class="goal-buttons">
+    {% for key in ["lean_maintain_strength","maintenance","muscle_gain"] %}
+      <form method="post" action="{{ url_for('meals.set_goal') }}">
+        <input type="hidden" name="goal" value="{{ key }}">
+        <button type="submit" class="goal-btn {{ 'active' if profile.goal == key }}">
+          <strong>{{ goal_labels[key]['ro' if lang=='ro' else 'en'] }}</strong>
+          <span>{{ goal_descriptions[key]['ro' if lang=='ro' else 'en'] }}</span>
+        </button>
+      </form>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="card">
+  <h2>{{ t('today_so_far') }}</h2>
+  <div class="macro-row"><span>{{ t('calories_target') }}</span><span>{{ totals.kcal }} / {{ targets.target_calories }} kcal</span></div>
+  <div class="bar"><div class="bar-fill {{ 'over' if progress.kcal >= 100 }}" style="width:{{ progress.kcal }}%"></div></div>
+  <div class="macro-row"><span>{{ t('protein_target') }}</span><span>{{ totals.protein_g }} / {{ targets.protein_g }} g</span></div>
+  <div class="bar"><div class="bar-fill protein {{ 'over' if progress.protein_g >= 100 }}" style="width:{{ progress.protein_g }}%"></div></div>
+  <div class="macro-row"><span>{{ t('carbs_target') }}</span><span>{{ totals.carb_g }} / {{ targets.carb_g }} g</span></div>
+  <div class="bar"><div class="bar-fill carb {{ 'over' if progress.carb_g >= 100 }}" style="width:{{ progress.carb_g }}%"></div></div>
+  <div class="macro-row"><span>{{ t('fat_target') }}</span><span>{{ totals.fat_g }} / {{ targets.fat_g }} g</span></div>
+  <div class="bar"><div class="bar-fill fat {{ 'over' if progress.fat_g >= 100 }}" style="width:{{ progress.fat_g }}%"></div></div>
+  <p class="hint">{{ t('fiber') }}: {{ totals.fiber_g }}g / {{ targets.fiber_g }}g</p>
+
+  <form method="post" action="{{ url_for('meals.log_food') }}" class="food-form">
+    <label>{{ t('food') }}
+      <input list="food-options" name="food_name" placeholder="{{ t('food') }}..." required autocomplete="off">
+      <datalist id="food-options">
+        {% for f in food_db %}<option value="{{ f.name_ro if lang=='ro' else f.name_en }}">{% endfor %}
+      </datalist>
+    </label>
+    <div class="food-form-row">
+      <label class="grow">{{ t('quantity') }} <input type="number" step="0.1" name="qty" required></label>
+      <label class="grow">{{ t('meal_type') }}
+        <select name="meal_type">{% for mt in meal_types %}<option value="{{ mt }}">{{ t(mt) }}</option>{% endfor %}</select>
+      </label>
+    </div>
+    <button class="btn" type="submit">{{ t('add') }}</button>
+  </form>
+
+  <form method="post" action="{{ url_for('meals.regenerate_day') }}">
+    <button class="btn-secondary" type="submit">{{ t('regenerate_day') }}</button>
+  </form>
+</section>
+
+<section class="card">
+  <h2>{{ t('todays_food_log') }}</h2>
+  {% if today_entries %}
+    <ul class="food-log-list">
+      {% for e in today_entries %}
+        <li>
+          <div><strong>{{ e.food_name }}</strong><small>{{ e.qty }}{{ 'g' if e.unit=='g' else 'x' }} · {{ t(e.meal_type) }} · {{ e.kcal }} kcal{% if e.estimated %} · {{ t('estimated') }}{% endif %}</small></div>
+          <form method="post" action="{{ url_for('meals.delete_food', entry_id=e.id) }}"><button class="btn-ghost" type="submit">{{ t('delete') }}</button></form>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}<p class="hint">{{ t('no_food_logged') }}</p>{% endif %}
+</section>
+
+<section class="card">
+  <h2>{{ t('meal_ideas') }}</h2>
+  <div class="chip-group filter-chips">
+    {% for tag in all_tags %}
+      <a class="chip {{ 'active' if tag in active_tags }}"
+         href="{{ url_for('meals.index', tag=(active_tags|reject('equalto', tag)|list) if tag in active_tags else (active_tags + [tag])) }}">{{ t(tag) if tag in ['breakfast','lunch','dinner','snack'] else tag.replace('_',' ') }}</a>
+    {% endfor %}
+    {% if active_tags %}<a class="chip" href="{{ url_for('meals.index') }}">✕ {{ t('clear_filters') }}</a>{% endif %}
+  </div>
+  <div class="meal-grid">
+    {% for m in meals %}
+      <a class="meal-card" href="{{ url_for('meals.meal_detail', meal_key=m.key) }}">
+        <strong>{{ m.name_ro if lang=='ro' else m.name_en }}</strong>
+        <span class="hint">{{ m.kcal_per_serving }} kcal · {{ m.protein_g_per_serving }}g P · {{ m.prep_time_min }} min</span>
+        {% if m.key in favorite_keys %}<span class="fav-badge">★</span>{% endif %}
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ t('nav_crossfit') }}</h1>
+
+<section class="card">
+  <h2>{{ t('generate_workout') }}</h2>
+  <form method="post" action="{{ url_for('crossfit.generate') }}" class="inline-form">
+    <select name="type">{% for ty in types %}<option value="{{ ty }}">{{ ty.replace('_',' ') }}</option>{% endfor %}</select>
+    <input type="number" name="duration_min" value="15" style="max-width:80px;">
+    <button class="btn" type="submit">{{ t('generate') }}</button>
+  </form>
+</section>
+
+<section class="card">
+  <div class="chip-group">
+    <a class="chip {{ 'active' if not active_type }}" href="{{ url_for('crossfit.index') }}">{{ t('all') }}</a>
+    {% for ty in types %}<a class="chip {{ 'active' if active_type==ty }}" href="{{ url_for('crossfit.index', type=ty, difficulty=active_difficulty) }}">{{ ty.replace('_',' ') }}</a>{% endfor %}
+  </div>
+  <div class="chip-group">
+    {% for d in difficulties %}<a class="chip {{ 'active' if active_difficulty==d }}" href="{{ url_for('crossfit.index', type=active_type, difficulty=d) }}">{{ t(d) }}</a>{% endfor %}
+  </div>
+  <div class="meal-grid">
+    {% for w in workouts %}
+      <a class="meal-card" href="{{ url_for('crossfit.detail', key=w.key) }}">
+        <strong>{{ w.name_ro if lang=='ro' else w.name_en }}</strong>
+        <span class="hint">{{ w.type }} · {{ t(w.difficulty) }} · {{ w.est_duration_min }} min</span>
+        {% if w.key in favorite_keys %}<span class="fav-badge">★</span>{% endif %}
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

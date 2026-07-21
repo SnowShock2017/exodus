@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ t('nav_scanner') }}</h1>
+
+<section class="card">
+  <p class="hint">{{ t('scanner_hint') }}</p>
+  <div id="reader" style="width:100%; max-width:400px;"></div>
+  <button class="btn" id="start-scan">{{ t('start_camera') }}</button>
+  <div class="inline-form">
+    <input type="text" id="manual-barcode" placeholder="{{ t('or_enter_barcode') }}">
+    <button class="btn-secondary" id="lookup-barcode">{{ t('lookup') }}</button>
+  </div>
+</section>
+
+<section class="card" id="result-card" style="display:none;">
+  <h2 id="result-name"></h2>
+  <p id="result-brand" class="hint"></p>
+  <div id="result-fit"></div>
+  <div id="result-macros"></div>
+  <form id="log-form" method="post" action="{{ url_for('meals.scanner_log') }}">
+    <input type="hidden" name="barcode" id="log-barcode">
+    <input type="hidden" name="product_name" id="log-name">
+    <input type="hidden" name="kcal" id="log-kcal">
+    <input type="hidden" name="protein_g" id="log-protein">
+    <input type="hidden" name="carb_g" id="log-carb">
+    <input type="hidden" name="fat_g" id="log-fat">
+    <input type="hidden" name="fiber_g" id="log-fiber">
+    <input type="hidden" name="estimated" id="log-estimated">
+    <label>{{ t('portion_grams') }} <input type="number" name="portion_g" id="portion-g" value="100"></label>
+    <label>{{ t('meal_type') }}
+      <select name="meal_type">{% for mt in ["breakfast","lunch","dinner","snack"] %}<option value="{{ mt }}">{{ t(mt) }}</option>{% endfor %}</select>
+    </label>
+    <button class="btn" type="submit">{{ t('log_this_product') }}</button>
+  </form>
+</section>
+
+<section class="card">
+  <h2>{{ t('manual_search') }}</h2>
+  <input type="text" id="manual-search" placeholder="{{ t('search_food') }}...">
+  <ul id="manual-results"></ul>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
+<script src="{{ url_for('static', filename='js/scanner.js') }}"></script>
+{% endblock %}

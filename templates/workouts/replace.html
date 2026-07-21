@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<a class="back-link" href="{{ url_for('workouts.plan_view') }}">← {{ t('your_weekly_plan') }}</a>
+<h1>{{ t('replace_exercise') }}</h1>
+<p class="hint">{{ t('currently') }}: {{ suggestions.original.name_ro if lang=='ro' else suggestions.original.name_en }}</p>
+
+{% if suggestions.recommended %}
+<section class="card">
+  <h2>{{ t('recommended') }}</h2>
+  {% for r in suggestions.recommended %}
+    <div class="week-day">
+      <strong>{{ r.name_ro if lang=='ro' else r.name_en }}</strong>
+      <p class="hint">{{ explanations.get(r.key, '') }}</p>
+      <form method="post"><input type="hidden" name="new_exercise_key" value="{{ r.key }}"><button class="btn" type="submit">{{ t('use_this') }}</button></form>
+    </div>
+  {% endfor %}
+</section>
+{% endif %}
+
+<section class="card">
+  <h2>{{ t('same_muscle') }}</h2>
+  {% for r in suggestions.same_muscle %}
+    <div class="week-day">
+      <span>{{ r.name_ro if lang=='ro' else r.name_en }}</span>
+      <form method="post"><input type="hidden" name="new_exercise_key" value="{{ r.key }}"><button class="btn-ghost" type="submit">{{ t('use_this') }}</button></form>
+    </div>
+  {% endfor %}
+</section>
+
+<section class="card">
+  <h2>{{ t('same_pattern') }}</h2>
+  {% for r in suggestions.same_pattern %}
+    <div class="week-day">
+      <span>{{ r.name_ro if lang=='ro' else r.name_en }}</span>
+      <form method="post"><input type="hidden" name="new_exercise_key" value="{{ r.key }}"><button class="btn-ghost" type="submit">{{ t('use_this') }}</button></form>
+    </div>
+  {% endfor %}
+</section>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<a class="back-link" href="{{ url_for('meals.index') }}">← {{ t('nav_meals') }}</a>
+<h1>{{ meal.name_ro if lang=='ro' else meal.name_en }}</h1>
+
+<section class="card">
+  <form method="get" class="inline-form">
+    <label>{{ t('servings') }} <input type="number" name="servings" value="{{ servings }}" min="1" onchange="this.form.submit()"></label>
+  </form>
+  <p class="big-number">{{ scaled.kcal_total }} kcal <span class="of-target">{{ t('total') }}</span></p>
+  <p>{{ t('protein_target') }}: {{ scaled.protein_g_total }}g · {{ t('carbs_target') }}: {{ scaled.carb_g_total }}g ·
+     {{ t('fat_target') }}: {{ scaled.fat_g_total }}g · {{ t('fiber') }}: {{ scaled.fiber_g_total }}g</p>
+  <p class="hint">{{ t('per_serving') }}: {{ meal.kcal_per_serving }} kcal, {{ meal.protein_g_per_serving }}g {{ t('protein_target') }} ·
+     {{ meal.prep_time_min }} min · {{ meal.difficulty }}</p>
+
+  <h3>{{ t('ingredients') }} ({{ t('raw_weight_note') }})</h3>
+  <ul>
+    {% for ing in scaled.ingredients %}
+      <li>{{ ing.name_ro if lang=='ro' else ing.name_en }} — {{ ing.qty }}{{ 'g' if ing.unit=='g' else 'x' }}</li>
+    {% endfor %}
+  </ul>
+
+  <h3>{{ t('instructions') }}</h3>
+  <ol>{% for step in (meal.steps_ro if lang=='ro' else meal.steps_en) %}<li>{{ step }}</li>{% endfor %}</ol>
+
+  {% set subs = meal.substitutions_ro if lang=='ro' else meal.substitutions_en %}
+  {% if subs %}
+    <h3>{{ t('substitutions') }}</h3>
+    <ul>{% for s in subs %}<li>{{ s }}</li>{% endfor %}</ul>
+  {% endif %}
+
+  <div class="action-row">
+    <form method="post" action="{{ url_for('meals.toggle_favorite', meal_key=meal.key) }}">
+      <button class="btn-secondary" type="submit">{{ t('toggle_favorite') }}</button>
+    </form>
+    <form method="post" action="{{ url_for('meals.add_meal_to_shopping', meal_key=meal.key) }}">
+      <input type="hidden" name="servings" value="{{ servings }}">
+      <button class="btn-secondary" type="submit">{{ t('add_to_shopping_list') }}</button>
+    </form>
+  </div>
+
+  <form method="post" action="{{ url_for('meals.rate_meal', meal_key=meal.key) }}" class="inline-form">
+    <label>{{ t('rate_this_meal') }}
+      <select name="rating">{% for i in range(1,6) %}<option value="{{ i }}">{{ i }} ★</option>{% endfor %}</select>
+    </label>
+    <button class="btn-secondary" type="submit">{{ t('save') }}</button>
+  </form>
+</section>
+{% endblock %}

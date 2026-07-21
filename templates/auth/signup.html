@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="auth-card">
+  <h1>{{ t('app_name') }}</h1>
+  <p class="tagline">{{ t('tagline') }}</p>
+  <form method="post" class="card">
+    <label>{{ t('email') }} <input type="email" name="email" required autofocus></label>
+    <label>{{ t('password') }} <input type="password" name="password" required minlength="8"></label>
+    <label>{{ t('confirm_password') }} <input type="password" name="confirm_password" required minlength="8"></label>
+    <button class="btn" type="submit">{{ t('create_account') }}</button>
+  </form>
+  <p class="auth-links"><a href="{{ url_for('auth.login') }}">{{ t('already_have_account') }}</a></p>
+</div>
+{% endblock %}

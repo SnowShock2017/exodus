@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<a class="back-link" href="{{ url_for('crossfit.index') }}">← {{ t('nav_crossfit') }}</a>
+<h1>{{ w.name_ro if lang=='ro' else w.name_en }}</h1>
+
+<section class="card">
+  <p class="badge">{{ w.type }} · {{ t(w.difficulty) }} · {{ w.est_duration_min }} min</p>
+  <p>{{ w.format_ro if lang=='ro' else w.format_en }}</p>
+
+  {% if not generated %}
+  <div class="chip-group">
+    {% for d in difficulties %}
+      <a class="chip {{ 'active' if target_difficulty==d }}" href="{{ url_for('crossfit.detail', key=w.key, difficulty=d) }}">{{ t(d) }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <h3>{{ t('movements') }}</h3>
+  <ul>
+    {% for m in (movements if not generated else w.movements) %}
+      {% set ex = movement_exercises.get(m.exercise_key) %}
+      <li>
+        {% if ex %}<a href="{{ url_for('workouts.exercise_detail', key=ex.key) }}">{{ ex.name_ro if lang=='ro' else ex.name_en }}</a>{% else %}{{ m.exercise_key.replace('_',' ') }}{% endif %}
+        {% if m.reps %} — {{ m.reps }} reps{% endif %}{% if m.duration %} — {{ m.duration }}{% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h3>{{ t('scaling_notes') }}</h3>
+  <p>{{ w.scaling_notes_ro if lang=='ro' else w.scaling_notes_en }}</p>
+  <h3>{{ t('technique_notes') }}</h3>
+  <p>{{ w.technique_notes_ro if lang=='ro' else w.technique_notes_en }}</p>
+
+  {% if not generated %}
+  <div class="action-row">
+    <form method="post" action="{{ url_for('crossfit.toggle_favorite', key=w.key) }}">
+      <button class="btn-secondary" type="submit">{{ '★' if is_favorite else '☆' }} {{ t('toggle_favorite') }}</button>
+    </form>
+  </div>
+  <form method="post" action="{{ url_for('crossfit.log_score', key=w.key) }}" class="inline-form">
+    <input type="text" name="score" placeholder="{{ t('score_placeholder') }}" required>
+    <input type="hidden" name="difficulty" value="{{ target_difficulty }}">
+    <button class="btn" type="submit">{{ t('log_score') }}</button>
+  </form>
+  {% endif %}
+</section>
+{% endblock %}

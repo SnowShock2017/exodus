@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<a class="back-link" href="{{ url_for('meals.index') }}">← {{ t('nav_meals') }}</a>
+<h1>{{ t('regenerate_day') }}</h1>
+<section class="card">
+  {% for m in day_plan %}
+    <div class="week-day">
+      <strong>{{ m.name_ro if lang=='ro' else m.name_en }}</strong>
+      <p class="hint">{{ m.kcal_per_serving }} kcal · {{ m.protein_g_per_serving }}g protein</p>
+      <a class="btn-secondary" href="{{ url_for('meals.meal_detail', meal_key=m.key) }}">{{ t('view') }}</a>
+    </div>
+  {% endfor %}
+  {% if not day_plan %}<p>{{ t('no_food_logged') }}</p>{% endif %}
+</section>
+{% endblock %}

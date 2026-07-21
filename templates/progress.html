@@ -3,78 +3,97 @@
 <h1>{{ t('nav_progress') }}</h1>
 
 <section class="card">
-  <h2>{{ t('log_weight') }}</h2>
-  <form method="post" action="{{ url_for('log_weight') }}" class="inline-form">
-    <input type="number" step="0.1" name="weight_kg" placeholder="kg" required>
-    <button class="btn" type="submit">{{ t('save') }}</button>
-  </form>
+  <div class="chip-group">
+    {% for p in ["week","month","3months","6months","year"] %}
+      <a class="chip {{ 'active' if period==p }}" href="{{ url_for('progress.index', period=p, exercise=exercise_key) }}">{{ t(p) }}</a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="card">
+  <h2>{{ t('weekly_summary') }}</h2>
+  {% if summary %}<ul>{% for line in summary %}<li>{{ line }}</li>{% endfor %}</ul>{% else %}<p class="hint">{{ t('no_data_yet') }}</p>{% endif %}
 </section>
 
 <section class="card">
   <h2>{{ t('weight_history') }}</h2>
-  {% if weight_log %}
-    <canvas id="weightChart" height="180"></canvas>
-    <table class="log-table">
-      <tr><th>Date</th><th>kg</th></tr>
-      {% for w in weight_log[::-1] %}
-        <tr><td>{{ w.date }}</td><td>{{ w.weight_kg }}</td></tr>
-      {% endfor %}
-    </table>
-  {% else %}
-    <p>No entries yet.</p>
-  {% endif %}
+  <canvas id="weightChart" height="180"></canvas>
+</section>
+
+<section class="card">
+  <h2>{{ t('strength_progress') }}</h2>
+  <form method="get" class="inline-form">
+    <input type="hidden" name="period" value="{{ period }}">
+    <select name="exercise" onchange="this.form.submit()">
+      {% for ex in exercises %}<option value="{{ ex.key }}" {{ 'selected' if ex.key==exercise_key }}>{{ ex.name_ro if lang=='ro' else ex.name_en }}</option>{% endfor %}
+    </select>
+  </form>
+  <canvas id="e1rmChart" height="180"></canvas>
+</section>
+
+<section class="card">
+  <h2>{{ t('training_volume') }}</h2>
+  <canvas id="volumeChart" height="180"></canvas>
+</section>
+
+<section class="card">
+  <h2>{{ t('consistency') }}</h2>
+  <canvas id="consistencyChart" height="180"></canvas>
 </section>
 
 <section class="card">
   <h2>{{ t('calorie_history') }}</h2>
   <canvas id="kcalChart" height="180"></canvas>
+  <p class="hint">{{ t('protein_target_hit_days') }}: {{ protein_hit_days }}</p>
 </section>
 
 <section class="card">
-  <h2>Workout log</h2>
-  {% if workout_log %}
-    <table class="log-table">
-      <tr><th>Date</th><th>Exercise</th><th>kg</th><th>Reps</th><th>RPE</th></tr>
-      {% for e in workout_log[::-1][:30] %}
-        <tr>
-          <td>{{ e.date }}</td><td>{{ e.exercise }}</td>
-          <td>{{ e.weight_kg or '-' }}</td><td>{{ e.reps_done or '-' }}</td><td>{{ e.rpe or '-' }}</td>
-        </tr>
-      {% endfor %}
-    </table>
-  {% else %}
-    <p>No entries yet.</p>
-  {% endif %}
+  <h2>{{ t('recent_prs') }}</h2>
+  {% if prs %}
+    <ul>{% for pr in prs[:10] %}<li>{{ pr.exercise_name_ro if lang=='ro' else pr.exercise_name_en }} — e1RM ~{{ pr.e1rm }}kg ({{ pr.date }})</li>{% endfor %}</ul>
+  {% else %}<p class="hint">{{ t('no_data_yet') }}</p>{% endif %}
 </section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
-{% if weight_log %}
 <script>
-  const labels = {{ weight_log | map(attribute='date') | list | tojson }};
-  const data = {{ weight_log | map(attribute='weight_kg') | list | tojson }};
-  const ctx = document.getElementById('weightChart').getContext('2d');
-  new Chart(ctx, {
+  const commonOpts = { plugins: { legend: { labels: { color: '#9aa4b2' } } } };
+
+  new Chart(document.getElementById('weightChart'), {
     type: 'line',
-    data: { labels: labels, datasets: [{ label: 'kg', data: data, borderColor: '#3fa9f5', tension: 0.2 }] },
-    options: { plugins: { legend: { display: false } } }
+    data: { labels: {{ weight_series | map(attribute='date') | list | tojson }},
+            datasets: [{ label: 'kg', data: {{ weight_series | map(attribute='weight_kg') | list | tojson }}, borderColor: '#3fa9f5', tension: 0.2 }] },
+    options: commonOpts,
   });
-</script>
-{% endif %}
-<script>
-  const kcalLabels = {{ kcal_history | map(attribute='date') | list | tojson }};
-  const kcalData = {{ kcal_history | map(attribute='kcal') | list | tojson }};
-  const kcalCtx = document.getElementById('kcalChart').getContext('2d');
-  new Chart(kcalCtx, {
+
+  new Chart(document.getElementById('e1rmChart'), {
+    type: 'line',
+    data: { labels: {{ e1rm_series | map(attribute='date') | list | tojson }},
+            datasets: [{ label: 'e1RM kg', data: {{ e1rm_series | map(attribute='e1rm') | list | tojson }}, borderColor: '#5ee0a0', tension: 0.2 }] },
+    options: commonOpts,
+  });
+
+  new Chart(document.getElementById('volumeChart'), {
     type: 'bar',
-    data: {
-      labels: kcalLabels,
-      datasets: [
-        { label: 'kcal logged', data: kcalData, backgroundColor: '#3fa9f5' },
-        { label: 'target', data: kcalLabels.map(() => {{ target_calories }}), type: 'line',
-          borderColor: '#f5a83f', borderDash: [6, 4], pointRadius: 0 },
-      ],
-    },
-    options: { plugins: { legend: { display: true, labels: { color: '#9aa4b2' } } } },
+    data: { labels: {{ volume_series | map(attribute='period') | list | tojson }},
+            datasets: [{ label: 'Volume (kg)', data: {{ volume_series | map(attribute='volume_kg') | list | tojson }}, backgroundColor: '#c98fff' }] },
+    options: commonOpts,
+  });
+
+  new Chart(document.getElementById('consistencyChart'), {
+    type: 'bar',
+    data: { labels: {{ consistency_series | map(attribute='period') | list | tojson }},
+            datasets: [
+              { label: 'Sessions', data: {{ consistency_series | map(attribute='sessions') | list | tojson }}, backgroundColor: '#3fa9f5' },
+              { label: 'Planned', data: {{ consistency_series | map(attribute='planned') | list | tojson }}, type: 'line', borderColor: '#f5a83f', borderDash: [6,4], pointRadius: 0 },
+            ] },
+    options: commonOpts,
+  });
+
+  new Chart(document.getElementById('kcalChart'), {
+    type: 'bar',
+    data: { labels: {{ calorie_series | map(attribute='date') | list | tojson }},
+            datasets: [{ label: 'kcal', data: {{ calorie_series | map(attribute='kcal') | list | tojson }}, backgroundColor: '#3fa9f5' }] },
+    options: commonOpts,
   });
 </script>
 {% endblock %}

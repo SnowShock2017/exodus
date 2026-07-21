@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ t('nav_readiness') }}</h1>
+
+<form method="post" class="card">
+  <label>{{ t('energy_level') }} (1-5) <input type="range" name="energy" min="1" max="5" value="3"></label>
+  <label>{{ t('sleep_quality') }} (1-5) <input type="range" name="sleep_quality" min="1" max="5" value="3"></label>
+  <label>{{ t('soreness') }} (1-5) <input type="range" name="soreness" min="1" max="5" value="3"></label>
+  <label>{{ t('stress_level') }} (1-5) <input type="range" name="stress" min="1" max="5" value="3"></label>
+  <label>{{ t('available_minutes') }} <input type="number" name="available_minutes" value="60"></label>
+  <label>{{ t('pain_notes') }} <textarea name="pain_notes" rows="2"></textarea></label>
+  <button class="btn" type="submit">{{ t('check_in') }}</button>
+</form>
+
+{% if result %}
+<section class="card {{ 'flash-error' if result.safety_flag }}">
+  <h2>{{ t('suggestion') }}: {{ t(result.action) }}</h2>
+  <p>{{ result.reason_ro if lang=='ro' else result.reason_en }}</p>
+  <p class="hint">{{ t('you_decide') }}</p>
+  <a class="btn" href="{{ url_for('workouts.today') }}">{{ t('nav_workout') }}</a>
+</section>
+{% endif %}
+{% endblock %}

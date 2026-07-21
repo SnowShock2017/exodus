@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ t('nav_exercise_library') }}</h1>
+<section class="card">
+  <div class="chip-group">
+    <a class="chip {{ 'active' if not active_muscle }}" href="{{ url_for('workouts.exercise_library') }}">{{ t('all') }}</a>
+    {% for m in muscles %}
+      <a class="chip {{ 'active' if active_muscle == m }}" href="{{ url_for('workouts.exercise_library', muscle=m) }}">{{ m.replace('_',' ') }}</a>
+    {% endfor %}
+  </div>
+</section>
+<section class="card">
+  <div class="meal-grid">
+    {% for ex in exercises %}
+      <a class="meal-card" href="{{ url_for('workouts.exercise_detail', key=ex.key) }}">
+        <strong>{{ ex.name_ro if lang=='ro' else ex.name_en }}</strong>
+        <span class="hint">{{ ex.primary_muscle.replace('_',' ') }} · {{ ex.experience_level }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

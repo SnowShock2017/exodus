@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="auth-card">
+  <h1>{{ t('app_name') }}</h1>
+  <p class="tagline">{{ t('tagline') }}</p>
+  <form method="post" class="card">
+    <label>{{ t('email') }} <input type="email" name="email" required autofocus></label>
+    <label>{{ t('password') }} <input type="password" name="password" required></label>
+    <button class="btn" type="submit">{{ t('log_in') }}</button>
+  </form>
+  <p class="auth-links">
+    <a href="{{ url_for('auth.forgot_password') }}">{{ t('forgot_password') }}</a> ·
+    <a href="{{ url_for('auth.signup') }}">{{ t('create_account') }}</a>
+  </p>
+</div>
+{% endblock %}

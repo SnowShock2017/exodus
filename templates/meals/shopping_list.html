@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ t('nav_shopping') }}</h1>
+
+<section class="card">
+  <form method="post" action="{{ url_for('meals.shopping_list_add') }}" class="food-form-row">
+    <input type="text" name="name" placeholder="{{ t('item_name') }}" required class="grow">
+    <input type="number" step="0.1" name="quantity" placeholder="{{ t('quantity') }}" style="max-width:90px;">
+    <button class="btn" type="submit">{{ t('add') }}</button>
+  </form>
+</section>
+
+<section class="card">
+  {% set categories = items|map(attribute='category')|unique|list %}
+  {% for cat in categories %}
+    <h3>{{ cat|title }}</h3>
+    <ul class="shopping-list">
+      {% for item in items if item.category == cat %}
+        <li class="{{ 'checked' if item.checked }}">
+          <form method="post" action="{{ url_for('meals.shopping_list_toggle', item_id=item.id) }}" class="inline-toggle">
+            <button type="submit" class="checkbox-btn">{{ '☑' if item.checked else '☐' }}</button>
+          </form>
+          <span>{{ item.name }}{% if item.quantity %} — {{ item.quantity }}{{ item.unit }}{% endif %}</span>
+          {% if item.have_at_home %}<span class="hint">({{ t('have_at_home') }})</span>{% endif %}
+          <form method="post" action="{{ url_for('meals.shopping_list_delete', item_id=item.id) }}">
+            <button class="btn-ghost" type="submit">{{ t('delete') }}</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+  {% if not items %}<p class="hint">{{ t('shopping_list_empty') }}</p>{% endif %}
+</section>
+{% endblock %}

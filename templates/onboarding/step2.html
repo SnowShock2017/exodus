@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="onboarding">
+  <div class="wizard-progress"><div class="wizard-progress-fill" style="width:{{ (step/total*100)|round }}%"></div></div>
+  <p class="hint">{{ t('step') }} {{ step }} / {{ total }}</p>
+  <h1>{{ t('onboarding_goal_title') }}</h1>
+  <form method="post" class="card">
+    <label>{{ t('goal') }}
+      <select name="goal">
+        <option value="lean_maintain_strength" {{ 'selected' if profile.goal=='lean_maintain_strength' }}>{{ t('goal_lean') }}</option>
+        <option value="maintenance" {{ 'selected' if profile.goal=='maintenance' }}>{{ t('goal_maintenance') }}</option>
+        <option value="muscle_gain" {{ 'selected' if profile.goal=='muscle_gain' }}>{{ t('goal_gain') }}</option>
+      </select>
+    </label>
+    <label>{{ t('experience_level') }}
+      <select name="experience_level">
+        <option value="beginner" {{ 'selected' if profile.experience_level=='beginner' }}>{{ t('beginner') }}</option>
+        <option value="intermediate" {{ 'selected' if profile.experience_level=='intermediate' }}>{{ t('intermediate') }}</option>
+        <option value="advanced" {{ 'selected' if profile.experience_level=='advanced' }}>{{ t('advanced') }}</option>
+      </select>
+    </label>
+    <label>{{ t('activity_level') }}
+      <select name="activity_level">
+        <option value="sedentary" {{ 'selected' if profile.activity_level=='sedentary' }}>{{ t('sedentary') }}</option>
+        <option value="moderate" {{ 'selected' if profile.activity_level=='moderate' }}>{{ t('moderate') }}</option>
+        <option value="high" {{ 'selected' if profile.activity_level=='high' }}>{{ t('high') }}</option>
+      </select>
+    </label>
+    <label>{{ t('training_days') }} <input type="number" name="training_days_per_week" min="1" max="7" value="{{ profile.training_days_per_week }}"></label>
+    <label>{{ t('preferred_style') }}
+      <select name="preferred_style">
+        {% for s in ["full_body","upper_lower","push_pull_legs","bro_split","strength","hypertrophy","powerbuilding","bodyweight","home","custom"] %}
+          <option value="{{ s }}" {{ 'selected' if profile.preferred_style==s }}>{{ s.replace('_',' ')|title }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>{{ t('equipment_available') }}</label>
+    <div class="chip-group">
+      {% for eq in ["barbell","dumbbell","kettlebell","machine","cable_machine","pullup_bar","bench","rack","bike","rower","band","box","medicine_ball","landmine","dip_bars","ab_wheel","jump_rope"] %}
+        <label class="chip"><input type="checkbox" name="equipment" value="{{ eq }}" {{ 'checked' if eq in (profile.equipment or []) }}> {{ eq.replace('_',' ') }}</label>
+      {% endfor %}
+    </div>
+    <button class="btn" type="submit">{{ t('continue') }}</button>
+  </form>
+</div>
+{% endblock %}

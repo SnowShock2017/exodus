@@ -13,22 +13,49 @@
 </head>
 <body>
   <header class="topbar">
-    <div class="brand">{{ t('app_name') }}</div>
-    <form method="post" action="{{ url_for('toggle_language') }}" class="lang-form">
-      <button type="submit" class="lang-btn">{{ 'RO' if lang == 'en' else 'EN' }}</button>
-    </form>
+    <a href="{{ url_for('dashboard.home') }}" class="brand">{{ t('app_name') }}</a>
+    <div class="topbar-actions">
+      {% if current_user.is_authenticated %}
+      <button class="icon-btn" onclick="document.getElementById('more-menu').classList.toggle('open')">☰</button>
+      {% endif %}
+    </div>
   </header>
 
+  {% if current_user.is_authenticated %}
+  <nav id="more-menu" class="more-menu">
+    <a href="{{ url_for('meals.scanner') }}">📷 {{ t('nav_scanner') }}</a>
+    <a href="{{ url_for('meals.shopping_list') }}">🛒 {{ t('nav_shopping') }}</a>
+    <a href="{{ url_for('workouts.exercise_library') }}">📖 {{ t('nav_exercise_library') }}</a>
+    <a href="{{ url_for('workouts.readiness') }}">🌡️ {{ t('nav_readiness') }}</a>
+    <a href="{{ url_for('assistant.index') }}">💬 {{ t('nav_assistant') }}</a>
+    <a href="{{ url_for('settings.index') }}">⚙️ {{ t('nav_settings') }}</a>
+    <form method="post" action="{{ url_for('auth.logout') }}">
+      <button type="submit" class="menu-logout">🚪 {{ t('logout') }}</button>
+    </form>
+  </nav>
+  {% endif %}
+
   <main class="content">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-stack">
+        {% for category, message in messages %}
+          <div class="flash flash-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
     {% block content %}{% endblock %}
   </main>
 
+  {% if current_user.is_authenticated %}
   <nav class="tabbar">
-    <a href="{{ url_for('dashboard') }}" class="{{ 'active' if request.path == '/' else '' }}">🏠<span>{{ t('nav_dashboard') }}</span></a>
-    <a href="{{ url_for('workout') }}" class="{{ 'active' if request.path == '/workout' else '' }}">🏋️<span>{{ t('nav_workout') }}</span></a>
-    <a href="{{ url_for('meals') }}" class="{{ 'active' if request.path == '/meals' else '' }}">🍽️<span>{{ t('nav_meals') }}</span></a>
-    <a href="{{ url_for('progress') }}" class="{{ 'active' if request.path == '/progress' else '' }}">📈<span>{{ t('nav_progress') }}</span></a>
-    <a href="{{ url_for('settings') }}" class="{{ 'active' if request.path == '/settings' else '' }}">⚙️<span>{{ t('nav_settings') }}</span></a>
+    <a href="{{ url_for('dashboard.home') }}" class="{{ 'active' if request.path == '/' else '' }}">🏠<span>{{ t('nav_dashboard') }}</span></a>
+    <a href="{{ url_for('meals.index') }}" class="{{ 'active' if request.path.startswith('/meals') and 'shopping' not in request.path and 'scanner' not in request.path else '' }}">🍽️<span>{{ t('nav_meals') }}</span></a>
+    <a href="{{ url_for('workouts.today') }}" class="{{ 'active' if request.path.startswith('/workouts') else '' }}">🏋️<span>{{ t('nav_workout') }}</span></a>
+    <a href="{{ url_for('crossfit.index') }}" class="{{ 'active' if request.path.startswith('/crossfit') else '' }}">🔥<span>{{ t('nav_crossfit') }}</span></a>
+    <a href="{{ url_for('progress.index') }}" class="{{ 'active' if request.path.startswith('/progress') else '' }}">📈<span>{{ t('nav_progress') }}</span></a>
   </nav>
+  {% endif %}
 </body>
 </html>

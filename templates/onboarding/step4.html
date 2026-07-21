@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="onboarding">
+  <div class="wizard-progress"><div class="wizard-progress-fill" style="width:{{ (step/total*100)|round }}%"></div></div>
+  <p class="hint">{{ t('step') }} {{ step }} / {{ total }}</p>
+  <h1>{{ t('onboarding_health_title') }}</h1>
+  <form method="post" class="card">
+    <label>{{ t('injuries_notes') }} <textarea name="injuries" rows="2">{{ profile.injuries or '' }}</textarea></label>
+    <label>{{ t('injury_areas') }}</label>
+    <div class="chip-group">
+      {% for tag in ["knee","shoulder","lower_back","wrist","ankle","elbow","hip","neck"] %}
+        <label class="chip"><input type="checkbox" name="injury_tags" value="{{ tag }}" {{ 'checked' if tag in (profile.injury_tags or []) }}> {{ tag.replace('_',' ') }}</label>
+      {% endfor %}
+    </div>
+    <label>{{ t('sleep_hours') }} <input type="number" step="0.5" name="sleep_hours" value="{{ profile.sleep_hours }}"></label>
+    <label>{{ t('step_target') }} <input type="number" name="step_target" value="{{ profile.step_target or '' }}" placeholder="{{ t('optional') }}"></label>
+    <h3>{{ t('prs') }} ({{ t('optional') }})</h3>
+    <label>{{ t('bench') }} <input type="number" step="0.5" name="pr_bench" value="{{ (profile.prs_kg or {}).get('bench', '') }}"></label>
+    <label>{{ t('squat') }} <input type="number" step="0.5" name="pr_squat" value="{{ (profile.prs_kg or {}).get('squat', '') }}"></label>
+    <label>{{ t('deadlift') }} <input type="number" step="0.5" name="pr_deadlift" value="{{ (profile.prs_kg or {}).get('deadlift', '') }}"></label>
+    <label>{{ t('pullups') }} <input type="number" name="pr_pullups" value="{{ (profile.prs_kg or {}).get('pullups_clean_reps', '') }}"></label>
+    <button class="btn" type="submit">{{ t('finish') }}</button>
+  </form>
+</div>
+{% endblock %}

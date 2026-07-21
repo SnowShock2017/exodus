@@ -2,41 +2,95 @@
 {% block content %}
 <h1>{{ t('settings_title') }}</h1>
 
-<form method="post" action="{{ url_for('save_settings') }}" class="card">
+<form method="post" action="{{ url_for('settings.save') }}" class="card">
+  <label>{{ t('name_nickname') }} <input type="text" name="name" value="{{ profile.name or '' }}"></label>
   <label>{{ t('language') }}
-    <select name="language">
-      <option value="en" {{ 'selected' if profile.language == 'en' else '' }}>English</option>
-      <option value="ro" {{ 'selected' if profile.language == 'ro' else '' }}>Română</option>
-    </select>
+    <select name="language"><option value="en" {{ 'selected' if profile.language=='en' }}>English</option><option value="ro" {{ 'selected' if profile.language=='ro' }}>Română</option></select>
+  </label>
+  <label>{{ t('units') }}
+    <select name="units"><option value="kg" {{ 'selected' if profile.units=='kg' }}>kg</option><option value="lb" {{ 'selected' if profile.units=='lb' }}>lb</option></select>
   </label>
 
   <label>{{ t('goal') }}
     <select name="goal">
-      <option value="lean_maintain_strength" {{ 'selected' if profile.goal == 'lean_maintain_strength' else '' }}>Lean out, keep strength</option>
-      <option value="lean_aggressive" {{ 'selected' if profile.goal == 'lean_aggressive' else '' }}>Lean out, faster</option>
-      <option value="recomp" {{ 'selected' if profile.goal == 'recomp' else '' }}>Recomposition</option>
-      <option value="bulk" {{ 'selected' if profile.goal == 'bulk' else '' }}>Bulk</option>
+      {% for key, label in goal_labels.items() %}
+        <option value="{{ key }}" {{ 'selected' if profile.goal==key }}>{{ label['ro' if profile.language=='ro' else 'en'] }}</option>
+      {% endfor %}
     </select>
   </label>
 
+  <label>{{ t('age') }} <input type="number" name="age" value="{{ profile.age }}"></label>
+  <label>{{ t('sex') }}
+    <select name="sex"><option value="male" {{ 'selected' if profile.sex=='male' }}>{{ t('male') }}</option><option value="female" {{ 'selected' if profile.sex=='female' }}>{{ t('female') }}</option></select>
+  </label>
   <label>{{ t('height') }} <input type="number" step="0.1" name="height_cm" value="{{ profile.height_cm }}"></label>
   <label>{{ t('weight') }} <input type="number" step="0.1" name="weight_kg" value="{{ profile.weight_kg }}"></label>
-  <label>Age <input type="number" name="age" value="{{ profile.age }}"></label>
-  <label>Activity level
+  <label>{{ t('target_weight') }} <input type="number" step="0.1" name="target_weight_kg" value="{{ profile.target_weight_kg or '' }}"></label>
+
+  <label>{{ t('experience_level') }}
+    <select name="experience_level">
+      {% for lvl in ["beginner","intermediate","advanced"] %}<option value="{{ lvl }}" {{ 'selected' if profile.experience_level==lvl }}>{{ t(lvl) }}</option>{% endfor %}
+    </select>
+  </label>
+  <label>{{ t('activity_level') }}
     <select name="activity_level">
-      <option value="sedentary" {{ 'selected' if profile.activity_level == 'sedentary' else '' }}>Sedentary</option>
-      <option value="moderate" {{ 'selected' if profile.activity_level == 'moderate' else '' }}>Moderate (3-5 sessions/wk)</option>
-      <option value="high" {{ 'selected' if profile.activity_level == 'high' else '' }}>High (hard training + active job)</option>
+      {% for lvl in ["sedentary","moderate","high"] %}<option value="{{ lvl }}" {{ 'selected' if profile.activity_level==lvl }}>{{ t(lvl) }}</option>{% endfor %}
     </select>
   </label>
   <label>{{ t('training_days') }} <input type="number" name="training_days_per_week" value="{{ profile.training_days_per_week }}"></label>
+  <label>{{ t('preferred_style') }}
+    <select name="preferred_style">
+      {% for s in ["full_body","upper_lower","push_pull_legs","bro_split","strength","hypertrophy","powerbuilding","bodyweight","home","custom"] %}
+        <option value="{{ s }}" {{ 'selected' if profile.preferred_style==s }}>{{ s.replace('_',' ')|title }}</option>
+      {% endfor %}
+    </select>
+  </label>
+
+  <label>{{ t('equipment_available') }}</label>
+  <div class="chip-group">
+    {% for eq in ["barbell","dumbbell","kettlebell","machine","cable_machine","pullup_bar","bench","rack","bike","rower","band","box","medicine_ball","landmine","dip_bars","ab_wheel","jump_rope"] %}
+      <label class="chip"><input type="checkbox" name="equipment" value="{{ eq }}" {{ 'checked' if eq in (profile.equipment or []) }}> {{ eq.replace('_',' ') }}</label>
+    {% endfor %}
+  </div>
+
+  <label>{{ t('dietary_preferences') }}</label>
+  <div class="chip-group">
+    {% for pref in ["vegetarian","vegan","lactose_free","gluten_free","halal","kosher","none"] %}
+      <label class="chip"><input type="checkbox" name="dietary_prefs" value="{{ pref }}" {{ 'checked' if pref in (profile.dietary_prefs or []) }}> {{ pref.replace('_',' ') }}</label>
+    {% endfor %}
+  </div>
+  <label>{{ t('allergies') }} <input type="text" name="allergies" value="{{ (profile.allergies or [])|join(', ') }}"></label>
+  <label>{{ t('dislikes') }} <input type="text" name="dislikes" value="{{ (profile.dislikes or [])|join(', ') }}"></label>
+  <label>{{ t('meal_frequency') }} <input type="number" name="meal_frequency" value="{{ profile.meal_frequency }}"></label>
+
+  <label>{{ t('injuries_notes') }} <textarea name="injuries" rows="2">{{ profile.injuries or '' }}</textarea></label>
+  <label>{{ t('injury_areas') }}</label>
+  <div class="chip-group">
+    {% for tag in ["knee","shoulder","lower_back","wrist","ankle","elbow","hip","neck"] %}
+      <label class="chip"><input type="checkbox" name="injury_tags" value="{{ tag }}" {{ 'checked' if tag in (profile.injury_tags or []) }}> {{ tag.replace('_',' ') }}</label>
+    {% endfor %}
+  </div>
+  <label>{{ t('sleep_hours') }} <input type="number" step="0.5" name="sleep_hours" value="{{ profile.sleep_hours }}"></label>
+  <label>{{ t('step_target') }} <input type="number" name="step_target" value="{{ profile.step_target or '' }}"></label>
 
   <h3>{{ t('prs') }}</h3>
-  <label>Bench <input type="number" step="0.5" name="pr_bench" value="{{ profile.prs_kg.bench }}"></label>
-  <label>Deadlift <input type="number" step="0.5" name="pr_deadlift" value="{{ profile.prs_kg.deadlift }}"></label>
-  <label>Squat <input type="number" step="0.5" name="pr_squat" value="{{ profile.prs_kg.squat }}"></label>
-  <label>Pull-ups (clean reps) <input type="number" name="pr_pullups" value="{{ profile.prs_kg.pullups_clean_reps }}"></label>
+  <label>{{ t('bench') }} <input type="number" step="0.5" name="pr_bench" value="{{ (profile.prs_kg or {}).get('bench','') }}"></label>
+  <label>{{ t('squat') }} <input type="number" step="0.5" name="pr_squat" value="{{ (profile.prs_kg or {}).get('squat','') }}"></label>
+  <label>{{ t('deadlift') }} <input type="number" step="0.5" name="pr_deadlift" value="{{ (profile.prs_kg or {}).get('deadlift','') }}"></label>
+  <label>{{ t('pullups') }} <input type="number" name="pr_pullups" value="{{ (profile.prs_kg or {}).get('pullups_clean_reps','') }}"></label>
 
   <button class="btn" type="submit">{{ t('save') }}</button>
 </form>
+
+<section class="card">
+  <h2>{{ t('your_data') }}</h2>
+  <a class="btn-secondary" href="{{ url_for('auth.export_data') }}">{{ t('export_data') }}</a>
+  <details>
+    <summary class="danger-summary">{{ t('delete_account') }}</summary>
+    <form method="post" action="{{ url_for('auth.delete_account') }}" class="inline-form">
+      <input type="password" name="password" placeholder="{{ t('confirm_password') }}" required>
+      <button class="btn-danger" type="submit">{{ t('delete_account') }}</button>
+    </form>
+  </details>
+</section>
 {% endblock %}

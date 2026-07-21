@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ t('nav_assistant') }}</h1>
+<p class="hint">{{ t('assistant_disclaimer') }}</p>
+
+<section class="card">
+  <div class="chip-group">
+    {% for q in quick_questions %}
+      <form method="post" style="display:inline;">
+        <input type="hidden" name="message" value="{{ q['ro' if lang=='ro' else 'en'] }}">
+        <button type="submit" class="chip">{{ q['ro' if lang=='ro' else 'en'] }}</button>
+      </form>
+    {% endfor %}
+  </div>
+  <form method="post" class="inline-form">
+    <input type="text" name="message" placeholder="{{ t('ask_anything') }}" value="{{ message }}" required class="grow">
+    <button class="btn" type="submit">{{ t('send') }}</button>
+  </form>
+</section>
+
+{% if response %}
+<section class="card {{ 'flash-error' if response.intent == 'safety' }}">
+  <p class="hint">{{ t('you_asked') }}: {{ message }}</p>
+  <p>{{ response.text }}</p>
+  {% if response.meals %}
+    <ul>{% for m in response.meals %}<li><a href="{{ url_for('meals.meal_detail', meal_key=m.key) }}">{{ m.name_ro if lang=='ro' else m.name_en }}</a></li>{% endfor %}</ul>
+  {% endif %}
+  {% if response.replacements %}
+    <ul>{% for r in response.replacements %}<li>{{ r.name_ro if lang=='ro' else r.name_en }}</li>{% endfor %}</ul>
+  {% endif %}
+</section>
+{% endif %}
+{% endblock %}
