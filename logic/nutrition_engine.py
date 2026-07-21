@@ -1,215 +1,207 @@
 """
-nutrition_engine.py
---------------------
-Calorie & macro targets, a small bilingual (EN/RO) list of meal ideas built
-around foods that are cheap and easy to find in Romania, and the food-
-logging math (looking up a food, scaling it by quantity, and totalling up
-a day's logged entries against your targets).
+nutrition_engine.py (v2 — multi-user)
+---------------------------------------
+Food-logging math, meal-template filtering/scaling, and shopping-list
+generation. Framework-free (plain dicts in, plain dicts out) so it's
+directly unit-testable; routes/meals.py wires it to the database.
 
-Method for targets
--------------------
-1. BMR via Mifflin-St Jeor (most accurate common formula, doesn't need
-   body-fat %):
-       men:  BMR = 10*weight_kg + 6.25*height_cm - 5*age + 5
-2. TDEE = BMR * activity multiplier (based on training days/week + job).
-3. Goal = "lean_maintain_strength" -> moderate ~18% deficit. Moderate
-   (not aggressive) on purpose: aggressive cuts are the #1 cause of lost
-   strength/muscle, which conflicts with the user's stated goal of
-   keeping his lifts up while leaning out.
-4. Protein set high (2.2 g/kg) to protect muscle/strength in a deficit.
-   Fat set to a sensible floor (0.8 g/kg, hormones need dietary fat).
-   Remaining calories -> carbs, which fuel the actual training sessions.
+Calorie/macro *targets* (BMR/TDEE/goal math) live in goal_engine.py — this
+file is about logging what was actually eaten and browsing/using the meal
+library, not about setting targets.
 """
 
-from datetime import date, datetime, timedelta
-
-from logic.profile_store import get_food_db
-
-ACTIVITY_MULTIPLIERS = {
-    "sedentary": 1.35,
-    "moderate": 1.55,   # 3-5 training days/week + normal daily life
-    "high": 1.7,        # 4-5 hard sessions + physically active job
-}
-
-DEFICIT_BY_GOAL = {
-    "lean_maintain_strength": 0.18,   # ~18% below maintenance
-    "lean_aggressive": 0.25,
-    "recomp": 0.10,
-    "bulk": -0.10,  # negative deficit = surplus
-}
-
-MEAL_IDEAS = [
-    {
-        "en": "Greek yogurt + oats + honey + walnuts",
-        "ro": "Iaurt grecesc + fulgi de ovăz + miere + nuci",
-        "tag": "breakfast", "protein_note": "high protein, fast to make",
-    },
-    {
-        "en": "Eggs (whole + extra whites) + whole-grain bread + tomatoes",
-        "ro": "Ouă (întregi + albușuri extra) + pâine integrală + roșii",
-        "tag": "breakfast", "protein_note": "classic, cheap, filling",
-    },
-    {
-        "en": "Grilled chicken breast + rice + salad",
-        "ro": "Piept de pui la grătar + orez + salată",
-        "tag": "lunch_dinner", "protein_note": "the default 'can't go wrong' meal",
-    },
-    {
-        "en": "Ground beef (5% fat) + potatoes + vegetables",
-        "ro": "Carne tocată de vită (5% grăsime) + cartofi + legume",
-        "tag": "lunch_dinner", "protein_note": "budget-friendly, very filling",
-    },
-    {
-        "en": "Cottage cheese (branza de vaci) + rye bread + cucumber",
-        "ro": "Brânză de vaci + pâine de secară + castraveți",
-        "tag": "snack", "protein_note": "Romanian pantry staple, slow-digesting protein",
-    },
-    {
-        "en": "Whey protein shake + banana",
-        "ro": "Shake de proteine (whey) + banană",
-        "tag": "snack", "protein_note": "use to close a protein gap post-workout",
-    },
-    {
-        "en": "Salmon or trout + quinoa/rice + broccoli",
-        "ro": "Somon sau păstrăv + quinoa/orez + broccoli",
-        "tag": "lunch_dinner", "protein_note": "extra omega-3, good 1-2x/week",
-    },
-    {
-        "en": "Turkey breast + sweet potato + green beans",
-        "ro": "Piept de curcan + cartof dulce + fasole verde",
-        "tag": "lunch_dinner", "protein_note": "very lean, easy to hit protein target",
-    },
-]
+from datetime import date, timedelta
 
 MEAL_TYPES = ["breakfast", "lunch", "dinner", "snack"]
 
+# categories a meal can be filtered/tagged by — matches the tags used in
+# seed_data/meals.json
+MEAL_TAGS = [
+    "breakfast", "lunch", "dinner", "snack", "pre_workout", "post_workout",
+    "high_protein", "low_calorie", "budget", "quick", "romanian", "meal_prep",
+    "vegetarian", "vegan", "lactose_free", "gluten_free", "high_carb",
+    "low_carb", "dessert",
+]
 
-def calculate_targets(profile):
-    weight = float(profile.get("weight_kg", 80))
-    height = float(profile.get("height_cm", 175))
-    age = int(profile.get("age", 25))
-    sex = profile.get("sex", "male")
-    activity = profile.get("activity_level", "moderate")
-    goal = profile.get("goal", "lean_maintain_strength")
-
-    if sex == "male":
-        bmr = 10 * weight + 6.25 * height - 5 * age + 5
-    else:
-        bmr = 10 * weight + 6.25 * height - 5 * age - 161
-
-    multiplier = ACTIVITY_MULTIPLIERS.get(activity, 1.55)
-    tdee = bmr * multiplier
-
-    deficit_pct = DEFICIT_BY_GOAL.get(goal, 0.18)
-    target_calories = tdee * (1 - deficit_pct)
-
-    protein_g = round(2.2 * weight)
-    fat_g = round(0.8 * weight)
-    protein_kcal = protein_g * 4
-    fat_kcal = fat_g * 9
-    remaining_kcal = max(target_calories - protein_kcal - fat_kcal, 0)
-    carb_g = round(remaining_kcal / 4)
-
-    return {
-        "bmr": round(bmr),
-        "tdee": round(tdee),
-        "target_calories": round(target_calories),
-        "deficit_pct": round(deficit_pct * 100),
-        "protein_g": protein_g,
-        "fat_g": fat_g,
-        "carb_g": carb_g,
-    }
-
-
-def get_meal_ideas(lang="en"):
-    return MEAL_IDEAS
+SHOPPING_CATEGORIES = {
+    # crude food_key -> aisle category mapping for the shopping list grouping
+    "chicken_breast": "meat", "ground_beef": "meat", "turkey_breast": "meat", "salmon": "meat",
+    "white_rice": "pantry", "potatoes": "produce", "sweet_potato": "produce", "oats": "pantry",
+    "quinoa": "pantry", "honey": "pantry", "olive_oil": "pantry", "mamaliga": "pantry",
+    "greek_yogurt": "dairy", "cottage_cheese": "dairy", "telemea": "dairy",
+    "whole_egg": "dairy", "egg_white": "dairy", "whey_protein": "supplements",
+    "wholegrain_bread": "bakery", "rye_bread": "bakery",
+    "banana": "produce", "broccoli": "produce", "green_beans": "produce",
+    "tomatoes": "produce", "cucumber": "produce", "walnuts": "pantry",
+}
 
 
 # ---------------------------------------------------------------------------
-# Food logging
+# Food logging (simple food_db items, per 100g/unit)
 # ---------------------------------------------------------------------------
 
-def find_food(name, lang="en"):
-    """Match a food by its displayed name (either language) or its key."""
-    if not name:
+def find_food(food_items, name_or_key, lang="en"):
+    if not name_or_key:
         return None
-    name_lower = name.strip().lower()
-    for food in get_food_db():
-        if food["key"] == name_lower:
-            return food
-        if food["name_en"].lower() == name_lower:
-            return food
-        if food["name_ro"].lower() == name_lower:
-            return food
+    q = name_or_key.strip().lower()
+    for f in food_items:
+        if f["key"] == q or f["name_en"].lower() == q or f["name_ro"].lower() == q:
+            return f
     return None
 
 
 def compute_macros(food, qty):
-    """Scale a food_db entry's macros by quantity.
-
-    unit == "g"    -> qty is grams, food values are per `per` grams (usually 100)
-    unit == "unit" -> qty is a count (eggs, bananas, scoops), food values are per `per` units (usually 1)
-    """
     qty = float(qty)
-    factor = qty / float(food.get("per", 100))
+    factor = qty / float(food.get("per", 100) or 100)
     return {
         "kcal": round(food["kcal"] * factor),
         "protein_g": round(food["protein"] * factor, 1),
         "carb_g": round(food["carb"] * factor, 1),
         "fat_g": round(food["fat"] * factor, 1),
+        "fiber_g": round((food.get("fiber") or 0) * factor, 1),
     }
 
 
-def build_log_entry(food, qty, meal_type, lang="en"):
+def build_log_entry(food, qty, meal_type, lang="en", source="db", barcode=None, estimated=False):
     macros = compute_macros(food, qty)
     return {
         "meal_type": meal_type,
-        "food_key": food["key"],
+        "food_key": food.get("key"),
         "food_name": food["name_ro"] if lang == "ro" else food["name_en"],
-        "qty": qty,
-        "unit": food["unit"],
-        "kcal": macros["kcal"],
-        "protein_g": macros["protein_g"],
-        "carb_g": macros["carb_g"],
-        "fat_g": macros["fat_g"],
+        "qty": qty, "unit": food["unit"],
+        "source": source, "barcode": barcode, "estimated": estimated,
+        **macros,
     }
 
 
-def entries_for_date(meal_log, target_date=None):
-    target_date = target_date or date.today().isoformat()
-    return [e for e in meal_log if e.get("date") == target_date]
-
-
-def daily_totals(meal_log, target_date=None):
-    entries = entries_for_date(meal_log, target_date)
-    totals = {"kcal": 0, "protein_g": 0.0, "carb_g": 0.0, "fat_g": 0.0}
+def daily_totals(entries):
+    totals = {"kcal": 0, "protein_g": 0.0, "carb_g": 0.0, "fat_g": 0.0, "fiber_g": 0.0}
     for e in entries:
         totals["kcal"] += e.get("kcal", 0)
-        totals["protein_g"] += e.get("protein_g", 0)
-        totals["carb_g"] += e.get("carb_g", 0)
-        totals["fat_g"] += e.get("fat_g", 0)
-    totals["protein_g"] = round(totals["protein_g"], 1)
-    totals["carb_g"] = round(totals["carb_g"], 1)
-    totals["fat_g"] = round(totals["fat_g"], 1)
-    return totals, entries
+        totals["protein_g"] += e.get("protein_g", 0) or 0
+        totals["carb_g"] += e.get("carb_g", 0) or 0
+        totals["fat_g"] += e.get("fat_g", 0) or 0
+        totals["fiber_g"] += e.get("fiber_g", 0) or 0
+    for k in ("protein_g", "carb_g", "fat_g", "fiber_g"):
+        totals[k] = round(totals[k], 1)
+    return totals
 
 
 def progress_pct(logged, target):
     if not target:
         return 0
-    return max(0, min(100, round((logged / target) * 100)))
+    return max(0, min(150, round((logged / target) * 100)))
 
 
-def calorie_history(meal_log, days=14):
-    """List of {"date", "kcal"} for the last `days` days, oldest first,
-    including days with 0 logged (so the chart doesn't have gaps)."""
+def calorie_history(entries_by_date, days=14):
+    """entries_by_date: dict date-> list of log entry dicts (already grouped)."""
     today = date.today()
-    by_date = {}
-    for e in meal_log:
-        d = e.get("date")
-        by_date[d] = by_date.get(d, 0) + e.get("kcal", 0)
-    history = []
+    out = []
     for i in range(days - 1, -1, -1):
         d = (today - timedelta(days=i)).isoformat()
-        history.append({"date": d, "kcal": by_date.get(d, 0)})
-    return history
+        day_entries = entries_by_date.get(d, [])
+        out.append({"date": d, "kcal": sum(e.get("kcal", 0) for e in day_entries)})
+    return out
+
+
+# ---------------------------------------------------------------------------
+# Meal template browsing / filtering / scaling
+# ---------------------------------------------------------------------------
+
+def filter_meals(meals, tags=None, max_kcal=None, min_protein=None, max_prep_min=None,
+                  difficulty=None, exclude_keys=None):
+    exclude_keys = exclude_keys or set()
+    out = []
+    for m in meals:
+        if m["key"] in exclude_keys:
+            continue
+        if tags and not set(tags).issubset(set(m.get("tags", []))):
+            continue
+        if max_kcal and m["kcal_per_serving"] > max_kcal:
+            continue
+        if min_protein and m["protein_g_per_serving"] < min_protein:
+            continue
+        if max_prep_min and m["prep_time_min"] > max_prep_min:
+            continue
+        if difficulty and m["difficulty"] != difficulty:
+            continue
+        out.append(m)
+    return out
+
+
+def scale_meal(meal, servings):
+    """Recompute ingredient quantities and macros for a different number of
+    servings than the recipe's base_servings. Never mutates the original."""
+    ratio = float(servings) / float(meal.get("base_servings", 1) or 1)
+    scaled_ingredients = [
+        {**ing, "qty": round(ing["qty"] * ratio, 1)} for ing in meal.get("ingredients", [])
+    ]
+    return {
+        "servings": servings,
+        "ingredients": scaled_ingredients,
+        "kcal_total": round(meal["kcal_per_serving"] * servings),
+        "protein_g_total": round(meal["protein_g_per_serving"] * servings, 1),
+        "carb_g_total": round(meal["carb_g_per_serving"] * servings, 1),
+        "fat_g_total": round(meal["fat_g_per_serving"] * servings, 1),
+        "fiber_g_total": round(meal.get("fiber_g_per_serving", 0) * servings, 1),
+        # per-serving values stay the same regardless of how many servings you make
+        "kcal_per_serving": meal["kcal_per_serving"],
+        "protein_g_per_serving": meal["protein_g_per_serving"],
+    }
+
+
+def recently_eaten_meal_keys(meal_log_entries, days=5):
+    """food_key values logged in the last N days — used to avoid suggesting
+    the same meals/foods over and over."""
+    cutoff = (date.today() - timedelta(days=days)).isoformat()
+    return {e["food_key"] for e in meal_log_entries if e.get("date", "") >= cutoff and e.get("food_key")}
+
+
+def suggest_meals_for_remaining(meals, remaining_kcal, remaining_protein_g, tags=None,
+                                 recently_used_keys=None, limit=6):
+    """Simple rule-based 'what should I eat' suggestion: meals that fit
+    within the remaining calorie budget and help close the protein gap,
+    deprioritizing anything eaten in the last few days."""
+    recently_used_keys = recently_used_keys or set()
+    candidates = filter_meals(meals, tags=tags)
+    candidates = [m for m in candidates if m["kcal_per_serving"] <= max(remaining_kcal, 200)]
+
+    def score(m):
+        protein_fit = min(m["protein_g_per_serving"], remaining_protein_g)
+        penalty = 50 if m["key"] in recently_used_keys else 0
+        return protein_fit - penalty
+
+    candidates.sort(key=score, reverse=True)
+    return candidates[:limit]
+
+
+# ---------------------------------------------------------------------------
+# Shopping list generation
+# ---------------------------------------------------------------------------
+
+def generate_shopping_list(meals_with_servings, have_at_home_keys=None):
+    """meals_with_servings: list of (meal_dict, servings) tuples.
+    Combines duplicate ingredients across meals, sums quantities, groups by
+    category. have_at_home_keys: food_keys the user says they already have
+    (marks those items pre-checked as 'have_at_home')."""
+    have_at_home_keys = have_at_home_keys or set()
+    combined = {}
+    for meal, servings in meals_with_servings:
+        scaled = scale_meal(meal, servings)
+        for ing in scaled["ingredients"]:
+            key = ing["food_key"]
+            if key not in combined:
+                combined[key] = {
+                    "food_key": key, "name_en": ing["name_en"], "name_ro": ing["name_ro"],
+                    "qty": 0, "unit": ing["unit"],
+                    "category": SHOPPING_CATEGORIES.get(key, "other"),
+                    "have_at_home": key in have_at_home_keys,
+                }
+            combined[key]["qty"] += ing["qty"]
+
+    for item in combined.values():
+        item["qty"] = round(item["qty"], 1)
+
+    items = list(combined.values())
+    items.sort(key=lambda i: (i["category"], i["name_en"]))
+    return items

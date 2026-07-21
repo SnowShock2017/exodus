@@ -1,0 +1,2692 @@
+[
+  {
+    "key": "back_squat",
+    "name_en": "Barbell back squat",
+    "name_ro": "Genuflexiune cu bara (back squat)",
+    "primary_muscle": "quads",
+    "secondary_muscles": [
+      "glutes",
+      "hamstrings",
+      "core"
+    ],
+    "equipment": [
+      "barbell",
+      "rack"
+    ],
+    "movement_pattern": "squat",
+    "experience_level": "intermediate",
+    "unilateral": false,
+    "instructions_en": [
+      "Bar on upper traps, feet shoulder-width.",
+      "Brace core, break at hips and knees together.",
+      "Descend until hip crease passes knee top.",
+      "Drive through the whole foot to stand."
+    ],
+    "instructions_ro": [
+      "Bara pe trapezul superior, picioare la lățimea umerilor.",
+      "Contractă abdomenul, coboară din șold și genunchi simultan.",
+      "Coboară până șoldul trece sub genunchi.",
+      "Împinge prin toată talpa pentru a te ridica."
+    ],
+    "breathing_en": "Inhale before descending, brace, exhale past the sticking point.",
+    "breathing_ro": "Inspiră înainte de coborâre, contractă, expiră după punctul critic.",
+    "common_mistakes_en": [
+      "Knees caving inward",
+      "Heels rising off the floor",
+      "Rounding the lower back"
+    ],
+    "common_mistakes_ro": [
+      "Genunchii se prăbușesc spre interior",
+      "Călcâiele se ridică de pe podea",
+      "Rotunjirea spatelui inferior"
+    ],
+    "safety_tips_en": [
+      "Keep a spotter or safety pins for heavy sets",
+      "Don't sacrifice depth/form to add weight"
+    ],
+    "safety_tips_ro": [
+      "Folosește pini de siguranță la seturi grele",
+      "Nu sacrifica tehnica pentru greutate mai mare"
+    ],
+    "easier_variation": "goblet_squat",
+    "harder_variation": "front_squat",
+    "avoid_if_injury": [
+      "knee",
+      "lower_back"
+    ]
+  },
+  {
+    "key": "front_squat",
+    "name_en": "Barbell front squat",
+    "name_ro": "Genuflexiune frontală",
+    "primary_muscle": "quads",
+    "secondary_muscles": [
+      "glutes",
+      "core",
+      "upper_back"
+    ],
+    "equipment": [
+      "barbell",
+      "rack"
+    ],
+    "movement_pattern": "squat",
+    "experience_level": "advanced",
+    "unilateral": false,
+    "instructions_en": [
+      "Bar rests on front delts, elbows high.",
+      "Brace and squat down keeping torso upright.",
+      "Keep elbows up throughout.",
+      "Drive up through mid-foot."
+    ],
+    "instructions_ro": [
+      "Bara stă pe deltoizii anteriori, coatele sus.",
+      "Contractă și coboară cu trunchiul vertical.",
+      "Menține coatele sus pe tot parcursul.",
+      "Împinge prin mijlocul tălpii pentru a urca."
+    ],
+    "breathing_en": "Inhale and brace before descending, exhale on the way up.",
+    "breathing_ro": "Inspiră și contractă înainte de coborâre, expiră la urcare.",
+    "common_mistakes_en": [
+      "Elbows dropping, losing the rack position",
+      "Excessive forward lean"
+    ],
+    "common_mistakes_ro": [
+      "Coatele coboară, se pierde poziția de rack",
+      "Aplecare excesivă înainte"
+    ],
+    "safety_tips_en": [
+      "Requires good wrist/shoulder mobility — regress if uncomfortable"
+    ],
+    "safety_tips_ro": [
+      "Necesită mobilitate bună a încheieturii/umărului — regresează dacă e inconfortabil"
+    ],
+    "easier_variation": "back_squat",
+    "harder_variation": null,
+    "avoid_if_injury": [
+      "knee",
+      "wrist",
+      "shoulder"
+    ]
+  },
+  {
+    "key": "goblet_squat",
+    "name_en": "Goblet squat",
+    "name_ro": "Genuflexiune goblet",
+    "primary_muscle": "quads",
+    "secondary_muscles": [
+      "glutes",
+      "core"
+    ],
+    "equipment": [
+      "dumbbell",
+      "kettlebell"
+    ],
+    "movement_pattern": "squat",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Hold a dumbbell/kettlebell at chest.",
+      "Squat down between your knees, chest up.",
+      "Descend to a comfortable depth.",
+      "Stand back up through the heels."
+    ],
+    "instructions_ro": [
+      "Ține o gantera/kettlebell la piept.",
+      "Coboară între genunchi, pieptul sus.",
+      "Coboară la o adâncime confortabilă.",
+      "Ridică-te prin călcâie."
+    ],
+    "breathing_en": "Inhale down, exhale up.",
+    "breathing_ro": "Inspiră la coborâre, expiră la urcare.",
+    "common_mistakes_en": [
+      "Rounding the back",
+      "Rising onto toes"
+    ],
+    "common_mistakes_ro": [
+      "Rotunjirea spatelui",
+      "Ridicarea pe vârfuri"
+    ],
+    "safety_tips_en": [
+      "Great low-risk squat pattern for beginners"
+    ],
+    "safety_tips_ro": [
+      "Variantă de genuflexiune cu risc redus, ideală pentru începători"
+    ],
+    "easier_variation": null,
+    "harder_variation": "back_squat",
+    "avoid_if_injury": []
+  },
+  {
+    "key": "bulgarian_split_squat",
+    "name_en": "Bulgarian split squat",
+    "name_ro": "Genuflexiune bulgărească",
+    "primary_muscle": "quads",
+    "secondary_muscles": [
+      "glutes",
+      "hamstrings"
+    ],
+    "equipment": [
+      "dumbbell",
+      "bench"
+    ],
+    "movement_pattern": "squat",
+    "experience_level": "intermediate",
+    "unilateral": true,
+    "instructions_en": [
+      "Rear foot elevated on a bench.",
+      "Lower straight down until front thigh is near parallel.",
+      "Keep most weight on the front leg.",
+      "Push through the front heel to rise."
+    ],
+    "instructions_ro": [
+      "Piciorul din spate ridicat pe o bancă.",
+      "Coboară drept până coapsa din față e aproape paralelă.",
+      "Menține greutatea majoritar pe piciorul din față.",
+      "Împinge prin călcâiul din față pentru a urca."
+    ],
+    "breathing_en": "Inhale down, exhale up.",
+    "breathing_ro": "Inspiră la coborâre, expiră la urcare.",
+    "common_mistakes_en": [
+      "Front knee traveling far past toes with pain",
+      "Torso leaning too far forward"
+    ],
+    "common_mistakes_ro": [
+      "Genunchiul din față trece mult peste vârful piciorului cu durere",
+      "Trunchi aplecat prea mult înainte"
+    ],
+    "safety_tips_en": [
+      "Balance carefully near the bench edge"
+    ],
+    "safety_tips_ro": [
+      "Ai grijă la echilibru lângă marginea băncii"
+    ],
+    "easier_variation": "goblet_squat",
+    "harder_variation": null,
+    "avoid_if_injury": [
+      "knee"
+    ]
+  },
+  {
+    "key": "leg_press",
+    "name_en": "Leg press",
+    "name_ro": "Presă pentru picioare",
+    "primary_muscle": "quads",
+    "secondary_muscles": [
+      "glutes",
+      "hamstrings"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "movement_pattern": "squat",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Feet shoulder-width on the platform.",
+      "Lower the sled until knees near 90°.",
+      "Press through the whole foot to extend.",
+      "Don't lock knees out hard at the top."
+    ],
+    "instructions_ro": [
+      "Picioare la lățimea umerilor pe platformă.",
+      "Coboară sania până genunchii ajung la ~90°.",
+      "Împinge prin toată talpa pentru a extinde.",
+      "Nu bloca genunchii puternic în extensie."
+    ],
+    "breathing_en": "Exhale on the press, inhale on the way down.",
+    "breathing_ro": "Expiră la împingere, inspiră la coborâre.",
+    "common_mistakes_en": [
+      "Letting knees cave in",
+      "Lower back rounding off the pad"
+    ],
+    "common_mistakes_ro": [
+      "Genunchii se prăbușesc spre interior",
+      "Spatele inferior se rotunjește față de spătar"
+    ],
+    "safety_tips_en": [
+      "Don't overload past a comfortable range of motion"
+    ],
+    "safety_tips_ro": [
+      "Nu supraîncărca peste o amplitudine confortabilă"
+    ],
+    "easier_variation": null,
+    "harder_variation": "back_squat",
+    "avoid_if_injury": [
+      "knee"
+    ]
+  },
+  {
+    "key": "walking_lunge",
+    "name_en": "Walking lunge",
+    "name_ro": "Fandare cu pas",
+    "primary_muscle": "quads",
+    "secondary_muscles": [
+      "glutes",
+      "hamstrings"
+    ],
+    "equipment": [
+      "dumbbell",
+      "bodyweight"
+    ],
+    "movement_pattern": "squat",
+    "experience_level": "beginner",
+    "unilateral": true,
+    "instructions_en": [
+      "Step forward into a lunge.",
+      "Lower the back knee toward the floor.",
+      "Push off the front foot into the next step.",
+      "Keep torso upright throughout."
+    ],
+    "instructions_ro": [
+      "Pas înainte într-o fandare.",
+      "Coboară genunchiul din spate spre podea.",
+      "Împinge din piciorul din față spre pasul următor.",
+      "Menține trunchiul vertical."
+    ],
+    "breathing_en": "Inhale down, exhale up.",
+    "breathing_ro": "Inspiră la coborâre, expiră la urcare.",
+    "common_mistakes_en": [
+      "Front knee collapsing inward",
+      "Too short a step, stressing the front knee"
+    ],
+    "common_mistakes_ro": [
+      "Genunchiul din față se prăbușește spre interior",
+      "Pas prea scurt, stresează genunchiul din față"
+    ],
+    "safety_tips_en": [
+      "Use enough space, watch footing"
+    ],
+    "safety_tips_ro": [
+      "Folosește destul spațiu, ai grijă unde calci"
+    ],
+    "easier_variation": null,
+    "harder_variation": "bulgarian_split_squat",
+    "avoid_if_injury": [
+      "knee"
+    ]
+  },
+  {
+    "key": "hack_squat",
+    "name_en": "Hack squat (machine)",
+    "name_ro": "Hack squat (aparat)",
+    "primary_muscle": "quads",
+    "secondary_muscles": [
+      "glutes"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "movement_pattern": "squat",
+    "experience_level": "intermediate",
+    "unilateral": false,
+    "instructions_en": [
+      "Shoulders under pads, feet mid-platform.",
+      "Lower under control to near parallel.",
+      "Drive through the whole foot to extend."
+    ],
+    "instructions_ro": [
+      "Umerii sub perne, picioarele la mijlocul platformei.",
+      "Coboară controlat până aproape de paralel.",
+      "Împinge prin toată talpa pentru a extinde."
+    ],
+    "breathing_en": "Exhale on the press.",
+    "breathing_ro": "Expiră la împingere.",
+    "common_mistakes_en": [
+      "Bouncing out of the bottom"
+    ],
+    "common_mistakes_ro": [
+      "Sărirea din poziția joasă"
+    ],
+    "safety_tips_en": [
+      "Keep the safety catches set appropriately"
+    ],
+    "safety_tips_ro": [
+      "Setează corect opritoarele de siguranță"
+    ],
+    "easier_variation": "leg_press",
+    "harder_variation": null,
+    "avoid_if_injury": [
+      "knee"
+    ]
+  },
+  {
+    "key": "deadlift",
+    "name_en": "Barbell deadlift",
+    "name_ro": "Îndreptări (deadlift)",
+    "primary_muscle": "hamstrings",
+    "secondary_muscles": [
+      "glutes",
+      "lower_back",
+      "lats",
+      "core"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "movement_pattern": "hinge",
+    "experience_level": "intermediate",
+    "unilateral": false,
+    "instructions_en": [
+      "Bar over mid-foot, grip just outside legs.",
+      "Flat back, chest up, hips back.",
+      "Drive the floor away, bar close to the shins.",
+      "Lock out hips and knees together."
+    ],
+    "instructions_ro": [
+      "Bara deasupra mijlocului tălpii, priză puțin în afara picioarelor.",
+      "Spate drept, pieptul sus, șoldurile în spate.",
+      "Împinge podeaua departe, bara aproape de tibii.",
+      "Blochează șoldurile și genunchii simultan."
+    ],
+    "breathing_en": "Big breath and brace before the pull, exhale after lockout.",
+    "breathing_ro": "Respirație amplă și contracție înainte de tracțiune, expiră după blocare.",
+    "common_mistakes_en": [
+      "Rounding the lower back",
+      "Bar drifting away from the body",
+      "Hyperextending at the top"
+    ],
+    "common_mistakes_ro": [
+      "Rotunjirea spatelui inferior",
+      "Bara se depărtează de corp",
+      "Hiperextensie în partea de sus"
+    ],
+    "safety_tips_en": [
+      "Never round the back under load — stop the set if form breaks"
+    ],
+    "safety_tips_ro": [
+      "Nu rotunji niciodată spatele sub încărcare — oprește seria dacă tehnica se strică"
+    ],
+    "easier_variation": "romanian_deadlift",
+    "harder_variation": null,
+    "avoid_if_injury": [
+      "lower_back"
+    ]
+  },
+  {
+    "key": "romanian_deadlift",
+    "name_en": "Romanian deadlift",
+    "name_ro": "Îndreptări românești (RDL)",
+    "primary_muscle": "hamstrings",
+    "secondary_muscles": [
+      "glutes",
+      "lower_back"
+    ],
+    "equipment": [
+      "barbell",
+      "dumbbell"
+    ],
+    "movement_pattern": "hinge",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Start standing, slight knee bend.",
+      "Push hips back, bar close to legs.",
+      "Lower until a stretch is felt in the hamstrings.",
+      "Drive hips forward to stand."
+    ],
+    "instructions_ro": [
+      "Start în picioare, genunchi ușor flexați.",
+      "Împinge șoldurile în spate, bara aproape de picioare.",
+      "Coboară până simți întindere în ischio-gambieri.",
+      "Împinge șoldurile înainte pentru a te ridica."
+    ],
+    "breathing_en": "Inhale down, exhale up.",
+    "breathing_ro": "Inspiră la coborâre, expiră la urcare.",
+    "common_mistakes_en": [
+      "Rounding the back",
+      "Bending the knees too much (turns it into a squat)"
+    ],
+    "common_mistakes_ro": [
+      "Rotunjirea spatelui",
+      "Flexarea excesivă a genunchilor (devine genuflexiune)"
+    ],
+    "safety_tips_en": [
+      "Stop the descent where your back can stay flat"
+    ],
+    "safety_tips_ro": [
+      "Oprește coborârea acolo unde spatele rămâne drept"
+    ],
+    "easier_variation": "good_morning",
+    "harder_variation": "deadlift",
+    "avoid_if_injury": [
+      "lower_back"
+    ]
+  },
+  {
+    "key": "good_morning",
+    "name_en": "Good morning",
+    "name_ro": "Good morning",
+    "primary_muscle": "hamstrings",
+    "secondary_muscles": [
+      "glutes",
+      "lower_back"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "movement_pattern": "hinge",
+    "experience_level": "intermediate",
+    "unilateral": false,
+    "instructions_en": [
+      "Bar on upper back like a squat.",
+      "Hinge at the hips, back flat.",
+      "Lower torso until near parallel or comfortable range.",
+      "Drive hips forward to return upright."
+    ],
+    "instructions_ro": [
+      "Bara pe spatele superior ca la genuflexiune.",
+      "Flexează din șold, spatele drept.",
+      "Coboară trunchiul până aproape de paralel sau interval confortabil.",
+      "Împinge șoldurile înainte pentru a reveni."
+    ],
+    "breathing_en": "Inhale down, exhale up.",
+    "breathing_ro": "Inspiră la coborâre, expiră la urcare.",
+    "common_mistakes_en": [
+      "Rounding the back",
+      "Using too much weight too soon"
+    ],
+    "common_mistakes_ro": [
+      "Rotunjirea spatelui",
+      "Folosirea unei greutăți prea mari prea repede"
+    ],
+    "safety_tips_en": [
+      "Start very light — this is an easy exercise to strain the back on"
+    ],
+    "safety_tips_ro": [
+      "Începe foarte ușor — e ușor să-ți forțezi spatele la acest exercițiu"
+    ],
+    "easier_variation": "romanian_deadlift",
+    "harder_variation": null,
+    "avoid_if_injury": [
+      "lower_back"
+    ]
+  },
+  {
+    "key": "back_extension",
+    "name_en": "45-degree back extension",
+    "name_ro": "Extensii spate la 45 grade",
+    "primary_muscle": "lower_back",
+    "secondary_muscles": [
+      "glutes",
+      "hamstrings"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "movement_pattern": "hinge",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Hips on the pad, legs locked in.",
+      "Lower torso under control.",
+      "Raise until body forms a straight line.",
+      "Avoid hyperextending at the top."
+    ],
+    "instructions_ro": [
+      "Șoldurile pe suport, picioarele fixate.",
+      "Coboară trunchiul controlat.",
+      "Ridică până corpul formează o linie dreaptă.",
+      "Evită hiperextensia în vârf."
+    ],
+    "breathing_en": "Exhale on the way up.",
+    "breathing_ro": "Expiră la urcare.",
+    "common_mistakes_en": [
+      "Hyperextending the lower back at the top"
+    ],
+    "common_mistakes_ro": [
+      "Hiperextensia spatelui inferior în vârf"
+    ],
+    "safety_tips_en": [
+      "Good low-load option for lower back/hamstring work"
+    ],
+    "safety_tips_ro": [
+      "Opțiune cu încărcare redusă pentru spate inferior/ischio-gambieri"
+    ],
+    "easier_variation": null,
+    "harder_variation": "romanian_deadlift",
+    "avoid_if_injury": []
+  },
+  {
+    "key": "glute_bridge",
+    "name_en": "Glute bridge",
+    "name_ro": "Podul de bazin",
+    "primary_muscle": "glutes",
+    "secondary_muscles": [
+      "hamstrings",
+      "core"
+    ],
+    "equipment": [
+      "bodyweight",
+      "barbell"
+    ],
+    "movement_pattern": "hinge",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Lie on your back, knees bent, feet flat.",
+      "Squeeze glutes to raise hips.",
+      "Hold briefly at the top.",
+      "Lower under control."
+    ],
+    "instructions_ro": [
+      "Culcat pe spate, genunchii flexați, tălpile pe podea.",
+      "Contractă fesierii pentru a ridica șoldurile.",
+      "Menține scurt în poziția de sus.",
+      "Coboară controlat."
+    ],
+    "breathing_en": "Exhale on the way up.",
+    "breathing_ro": "Expiră la ridicare.",
+    "common_mistakes_en": [
+      "Overarching the lower back"
+    ],
+    "common_mistakes_ro": [
+      "Hiperextensia spatelui inferior"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": null,
+    "harder_variation": "romanian_deadlift",
+    "avoid_if_injury": []
+  },
+  {
+    "key": "kettlebell_swing",
+    "name_en": "Kettlebell swing",
+    "name_ro": "Balansare cu kettlebell",
+    "primary_muscle": "glutes",
+    "secondary_muscles": [
+      "hamstrings",
+      "core",
+      "shoulders"
+    ],
+    "equipment": [
+      "kettlebell"
+    ],
+    "movement_pattern": "hinge",
+    "experience_level": "intermediate",
+    "unilateral": false,
+    "instructions_en": [
+      "Hinge and hike the bell back between the legs.",
+      "Snap the hips forward to swing it to chest height.",
+      "Let it float weightless briefly at the top.",
+      "Let it fall back and repeat the hinge."
+    ],
+    "instructions_ro": [
+      "Flexează din șold și trage kettlebell-ul în spate între picioare.",
+      "Extinde brusc șoldurile pentru a-l ridica la nivelul pieptului.",
+      "Lasă-l 'plutind' scurt în vârf.",
+      "Lasă-l să cadă înapoi și repetă flexia."
+    ],
+    "breathing_en": "Exhale sharply on the hip snap.",
+    "breathing_ro": "Expiră brusc la extensia șoldului.",
+    "common_mistakes_en": [
+      "Squatting the swing instead of hinging",
+      "Using the arms to lift it"
+    ],
+    "common_mistakes_ro": [
+      "Genuflexiune în loc de flexie din șold",
+      "Ridicarea cu brațele în loc de șold"
+    ],
+    "safety_tips_en": [
+      "Learn the hip-hinge pattern with light weight first"
+    ],
+    "safety_tips_ro": [
+      "Învață mai întâi flexia din șold cu greutate mică"
+    ],
+    "easier_variation": "glute_bridge",
+    "harder_variation": null,
+    "avoid_if_injury": [
+      "lower_back"
+    ]
+  },
+  {
+    "key": "bench_press",
+    "name_en": "Barbell bench press",
+    "name_ro": "Împins din culcat (bench press)",
+    "primary_muscle": "chest",
+    "secondary_muscles": [
+      "triceps",
+      "front_delts"
+    ],
+    "equipment": [
+      "barbell",
+      "bench"
+    ],
+    "movement_pattern": "horizontal_push",
+    "experience_level": "intermediate",
+    "unilateral": false,
+    "instructions_en": [
+      "Lie flat, grip slightly wider than shoulders.",
+      "Lower the bar to mid-chest under control.",
+      "Press up and slightly back to lockout.",
+      "Keep feet planted and a slight arch."
+    ],
+    "instructions_ro": [
+      "Culcat pe bancă, priza puțin mai lată decât umerii.",
+      "Coboară bara la mijlocul pieptului controlat.",
+      "Împinge în sus și puțin în spate până la blocare.",
+      "Picioarele fixate, arc lombar ușor."
+    ],
+    "breathing_en": "Inhale down, exhale on the press.",
+    "breathing_ro": "Inspiră la coborâre, expiră la împingere.",
+    "common_mistakes_en": [
+      "Bouncing the bar off the chest",
+      "Flaring elbows to 90°",
+      "Lifting hips off the bench"
+    ],
+    "common_mistakes_ro": [
+      "Săltarea barei de pe piept",
+      "Coatele evazate la 90°",
+      "Ridicarea șoldurilor de pe bancă"
+    ],
+    "safety_tips_en": [
+      "Always use a spotter or safety bars for max attempts"
+    ],
+    "safety_tips_ro": [
+      "Folosește mereu un asistent sau bare de siguranță la încercări maximale"
+    ],
+    "easier_variation": "machine_chest_press",
+    "harder_variation": null,
+    "avoid_if_injury": [
+      "shoulder"
+    ]
+  },
+  {
+    "key": "incline_db_press",
+    "name_en": "Incline dumbbell press",
+    "name_ro": "Împins înclinat cu gantere",
+    "primary_muscle": "chest",
+    "secondary_muscles": [
+      "front_delts",
+      "triceps"
+    ],
+    "equipment": [
+      "dumbbell",
+      "bench"
+    ],
+    "movement_pattern": "horizontal_push",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Set bench to 30-45°.",
+      "Press dumbbells up over the upper chest.",
+      "Lower under control to a stretch.",
+      "Press back up without banging the dumbbells together too hard."
+    ],
+    "instructions_ro": [
+      "Setează banca la 30-45°.",
+      "Împinge ganterele deasupra pieptului superior.",
+      "Coboară controlat până la o întindere.",
+      "Împinge înapoi în sus."
+    ],
+    "breathing_en": "Inhale down, exhale up.",
+    "breathing_ro": "Inspiră la coborâre, expiră la urcare.",
+    "common_mistakes_en": [
+      "Flaring elbows excessively",
+      "Too steep an incline turns it into a shoulder press"
+    ],
+    "common_mistakes_ro": [
+      "Coate evazate excesiv",
+      "Înclinare prea mare transformă exercițiul în împins pentru umeri"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": "machine_chest_press",
+    "harder_variation": "bench_press",
+    "avoid_if_injury": [
+      "shoulder"
+    ]
+  },
+  {
+    "key": "machine_chest_press",
+    "name_en": "Machine chest press",
+    "name_ro": "Presă pentru piept (aparat)",
+    "primary_muscle": "chest",
+    "secondary_muscles": [
+      "triceps",
+      "front_delts"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "movement_pattern": "horizontal_push",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Adjust seat so handles align with mid-chest.",
+      "Press forward to extension.",
+      "Return under control without locking elbows hard."
+    ],
+    "instructions_ro": [
+      "Ajustează scaunul ca mânerele să fie la nivelul pieptului.",
+      "Împinge înainte până la extensie.",
+      "Revino controlat fără a bloca puternic coatele."
+    ],
+    "breathing_en": "Exhale on the press.",
+    "breathing_ro": "Expiră la împingere.",
+    "common_mistakes_en": [
+      "Using momentum instead of control"
+    ],
+    "common_mistakes_ro": [
+      "Folosirea inerției în loc de control"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": null,
+    "harder_variation": "bench_press",
+    "avoid_if_injury": []
+  },
+  {
+    "key": "weighted_dip",
+    "name_en": "Weighted dips",
+    "name_ro": "Flotări la paralele cu greutate",
+    "primary_muscle": "chest",
+    "secondary_muscles": [
+      "triceps",
+      "front_delts"
+    ],
+    "equipment": [
+      "bodyweight",
+      "dip_bars"
+    ],
+    "movement_pattern": "horizontal_push",
+    "experience_level": "intermediate",
+    "unilateral": false,
+    "instructions_en": [
+      "Support on parallel bars, lean slightly forward for chest emphasis.",
+      "Lower until shoulders near elbow height.",
+      "Press back up to lockout."
+    ],
+    "instructions_ro": [
+      "Sprijin pe paralele, apleacă-te ușor înainte pentru accent pe piept.",
+      "Coboară până umerii ajung aproape de nivelul coatelor.",
+      "Împinge înapoi până la blocare."
+    ],
+    "breathing_en": "Inhale down, exhale up.",
+    "breathing_ro": "Inspiră la coborâre, expiră la urcare.",
+    "common_mistakes_en": [
+      "Going too deep and straining the shoulders"
+    ],
+    "common_mistakes_ro": [
+      "Coborârea prea adâncă care forțează umerii"
+    ],
+    "safety_tips_en": [
+      "Stop if you feel sharp shoulder pain"
+    ],
+    "safety_tips_ro": [
+      "Oprește dacă simți durere ascuțită în umăr"
+    ],
+    "easier_variation": "machine_chest_press",
+    "harder_variation": null,
+    "avoid_if_injury": [
+      "shoulder"
+    ]
+  },
+  {
+    "key": "pushup",
+    "name_en": "Push-up",
+    "name_ro": "Flotări",
+    "primary_muscle": "chest",
+    "secondary_muscles": [
+      "triceps",
+      "front_delts",
+      "core"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "movement_pattern": "horizontal_push",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Hands slightly wider than shoulders, body in a straight line.",
+      "Lower chest to near the floor.",
+      "Press back up keeping the body rigid."
+    ],
+    "instructions_ro": [
+      "Mâinile puțin mai late decât umerii, corpul într-o linie dreaptă.",
+      "Coboară pieptul aproape de podea.",
+      "Împinge înapoi menținând corpul rigid."
+    ],
+    "breathing_en": "Inhale down, exhale up.",
+    "breathing_ro": "Inspiră la coborâre, expiră la urcare.",
+    "common_mistakes_en": [
+      "Sagging hips",
+      "Partial range of motion"
+    ],
+    "common_mistakes_ro": [
+      "Șoldurile lăsate în jos",
+      "Amplitudine parțială"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": null,
+    "harder_variation": "weighted_dip",
+    "avoid_if_injury": []
+  },
+  {
+    "key": "overhead_press",
+    "name_en": "Barbell overhead press",
+    "name_ro": "Împins deasupra capului cu bara",
+    "primary_muscle": "front_delts",
+    "secondary_muscles": [
+      "triceps",
+      "upper_chest",
+      "core"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "movement_pattern": "vertical_push",
+    "experience_level": "intermediate",
+    "unilateral": false,
+    "instructions_en": [
+      "Bar at collarbone height, grip just outside shoulders.",
+      "Brace core, press bar straight overhead.",
+      "Move the head slightly back then through as the bar passes.",
+      "Lock out overhead with bar over mid-foot."
+    ],
+    "instructions_ro": [
+      "Bara la nivelul claviculei, priza puțin în afara umerilor.",
+      "Contractă abdomenul, împinge bara vertical deasupra capului.",
+      "Mișcă ușor capul înapoi apoi înainte când bara trece.",
+      "Blochează deasupra capului cu bara peste mijlocul tălpii."
+    ],
+    "breathing_en": "Big brace before the press, exhale past the sticking point.",
+    "breathing_ro": "Contracție amplă înainte de împingere, expiră după punctul critic.",
+    "common_mistakes_en": [
+      "Excessive lower back arch",
+      "Pressing the bar forward instead of straight up"
+    ],
+    "common_mistakes_ro": [
+      "Arc lombar excesiv",
+      "Împingerea barei înainte în loc de vertical"
+    ],
+    "safety_tips_en": [
+      "Keep glutes/core tight to protect the lower back"
+    ],
+    "safety_tips_ro": [
+      "Menține fesierii/abdomenul contractați pentru a proteja spatele inferior"
+    ],
+    "easier_variation": "landmine_press",
+    "harder_variation": null,
+    "avoid_if_injury": [
+      "shoulder",
+      "lower_back"
+    ]
+  },
+  {
+    "key": "arnold_press",
+    "name_en": "Arnold press",
+    "name_ro": "Presă Arnold",
+    "primary_muscle": "front_delts",
+    "secondary_muscles": [
+      "side_delts",
+      "triceps"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "movement_pattern": "vertical_push",
+    "experience_level": "intermediate",
+    "unilateral": false,
+    "instructions_en": [
+      "Start with dumbbells at shoulders, palms facing you.",
+      "Press up while rotating palms to face forward.",
+      "Reverse the rotation on the way down."
+    ],
+    "instructions_ro": [
+      "Start cu ganterele la umeri, palmele spre tine.",
+      "Împinge în sus rotind palmele spre înainte.",
+      "Inversează rotația la coborâre."
+    ],
+    "breathing_en": "Exhale on the press.",
+    "breathing_ro": "Expiră la împingere.",
+    "common_mistakes_en": [
+      "Using too much weight and losing the rotation control"
+    ],
+    "common_mistakes_ro": [
+      "Greutate prea mare, pierzându-se controlul rotației"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": "landmine_press",
+    "harder_variation": "overhead_press",
+    "avoid_if_injury": [
+      "shoulder"
+    ]
+  },
+  {
+    "key": "landmine_press",
+    "name_en": "Landmine press",
+    "name_ro": "Presă landmine",
+    "primary_muscle": "front_delts",
+    "secondary_muscles": [
+      "upper_chest",
+      "triceps"
+    ],
+    "equipment": [
+      "barbell",
+      "landmine"
+    ],
+    "movement_pattern": "vertical_push",
+    "experience_level": "beginner",
+    "unilateral": true,
+    "instructions_en": [
+      "Hold the end of a landmine barbell at shoulder height.",
+      "Press up and slightly forward at an angle.",
+      "Lower under control back to the shoulder."
+    ],
+    "instructions_ro": [
+      "Ține capătul barei landmine la nivelul umărului.",
+      "Împinge în sus și puțin înainte, în unghi.",
+      "Coboară controlat înapoi la umăr."
+    ],
+    "breathing_en": "Exhale on the press.",
+    "breathing_ro": "Expiră la împingere.",
+    "common_mistakes_en": [
+      "Losing core stability, arching the back"
+    ],
+    "common_mistakes_ro": [
+      "Pierderea stabilității abdomenului, arcuirea spatelui"
+    ],
+    "safety_tips_en": [
+      "Shoulder-friendly pressing angle, good if overhead press hurts"
+    ],
+    "safety_tips_ro": [
+      "Unghi prietenos cu umărul, bun dacă presa deasupra capului doare"
+    ],
+    "easier_variation": null,
+    "harder_variation": "overhead_press",
+    "avoid_if_injury": []
+  },
+  {
+    "key": "barbell_row",
+    "name_en": "Barbell row",
+    "name_ro": "Ramat cu bara",
+    "primary_muscle": "lats",
+    "secondary_muscles": [
+      "upper_back",
+      "biceps",
+      "rear_delts"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "movement_pattern": "horizontal_pull",
+    "experience_level": "intermediate",
+    "unilateral": false,
+    "instructions_en": [
+      "Hinge forward ~45°, flat back.",
+      "Pull the bar to the lower ribs/upper abdomen.",
+      "Squeeze the shoulder blades together.",
+      "Lower under control."
+    ],
+    "instructions_ro": [
+      "Flexează trunchiul la ~45°, spate drept.",
+      "Trage bara spre coastele inferioare/abdomenul superior.",
+      "Contractă omoplații împreună.",
+      "Coboară controlat."
+    ],
+    "breathing_en": "Exhale on the pull.",
+    "breathing_ro": "Expiră la tracțiune.",
+    "common_mistakes_en": [
+      "Rounding the back",
+      "Using momentum/body English to heave the weight"
+    ],
+    "common_mistakes_ro": [
+      "Rotunjirea spatelui",
+      "Folosirea inerției corpului pentru a ridica greutatea"
+    ],
+    "safety_tips_en": [
+      "Keep the back flat throughout — stop if it rounds"
+    ],
+    "safety_tips_ro": [
+      "Menține spatele drept — oprește dacă se rotunjește"
+    ],
+    "easier_variation": "chest_supported_row",
+    "harder_variation": null,
+    "avoid_if_injury": [
+      "lower_back"
+    ]
+  },
+  {
+    "key": "dumbbell_row",
+    "name_en": "Dumbbell row",
+    "name_ro": "Ramat cu gantera",
+    "primary_muscle": "lats",
+    "secondary_muscles": [
+      "upper_back",
+      "biceps"
+    ],
+    "equipment": [
+      "dumbbell",
+      "bench"
+    ],
+    "movement_pattern": "horizontal_pull",
+    "experience_level": "beginner",
+    "unilateral": true,
+    "instructions_en": [
+      "One knee and hand on a bench, flat back.",
+      "Pull the dumbbell to the hip.",
+      "Squeeze at the top.",
+      "Lower under control."
+    ],
+    "instructions_ro": [
+      "Un genunchi și o mână pe bancă, spate drept.",
+      "Trage gantera spre șold.",
+      "Contractă în punctul de sus.",
+      "Coboară controlat."
+    ],
+    "breathing_en": "Exhale on the pull.",
+    "breathing_ro": "Expiră la tracțiune.",
+    "common_mistakes_en": [
+      "Twisting the torso to cheat the weight up"
+    ],
+    "common_mistakes_ro": [
+      "Răsucirea trunchiului pentru a trișa ridicarea"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": "chest_supported_row",
+    "harder_variation": "barbell_row",
+    "avoid_if_injury": []
+  },
+  {
+    "key": "chest_supported_row",
+    "name_en": "Chest-supported row",
+    "name_ro": "Ramat cu piept sprijinit",
+    "primary_muscle": "lats",
+    "secondary_muscles": [
+      "upper_back",
+      "biceps",
+      "rear_delts"
+    ],
+    "equipment": [
+      "machine",
+      "dumbbell",
+      "bench"
+    ],
+    "movement_pattern": "horizontal_pull",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Chest supported on an inclined pad.",
+      "Pull elbows back, squeezing shoulder blades.",
+      "Lower under control without shrugging."
+    ],
+    "instructions_ro": [
+      "Pieptul sprijinit pe un suport înclinat.",
+      "Trage coatele în spate, contractând omoplații.",
+      "Coboară controlat fără a ridica umerii."
+    ],
+    "breathing_en": "Exhale on the pull.",
+    "breathing_ro": "Expiră la tracțiune.",
+    "common_mistakes_en": [
+      "Using only the arms without engaging the back"
+    ],
+    "common_mistakes_ro": [
+      "Folosirea doar a brațelor fără a implica spatele"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": null,
+    "harder_variation": "barbell_row",
+    "avoid_if_injury": [
+      "lower_back"
+    ]
+  },
+  {
+    "key": "seated_cable_row",
+    "name_en": "Seated cable row",
+    "name_ro": "Ramat la cablu, șezând",
+    "primary_muscle": "lats",
+    "secondary_muscles": [
+      "upper_back",
+      "biceps"
+    ],
+    "equipment": [
+      "cable_machine"
+    ],
+    "movement_pattern": "horizontal_pull",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Sit with knees slightly bent, back straight.",
+      "Pull the handle to the abdomen.",
+      "Squeeze shoulder blades together.",
+      "Return under control without rounding forward."
+    ],
+    "instructions_ro": [
+      "Șezi cu genunchii ușor flexați, spate drept.",
+      "Trage mânerul spre abdomen.",
+      "Contractă omoplații împreună.",
+      "Revino controlat fără a te apleca prea mult înainte."
+    ],
+    "breathing_en": "Exhale on the pull.",
+    "breathing_ro": "Expiră la tracțiune.",
+    "common_mistakes_en": [
+      "Leaning back excessively to move more weight"
+    ],
+    "common_mistakes_ro": [
+      "Aplecarea prea mult în spate pentru a mișca mai multă greutate"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": null,
+    "harder_variation": "barbell_row",
+    "avoid_if_injury": []
+  },
+  {
+    "key": "meadows_row",
+    "name_en": "Meadows row",
+    "name_ro": "Ramat Meadows",
+    "primary_muscle": "lats",
+    "secondary_muscles": [
+      "upper_back",
+      "biceps"
+    ],
+    "equipment": [
+      "barbell",
+      "landmine"
+    ],
+    "movement_pattern": "horizontal_pull",
+    "experience_level": "advanced",
+    "unilateral": true,
+    "instructions_en": [
+      "One end of a landmine barbell, stand sideways.",
+      "Hinge forward, pull the bar to the hip.",
+      "Squeeze at the top, lower under control."
+    ],
+    "instructions_ro": [
+      "Un capăt al barei landmine, poziție laterală.",
+      "Flexează trunchiul, trage bara spre șold.",
+      "Contractă în vârf, coboară controlat."
+    ],
+    "breathing_en": "Exhale on the pull.",
+    "breathing_ro": "Expiră la tracțiune.",
+    "common_mistakes_en": [
+      "Rounding the back"
+    ],
+    "common_mistakes_ro": [
+      "Rotunjirea spatelui"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": "dumbbell_row",
+    "harder_variation": null,
+    "avoid_if_injury": [
+      "lower_back"
+    ]
+  },
+  {
+    "key": "inverted_row",
+    "name_en": "Inverted row",
+    "name_ro": "Ramat inversat",
+    "primary_muscle": "lats",
+    "secondary_muscles": [
+      "upper_back",
+      "biceps",
+      "core"
+    ],
+    "equipment": [
+      "bodyweight",
+      "barbell",
+      "rack"
+    ],
+    "movement_pattern": "horizontal_pull",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Bar at hip height, hang underneath it, body straight.",
+      "Pull chest to the bar.",
+      "Lower under control keeping the body rigid."
+    ],
+    "instructions_ro": [
+      "Bara la nivelul șoldului, atârnă dedesubt, corpul drept.",
+      "Trage pieptul spre bară.",
+      "Coboară controlat menținând corpul rigid."
+    ],
+    "breathing_en": "Exhale on the pull.",
+    "breathing_ro": "Expiră la tracțiune.",
+    "common_mistakes_en": [
+      "Sagging hips"
+    ],
+    "common_mistakes_ro": [
+      "Șoldurile lăsate în jos"
+    ],
+    "safety_tips_en": [
+      "Easy to regress by raising the bar height"
+    ],
+    "safety_tips_ro": [
+      "Ușor de simplificat ridicând înălțimea barei"
+    ],
+    "easier_variation": null,
+    "harder_variation": "barbell_row",
+    "avoid_if_injury": []
+  },
+  {
+    "key": "pullup",
+    "name_en": "Pull-up",
+    "name_ro": "Tracțiuni la bară (pull-up)",
+    "primary_muscle": "lats",
+    "secondary_muscles": [
+      "upper_back",
+      "biceps",
+      "core"
+    ],
+    "equipment": [
+      "bodyweight",
+      "pullup_bar"
+    ],
+    "movement_pattern": "vertical_pull",
+    "experience_level": "intermediate",
+    "unilateral": false,
+    "instructions_en": [
+      "Hang from the bar, hands slightly wider than shoulders.",
+      "Pull until the chin clears the bar.",
+      "Lower fully under control to a dead hang."
+    ],
+    "instructions_ro": [
+      "Atârnă de bară, mâinile puțin mai late decât umerii.",
+      "Trage până bărbia trece de bară.",
+      "Coboară complet controlat până la atârnare."
+    ],
+    "breathing_en": "Exhale on the pull.",
+    "breathing_ro": "Expiră la tracțiune.",
+    "common_mistakes_en": [
+      "Kipping/swinging on strict sets",
+      "Partial range of motion"
+    ],
+    "common_mistakes_ro": [
+      "Balans/kipping la seturi stricte",
+      "Amplitudine parțială"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": "lat_pulldown",
+    "harder_variation": null,
+    "avoid_if_injury": []
+  },
+  {
+    "key": "chinup",
+    "name_en": "Chin-up",
+    "name_ro": "Tracțiuni cu priză supinată (chin-up)",
+    "primary_muscle": "lats",
+    "secondary_muscles": [
+      "biceps",
+      "upper_back"
+    ],
+    "equipment": [
+      "bodyweight",
+      "pullup_bar"
+    ],
+    "movement_pattern": "vertical_pull",
+    "experience_level": "intermediate",
+    "unilateral": false,
+    "instructions_en": [
+      "Underhand grip, shoulder-width.",
+      "Pull until chin clears the bar.",
+      "Lower fully under control."
+    ],
+    "instructions_ro": [
+      "Priză supinată, la lățimea umerilor.",
+      "Trage până bărbia trece de bară.",
+      "Coboară complet controlat."
+    ],
+    "breathing_en": "Exhale on the pull.",
+    "breathing_ro": "Expiră la tracțiune.",
+    "common_mistakes_en": [
+      "Using momentum"
+    ],
+    "common_mistakes_ro": [
+      "Folosirea inerției"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": "lat_pulldown",
+    "harder_variation": null,
+    "avoid_if_injury": []
+  },
+  {
+    "key": "lat_pulldown",
+    "name_en": "Lat pulldown",
+    "name_ro": "Tracțiuni la helcometru (lat pulldown)",
+    "primary_muscle": "lats",
+    "secondary_muscles": [
+      "upper_back",
+      "biceps"
+    ],
+    "equipment": [
+      "cable_machine"
+    ],
+    "movement_pattern": "vertical_pull",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Grip slightly wider than shoulders.",
+      "Pull the bar to the upper chest.",
+      "Squeeze the lats, avoid leaning back excessively.",
+      "Return under control."
+    ],
+    "instructions_ro": [
+      "Priză puțin mai lată decât umerii.",
+      "Trage bara spre pieptul superior.",
+      "Contractă latissimusul, evită aplecarea excesivă în spate.",
+      "Revino controlat."
+    ],
+    "breathing_en": "Exhale on the pull.",
+    "breathing_ro": "Expiră la tracțiune.",
+    "common_mistakes_en": [
+      "Pulling behind the neck",
+      "Excessive body swing"
+    ],
+    "common_mistakes_ro": [
+      "Tracțiune în spatele gâtului",
+      "Balans excesiv al corpului"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": null,
+    "harder_variation": "pullup",
+    "avoid_if_injury": [
+      "shoulder"
+    ]
+  },
+  {
+    "key": "lateral_raise",
+    "name_en": "Lateral raise",
+    "name_ro": "Ridicări laterale",
+    "primary_muscle": "side_delts",
+    "secondary_muscles": [
+      "front_delts"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "movement_pattern": "isolation",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Dumbbells at sides, slight elbow bend.",
+      "Raise to shoulder height, leading with elbows.",
+      "Lower under control."
+    ],
+    "instructions_ro": [
+      "Ganterele pe lângă corp, coatele ușor flexate.",
+      "Ridică la nivelul umerilor, conducând cu coatele.",
+      "Coboară controlat."
+    ],
+    "breathing_en": "Exhale on the raise.",
+    "breathing_ro": "Expiră la ridicare.",
+    "common_mistakes_en": [
+      "Using momentum/shrugging to swing the weight up"
+    ],
+    "common_mistakes_ro": [
+      "Folosirea inerției/ridicarea umerilor pentru a arunca greutatea"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": null,
+    "harder_variation": "cable_lateral_raise",
+    "avoid_if_injury": []
+  },
+  {
+    "key": "cable_lateral_raise",
+    "name_en": "Cable lateral raise",
+    "name_ro": "Ridicări laterale la cablu",
+    "primary_muscle": "side_delts",
+    "secondary_muscles": [
+      "front_delts"
+    ],
+    "equipment": [
+      "cable_machine"
+    ],
+    "movement_pattern": "isolation",
+    "experience_level": "intermediate",
+    "unilateral": true,
+    "instructions_en": [
+      "Cable at low pulley, stand sideways.",
+      "Raise arm out to shoulder height.",
+      "Lower under control."
+    ],
+    "instructions_ro": [
+      "Cablu la scripete jos, poziție laterală.",
+      "Ridică brațul la nivelul umărului.",
+      "Coboară controlat."
+    ],
+    "breathing_en": "Exhale on the raise.",
+    "breathing_ro": "Expiră la ridicare.",
+    "common_mistakes_en": [
+      "Swinging the torso"
+    ],
+    "common_mistakes_ro": [
+      "Balansul trunchiului"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": "lateral_raise",
+    "harder_variation": null,
+    "avoid_if_injury": []
+  },
+  {
+    "key": "egyptian_lateral_raise",
+    "name_en": "Egyptian lateral raise",
+    "name_ro": "Ridicări laterale 'egyptiene'",
+    "primary_muscle": "side_delts",
+    "secondary_muscles": [
+      "front_delts"
+    ],
+    "equipment": [
+      "cable_machine"
+    ],
+    "movement_pattern": "isolation",
+    "experience_level": "advanced",
+    "unilateral": true,
+    "instructions_en": [
+      "Cable low, lean away from the pulley holding a rack for support.",
+      "Raise the arm out to the side with a long stretch at the bottom.",
+      "Lower under control."
+    ],
+    "instructions_ro": [
+      "Cablu jos, apleacă-te de scripete ținându-te de un suport.",
+      "Ridică brațul lateral cu o întindere amplă la bază.",
+      "Coboară controlat."
+    ],
+    "breathing_en": "Exhale on the raise.",
+    "breathing_ro": "Expiră la ridicare.",
+    "common_mistakes_en": [
+      "Using too much weight, losing the lean position"
+    ],
+    "common_mistakes_ro": [
+      "Greutate prea mare, pierderea poziției de aplecare"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": "cable_lateral_raise",
+    "harder_variation": null,
+    "avoid_if_injury": [
+      "shoulder"
+    ]
+  },
+  {
+    "key": "face_pull",
+    "name_en": "Face pull",
+    "name_ro": "Face pull",
+    "primary_muscle": "rear_delts",
+    "secondary_muscles": [
+      "upper_back",
+      "side_delts"
+    ],
+    "equipment": [
+      "cable_machine"
+    ],
+    "movement_pattern": "isolation",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Rope at upper pulley.",
+      "Pull toward the face, elbows high, rotating hands back.",
+      "Squeeze rear delts, return under control."
+    ],
+    "instructions_ro": [
+      "Coardă la scripete sus.",
+      "Trage spre față, coatele sus, rotind mâinile în spate.",
+      "Contractă deltoidul posterior, revino controlat."
+    ],
+    "breathing_en": "Exhale on the pull.",
+    "breathing_ro": "Expiră la tracțiune.",
+    "common_mistakes_en": [
+      "Using too much weight and losing the external rotation"
+    ],
+    "common_mistakes_ro": [
+      "Greutate prea mare, pierzându-se rotația externă"
+    ],
+    "safety_tips_en": [
+      "Great for shoulder health — good to include weekly"
+    ],
+    "safety_tips_ro": [
+      "Excelent pentru sănătatea umărului — bun de inclus săptămânal"
+    ],
+    "easier_variation": null,
+    "harder_variation": null,
+    "avoid_if_injury": []
+  },
+  {
+    "key": "reverse_pec_deck",
+    "name_en": "Reverse pec-deck fly",
+    "name_ro": "Fluturări inverse la aparat",
+    "primary_muscle": "rear_delts",
+    "secondary_muscles": [
+      "upper_back"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "movement_pattern": "isolation",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Chest against the pad, arms out in front.",
+      "Squeeze the arms back and out to the sides.",
+      "Return under control."
+    ],
+    "instructions_ro": [
+      "Pieptul pe suport, brațele înainte.",
+      "Contractă brațele în spate și lateral.",
+      "Revino controlat."
+    ],
+    "breathing_en": "Exhale on the squeeze.",
+    "breathing_ro": "Expiră la contracție.",
+    "common_mistakes_en": [
+      "Using momentum"
+    ],
+    "common_mistakes_ro": [
+      "Folosirea inerției"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": null,
+    "harder_variation": "face_pull",
+    "avoid_if_injury": []
+  },
+  {
+    "key": "band_pull_apart",
+    "name_en": "Band pull-apart",
+    "name_ro": "Tracțiuni cu banda elastică",
+    "primary_muscle": "rear_delts",
+    "secondary_muscles": [
+      "upper_back"
+    ],
+    "equipment": [
+      "band"
+    ],
+    "movement_pattern": "isolation",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Hold a band with arms extended in front.",
+      "Pull it apart to chest height.",
+      "Return under control."
+    ],
+    "instructions_ro": [
+      "Ține banda cu brațele întinse înainte.",
+      "Trage-o în lateral până la nivelul pieptului.",
+      "Revino controlat."
+    ],
+    "breathing_en": "Exhale on the pull.",
+    "breathing_ro": "Expiră la tracțiune.",
+    "common_mistakes_en": [
+      "Rushing the movement"
+    ],
+    "common_mistakes_ro": [
+      "Graba în execuție"
+    ],
+    "safety_tips_en": [
+      "Cheap, joint-friendly shoulder health tool"
+    ],
+    "safety_tips_ro": [
+      "Instrument ieftin, prietenos cu articulațiile pentru sănătatea umărului"
+    ],
+    "easier_variation": null,
+    "harder_variation": "face_pull",
+    "avoid_if_injury": []
+  },
+  {
+    "key": "barbell_curl",
+    "name_en": "Barbell curl",
+    "name_ro": "Flexii pentru biceps cu bara",
+    "primary_muscle": "biceps",
+    "secondary_muscles": [],
+    "equipment": [
+      "barbell"
+    ],
+    "movement_pattern": "isolation",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Grip shoulder-width, elbows at sides.",
+      "Curl the bar up without swinging.",
+      "Lower under control."
+    ],
+    "instructions_ro": [
+      "Priza la lățimea umerilor, coatele pe lângă corp.",
+      "Flexează bara în sus fără balans.",
+      "Coboară controlat."
+    ],
+    "breathing_en": "Exhale on the curl.",
+    "breathing_ro": "Expiră la flexie.",
+    "common_mistakes_en": [
+      "Swinging the torso/using momentum"
+    ],
+    "common_mistakes_ro": [
+      "Balansul trunchiului/folosirea inerției"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": "hammer_curl",
+    "harder_variation": null,
+    "avoid_if_injury": []
+  },
+  {
+    "key": "incline_db_curl",
+    "name_en": "Incline dumbbell curl",
+    "name_ro": "Flexii cu gantere pe bancă înclinată",
+    "primary_muscle": "biceps",
+    "secondary_muscles": [],
+    "equipment": [
+      "dumbbell",
+      "bench"
+    ],
+    "movement_pattern": "isolation",
+    "experience_level": "intermediate",
+    "unilateral": false,
+    "instructions_en": [
+      "Sit back on an incline bench, arms hanging.",
+      "Curl the dumbbells up.",
+      "Lower under full control."
+    ],
+    "instructions_ro": [
+      "Șezi pe spate pe banca înclinată, brațele atârnând.",
+      "Flexează ganterele în sus.",
+      "Coboară complet controlat."
+    ],
+    "breathing_en": "Exhale on the curl.",
+    "breathing_ro": "Expiră la flexie.",
+    "common_mistakes_en": [
+      "Cutting the range of motion short"
+    ],
+    "common_mistakes_ro": [
+      "Scurtarea amplitudinii de mișcare"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": "hammer_curl",
+    "harder_variation": null,
+    "avoid_if_injury": []
+  },
+  {
+    "key": "hammer_curl",
+    "name_en": "Hammer curl",
+    "name_ro": "Flexii cu priză neutră (hammer)",
+    "primary_muscle": "biceps",
+    "secondary_muscles": [
+      "forearms"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "movement_pattern": "isolation",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Neutral grip, elbows at sides.",
+      "Curl straight up.",
+      "Lower under control."
+    ],
+    "instructions_ro": [
+      "Priza neutră, coatele pe lângă corp.",
+      "Flexează drept în sus.",
+      "Coboară controlat."
+    ],
+    "breathing_en": "Exhale on the curl.",
+    "breathing_ro": "Expiră la flexie.",
+    "common_mistakes_en": [
+      "Swinging the weight up"
+    ],
+    "common_mistakes_ro": [
+      "Balansarea greutății în sus"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": null,
+    "harder_variation": "barbell_curl",
+    "avoid_if_injury": []
+  },
+  {
+    "key": "triceps_pushdown",
+    "name_en": "Triceps pushdown",
+    "name_ro": "Extensii pentru triceps la cablu",
+    "primary_muscle": "triceps",
+    "secondary_muscles": [],
+    "equipment": [
+      "cable_machine"
+    ],
+    "movement_pattern": "isolation",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Elbows pinned at sides.",
+      "Push the bar/rope down to full extension.",
+      "Return under control."
+    ],
+    "instructions_ro": [
+      "Coatele fixate pe lângă corp.",
+      "Împinge bara/coarda în jos până la extensie completă.",
+      "Revino controlat."
+    ],
+    "breathing_en": "Exhale on the push.",
+    "breathing_ro": "Expiră la împingere.",
+    "common_mistakes_en": [
+      "Elbows flaring out or moving forward"
+    ],
+    "common_mistakes_ro": [
+      "Coatele se depărtează sau se mișcă înainte"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": null,
+    "harder_variation": "overhead_triceps_extension",
+    "avoid_if_injury": []
+  },
+  {
+    "key": "overhead_triceps_extension",
+    "name_en": "Overhead triceps extension",
+    "name_ro": "Extensii pentru triceps deasupra capului",
+    "primary_muscle": "triceps",
+    "secondary_muscles": [],
+    "equipment": [
+      "dumbbell",
+      "cable_machine"
+    ],
+    "movement_pattern": "isolation",
+    "experience_level": "intermediate",
+    "unilateral": false,
+    "instructions_en": [
+      "Hold weight overhead, elbows pointing forward.",
+      "Lower behind the head under control.",
+      "Extend back to the top."
+    ],
+    "instructions_ro": [
+      "Ține greutatea deasupra capului, coatele spre înainte.",
+      "Coboară în spatele capului controlat.",
+      "Extinde înapoi în sus."
+    ],
+    "breathing_en": "Exhale on the extension.",
+    "breathing_ro": "Expiră la extensie.",
+    "common_mistakes_en": [
+      "Flaring elbows out wide"
+    ],
+    "common_mistakes_ro": [
+      "Coatele se depărtează prea mult"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": "triceps_pushdown",
+    "harder_variation": null,
+    "avoid_if_injury": [
+      "shoulder",
+      "elbow"
+    ]
+  },
+  {
+    "key": "close_grip_bench",
+    "name_en": "Close-grip bench press",
+    "name_ro": "Împins culcat cu priză îngustă",
+    "primary_muscle": "triceps",
+    "secondary_muscles": [
+      "chest",
+      "front_delts"
+    ],
+    "equipment": [
+      "barbell",
+      "bench"
+    ],
+    "movement_pattern": "horizontal_push",
+    "experience_level": "intermediate",
+    "unilateral": false,
+    "instructions_en": [
+      "Grip just inside shoulder width.",
+      "Lower the bar to the lower chest, elbows tucked.",
+      "Press up focusing on triceps lockout."
+    ],
+    "instructions_ro": [
+      "Priza puțin mai îngustă decât umerii.",
+      "Coboară bara spre pieptul inferior, coatele lipite de corp.",
+      "Împinge în sus cu accent pe blocarea tricepsului."
+    ],
+    "breathing_en": "Inhale down, exhale up.",
+    "breathing_ro": "Inspiră la coborâre, expiră la urcare.",
+    "common_mistakes_en": [
+      "Grip too narrow, straining the wrists"
+    ],
+    "common_mistakes_ro": [
+      "Priza prea îngustă, forțează încheieturile"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": "triceps_pushdown",
+    "harder_variation": null,
+    "avoid_if_injury": [
+      "wrist",
+      "shoulder"
+    ]
+  },
+  {
+    "key": "close_grip_pushup",
+    "name_en": "Close-grip push-up",
+    "name_ro": "Flotări cu priză îngustă",
+    "primary_muscle": "triceps",
+    "secondary_muscles": [
+      "chest",
+      "front_delts"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "movement_pattern": "horizontal_push",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Hands close together under the chest.",
+      "Lower keeping elbows tucked.",
+      "Press back up."
+    ],
+    "instructions_ro": [
+      "Mâinile apropiate sub piept.",
+      "Coboară cu coatele lipite de corp.",
+      "Împinge înapoi în sus."
+    ],
+    "breathing_en": "Inhale down, exhale up.",
+    "breathing_ro": "Inspiră la coborâre, expiră la urcare.",
+    "common_mistakes_en": [
+      "Elbows flaring out"
+    ],
+    "common_mistakes_ro": [
+      "Coatele se depărtează"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": null,
+    "harder_variation": "close_grip_bench",
+    "avoid_if_injury": []
+  },
+  {
+    "key": "standing_calf_raise",
+    "name_en": "Standing calf raise",
+    "name_ro": "Ridicări pe vârfuri, în picioare",
+    "primary_muscle": "calves",
+    "secondary_muscles": [],
+    "equipment": [
+      "machine",
+      "dumbbell"
+    ],
+    "movement_pattern": "isolation",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Balls of feet on a raised platform.",
+      "Rise as high as possible onto the toes.",
+      "Lower under control for a full stretch."
+    ],
+    "instructions_ro": [
+      "Vârfurile picioarelor pe o platformă ridicată.",
+      "Ridică-te cât mai sus pe vârfuri.",
+      "Coboară controlat pentru o întindere completă."
+    ],
+    "breathing_en": "Exhale on the raise.",
+    "breathing_ro": "Expiră la ridicare.",
+    "common_mistakes_en": [
+      "Bouncing instead of controlling the stretch"
+    ],
+    "common_mistakes_ro": [
+      "Săltarea în loc de a controla întinderea"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": null,
+    "harder_variation": null,
+    "avoid_if_injury": []
+  },
+  {
+    "key": "seated_calf_raise",
+    "name_en": "Seated calf raise",
+    "name_ro": "Ridicări pe vârfuri, șezând",
+    "primary_muscle": "calves",
+    "secondary_muscles": [],
+    "equipment": [
+      "machine"
+    ],
+    "movement_pattern": "isolation",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Balls of feet on the platform, pad on the knees.",
+      "Rise onto the toes.",
+      "Lower under control for a full stretch."
+    ],
+    "instructions_ro": [
+      "Vârfurile picioarelor pe platformă, perna pe genunchi.",
+      "Ridică-te pe vârfuri.",
+      "Coboară controlat pentru o întindere completă."
+    ],
+    "breathing_en": "Exhale on the raise.",
+    "breathing_ro": "Expiră la ridicare.",
+    "common_mistakes_en": [
+      "Using a short, bouncy range of motion"
+    ],
+    "common_mistakes_ro": [
+      "Amplitudine scurtă și săltăreață"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": null,
+    "harder_variation": "standing_calf_raise",
+    "avoid_if_injury": []
+  },
+  {
+    "key": "donkey_calf_raise",
+    "name_en": "Donkey calf raise",
+    "name_ro": "Ridicări pe vârfuri tip 'donkey'",
+    "primary_muscle": "calves",
+    "secondary_muscles": [],
+    "equipment": [
+      "machine"
+    ],
+    "movement_pattern": "isolation",
+    "experience_level": "intermediate",
+    "unilateral": false,
+    "instructions_en": [
+      "Hips bent forward, balls of feet on platform.",
+      "Rise onto the toes.",
+      "Lower for a full stretch."
+    ],
+    "instructions_ro": [
+      "Trunchi aplecat înainte, vârfurile picioarelor pe platformă.",
+      "Ridică-te pe vârfuri.",
+      "Coboară pentru o întindere completă."
+    ],
+    "breathing_en": "Exhale on the raise.",
+    "breathing_ro": "Expiră la ridicare.",
+    "common_mistakes_en": [
+      "Rushing reps"
+    ],
+    "common_mistakes_ro": [
+      "Graba în execuție"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": "standing_calf_raise",
+    "harder_variation": null,
+    "avoid_if_injury": []
+  },
+  {
+    "key": "plank",
+    "name_en": "Plank",
+    "name_ro": "Plank",
+    "primary_muscle": "core",
+    "secondary_muscles": [
+      "shoulders"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "movement_pattern": "core",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Forearms and toes on the floor, body straight.",
+      "Brace the core, keep hips level.",
+      "Hold for time, breathing normally."
+    ],
+    "instructions_ro": [
+      "Antebrațele și vârfurile picioarelor pe podea, corpul drept.",
+      "Contractă abdomenul, șoldurile la nivel.",
+      "Menține poziția, respiră normal."
+    ],
+    "breathing_en": "Breathe normally throughout, don't hold your breath.",
+    "breathing_ro": "Respiră normal, nu-ți ține respirația.",
+    "common_mistakes_en": [
+      "Hips sagging or piking up"
+    ],
+    "common_mistakes_ro": [
+      "Șoldurile lăsate sau ridicate prea sus"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": null,
+    "harder_variation": "ab_wheel_rollout",
+    "avoid_if_injury": []
+  },
+  {
+    "key": "hanging_leg_raise",
+    "name_en": "Hanging leg raise",
+    "name_ro": "Ridicări de picioare atârnat",
+    "primary_muscle": "core",
+    "secondary_muscles": [
+      "hip_flexors"
+    ],
+    "equipment": [
+      "pullup_bar"
+    ],
+    "movement_pattern": "core",
+    "experience_level": "intermediate",
+    "unilateral": false,
+    "instructions_en": [
+      "Hang from the bar, legs straight or bent.",
+      "Raise legs to hip height or higher.",
+      "Lower under control without swinging."
+    ],
+    "instructions_ro": [
+      "Atârnă de bară, picioarele drepte sau flexate.",
+      "Ridică picioarele la nivelul șoldului sau mai sus.",
+      "Coboară controlat fără balans."
+    ],
+    "breathing_en": "Exhale on the raise.",
+    "breathing_ro": "Expiră la ridicare.",
+    "common_mistakes_en": [
+      "Swinging the body for momentum"
+    ],
+    "common_mistakes_ro": [
+      "Balansarea corpului pentru inerție"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": "cable_crunch",
+    "harder_variation": "ab_wheel_rollout",
+    "avoid_if_injury": [
+      "lower_back"
+    ]
+  },
+  {
+    "key": "cable_crunch",
+    "name_en": "Cable crunch",
+    "name_ro": "Crunch la cablu",
+    "primary_muscle": "core",
+    "secondary_muscles": [],
+    "equipment": [
+      "cable_machine"
+    ],
+    "movement_pattern": "core",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Kneel below a high pulley, rope behind the head.",
+      "Crunch down, rounding the spine.",
+      "Return under control."
+    ],
+    "instructions_ro": [
+      "Îngenunchează sub scripete sus, coarda în spatele capului.",
+      "Flexează în jos, rotunjind coloana.",
+      "Revino controlat."
+    ],
+    "breathing_en": "Exhale on the crunch.",
+    "breathing_ro": "Expiră la flexie.",
+    "common_mistakes_en": [
+      "Using the hips instead of the abs"
+    ],
+    "common_mistakes_ro": [
+      "Folosirea șoldurilor în loc de abdomen"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": null,
+    "harder_variation": "hanging_leg_raise",
+    "avoid_if_injury": [
+      "lower_back"
+    ]
+  },
+  {
+    "key": "ab_wheel_rollout",
+    "name_en": "Ab wheel rollout",
+    "name_ro": "Rulare cu roata abdominală",
+    "primary_muscle": "core",
+    "secondary_muscles": [
+      "shoulders",
+      "lats"
+    ],
+    "equipment": [
+      "ab_wheel"
+    ],
+    "movement_pattern": "core",
+    "experience_level": "advanced",
+    "unilateral": false,
+    "instructions_en": [
+      "Kneeling, hands on the wheel.",
+      "Roll forward keeping the core braced, back flat.",
+      "Roll back to the start before the back sags."
+    ],
+    "instructions_ro": [
+      "Îngenuncheat, mâinile pe roată.",
+      "Rulează înainte cu abdomenul contractat, spatele drept.",
+      "Rulează înapoi înainte ca spatele să se lase."
+    ],
+    "breathing_en": "Exhale on the rollout, inhale on the return.",
+    "breathing_ro": "Expiră la rulare, inspiră la revenire.",
+    "common_mistakes_en": [
+      "Letting the lower back sag/arch"
+    ],
+    "common_mistakes_ro": [
+      "Lăsarea/arcuirea spatelui inferior"
+    ],
+    "safety_tips_en": [
+      "Only progress here once basic plank/crunch are solid"
+    ],
+    "safety_tips_ro": [
+      "Progresează aici doar după ce plank-ul/crunch-ul de bază sunt solide"
+    ],
+    "easier_variation": "plank",
+    "harder_variation": null,
+    "avoid_if_injury": [
+      "lower_back",
+      "shoulder"
+    ]
+  },
+  {
+    "key": "pallof_press",
+    "name_en": "Pallof press",
+    "name_ro": "Pallof press",
+    "primary_muscle": "core",
+    "secondary_muscles": [
+      "obliques"
+    ],
+    "equipment": [
+      "cable_machine",
+      "band"
+    ],
+    "movement_pattern": "core",
+    "experience_level": "beginner",
+    "unilateral": true,
+    "instructions_en": [
+      "Cable at chest height, stand sideways to the machine.",
+      "Press the handle straight out from the chest.",
+      "Resist rotation, return under control."
+    ],
+    "instructions_ro": [
+      "Cablul la nivelul pieptului, poziție laterală față de aparat.",
+      "Împinge mânerul drept din piept.",
+      "Rezistă rotației, revino controlat."
+    ],
+    "breathing_en": "Exhale on the press.",
+    "breathing_ro": "Expiră la împingere.",
+    "common_mistakes_en": [
+      "Letting the torso rotate toward the machine"
+    ],
+    "common_mistakes_ro": [
+      "Lăsarea trunchiului să se rotească spre aparat"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": null,
+    "harder_variation": null,
+    "avoid_if_injury": []
+  },
+  {
+    "key": "russian_twist",
+    "name_en": "Russian twist",
+    "name_ro": "Rotații de trunchi (Russian twist)",
+    "primary_muscle": "core",
+    "secondary_muscles": [
+      "obliques"
+    ],
+    "equipment": [
+      "bodyweight",
+      "dumbbell"
+    ],
+    "movement_pattern": "core",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Sit leaning back slightly, feet off the floor if able.",
+      "Rotate the torso side to side, touching the floor if using weight.",
+      "Keep the motion controlled."
+    ],
+    "instructions_ro": [
+      "Șezi ușor aplecat pe spate, picioarele ridicate dacă poți.",
+      "Rotește trunchiul dintr-o parte în alta, atingând podeaua dacă folosești greutate.",
+      "Menține mișcarea controlată."
+    ],
+    "breathing_en": "Exhale on each rotation.",
+    "breathing_ro": "Expiră la fiecare rotație.",
+    "common_mistakes_en": [
+      "Rushing the reps, using momentum"
+    ],
+    "common_mistakes_ro": [
+      "Graba în execuție, folosirea inerției"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": null,
+    "harder_variation": "pallof_press",
+    "avoid_if_injury": [
+      "lower_back"
+    ]
+  },
+  {
+    "key": "burpee",
+    "name_en": "Burpee",
+    "name_ro": "Burpee",
+    "primary_muscle": "full_body",
+    "secondary_muscles": [
+      "chest",
+      "quads",
+      "shoulders"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "movement_pattern": "conditioning",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Drop into a squat, hands on the floor.",
+      "Kick feet back into a plank, optional push-up.",
+      "Jump feet back to hands.",
+      "Jump up with arms overhead."
+    ],
+    "instructions_ro": [
+      "Coboară în genuflexiune, mâinile pe podea.",
+      "Aruncă picioarele în spate în poziția de plank, flotare opțională.",
+      "Sari cu picioarele înapoi la mâini.",
+      "Sari în sus cu brațele deasupra capului."
+    ],
+    "breathing_en": "Breathe rhythmically, don't hold your breath.",
+    "breathing_ro": "Respiră ritmic, nu-ți ține respirația.",
+    "common_mistakes_en": [
+      "Rounding the back on the jump-back"
+    ],
+    "common_mistakes_ro": [
+      "Rotunjirea spatelui la aruncarea picioarelor în spate"
+    ],
+    "safety_tips_en": [
+      "Scale by stepping instead of jumping if needed"
+    ],
+    "safety_tips_ro": [
+      "Simplifică pășind în loc de a sări dacă e nevoie"
+    ],
+    "easier_variation": null,
+    "harder_variation": null,
+    "avoid_if_injury": [
+      "knee",
+      "wrist"
+    ]
+  },
+  {
+    "key": "box_jump",
+    "name_en": "Box jump",
+    "name_ro": "Sărituri pe cutie (box jump)",
+    "primary_muscle": "quads",
+    "secondary_muscles": [
+      "glutes",
+      "calves"
+    ],
+    "equipment": [
+      "box"
+    ],
+    "movement_pattern": "conditioning",
+    "experience_level": "intermediate",
+    "unilateral": false,
+    "instructions_en": [
+      "Stand facing the box.",
+      "Swing arms and jump, landing softly with both feet.",
+      "Stand fully upright on the box before stepping down."
+    ],
+    "instructions_ro": [
+      "Stai cu fața spre cutie.",
+      "Balansează brațele și sari, aterizând moale pe ambele picioare.",
+      "Ridică-te complet pe cutie înainte de a coborî."
+    ],
+    "breathing_en": "Exhale on the jump.",
+    "breathing_ro": "Expiră la săritură.",
+    "common_mistakes_en": [
+      "Jumping down instead of stepping down (injury risk)"
+    ],
+    "common_mistakes_ro": [
+      "Săritul jos în loc de coborâre (risc de accidentare)"
+    ],
+    "safety_tips_en": [
+      "Always step down, never jump down from the box"
+    ],
+    "safety_tips_ro": [
+      "Coboară mereu pășind, nu sări niciodată de pe cutie"
+    ],
+    "easier_variation": "air_squat",
+    "harder_variation": null,
+    "avoid_if_injury": [
+      "knee",
+      "ankle"
+    ]
+  },
+  {
+    "key": "wall_ball",
+    "name_en": "Wall ball shot",
+    "name_ro": "Aruncare cu mingea la perete (wall ball)",
+    "primary_muscle": "quads",
+    "secondary_muscles": [
+      "shoulders",
+      "glutes"
+    ],
+    "equipment": [
+      "medicine_ball"
+    ],
+    "movement_pattern": "conditioning",
+    "experience_level": "intermediate",
+    "unilateral": false,
+    "instructions_en": [
+      "Hold the ball at chest height, squat down.",
+      "Drive up explosively and throw the ball at a target on the wall.",
+      "Catch the rebound and repeat."
+    ],
+    "instructions_ro": [
+      "Ține mingea la piept, coboară în genuflexiune.",
+      "Ridică-te exploziv și aruncă mingea într-o țintă pe perete.",
+      "Prinde mingea și repetă."
+    ],
+    "breathing_en": "Exhale on the throw.",
+    "breathing_ro": "Expiră la aruncare.",
+    "common_mistakes_en": [
+      "Squatting shallow to rush reps"
+    ],
+    "common_mistakes_ro": [
+      "Genuflexiune superficială pentru a grăbi repetările"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": "air_squat",
+    "harder_variation": null,
+    "avoid_if_injury": [
+      "shoulder",
+      "knee"
+    ]
+  },
+  {
+    "key": "air_squat",
+    "name_en": "Air squat",
+    "name_ro": "Genuflexiune fără greutate (air squat)",
+    "primary_muscle": "quads",
+    "secondary_muscles": [
+      "glutes",
+      "hamstrings"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "movement_pattern": "conditioning",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Feet shoulder-width apart.",
+      "Squat down until hips pass knee level.",
+      "Stand back up fully."
+    ],
+    "instructions_ro": [
+      "Picioarele la lățimea umerilor.",
+      "Coboară până șoldurile trec de nivelul genunchilor.",
+      "Ridică-te complet."
+    ],
+    "breathing_en": "Inhale down, exhale up.",
+    "breathing_ro": "Inspiră la coborâre, expiră la urcare.",
+    "common_mistakes_en": [
+      "Not reaching full depth",
+      "Knees caving in"
+    ],
+    "common_mistakes_ro": [
+      "Neatingerea adâncimii complete",
+      "Genunchii se prăbușesc spre interior"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": null,
+    "harder_variation": "back_squat",
+    "avoid_if_injury": []
+  },
+  {
+    "key": "mountain_climber",
+    "name_en": "Mountain climber",
+    "name_ro": "Mountain climber",
+    "primary_muscle": "core",
+    "secondary_muscles": [
+      "quads",
+      "shoulders"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "movement_pattern": "conditioning",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Start in a plank position.",
+      "Drive knees toward the chest alternately, quickly.",
+      "Keep the hips low and core braced."
+    ],
+    "instructions_ro": [
+      "Start în poziția de plank.",
+      "Adu genunchii spre piept alternativ, rapid.",
+      "Menține șoldurile jos și abdomenul contractat."
+    ],
+    "breathing_en": "Breathe rhythmically.",
+    "breathing_ro": "Respiră ritmic.",
+    "common_mistakes_en": [
+      "Hips bouncing up too high"
+    ],
+    "common_mistakes_ro": [
+      "Șoldurile sar prea sus"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": null,
+    "harder_variation": null,
+    "avoid_if_injury": [
+      "wrist"
+    ]
+  },
+  {
+    "key": "thruster",
+    "name_en": "Thruster",
+    "name_ro": "Thruster",
+    "primary_muscle": "full_body",
+    "secondary_muscles": [
+      "quads",
+      "shoulders",
+      "glutes"
+    ],
+    "equipment": [
+      "barbell",
+      "dumbbell"
+    ],
+    "movement_pattern": "conditioning",
+    "experience_level": "advanced",
+    "unilateral": false,
+    "instructions_en": [
+      "Front squat position with the bar/dumbbells.",
+      "Squat down fully.",
+      "Drive up and press the weight overhead in one fluid motion."
+    ],
+    "instructions_ro": [
+      "Poziție de genuflexiune frontală cu bara/ganterele.",
+      "Coboară complet.",
+      "Ridică-te și împinge greutatea deasupra capului într-o mișcare fluidă."
+    ],
+    "breathing_en": "Exhale on the press.",
+    "breathing_ro": "Expiră la împingere.",
+    "common_mistakes_en": [
+      "Pausing between the squat and the press, losing momentum"
+    ],
+    "common_mistakes_ro": [
+      "Pauză între genuflexiune și împingere, pierzând inerția"
+    ],
+    "safety_tips_en": [
+      "Learn front squat and overhead press separately first"
+    ],
+    "safety_tips_ro": [
+      "Învață mai întâi separat genuflexiunea frontală și presa deasupra capului"
+    ],
+    "easier_variation": "air_squat",
+    "harder_variation": null,
+    "avoid_if_injury": [
+      "shoulder",
+      "knee",
+      "lower_back"
+    ]
+  },
+  {
+    "key": "kb_clean_press",
+    "name_en": "Kettlebell clean and press",
+    "name_ro": "Smuls și împins cu kettlebell",
+    "primary_muscle": "full_body",
+    "secondary_muscles": [
+      "shoulders",
+      "glutes",
+      "core"
+    ],
+    "equipment": [
+      "kettlebell"
+    ],
+    "movement_pattern": "conditioning",
+    "experience_level": "advanced",
+    "unilateral": true,
+    "instructions_en": [
+      "Hike the bell back, then pull/clean it to rack position.",
+      "Press it overhead.",
+      "Lower back to rack, then down."
+    ],
+    "instructions_ro": [
+      "Trage kettlebell-ul în spate, apoi trage-l în poziția de rack.",
+      "Împinge-l deasupra capului.",
+      "Coboară înapoi în rack, apoi jos."
+    ],
+    "breathing_en": "Exhale on the press.",
+    "breathing_ro": "Expiră la împingere.",
+    "common_mistakes_en": [
+      "Banging the wrist/forearm on the clean"
+    ],
+    "common_mistakes_ro": [
+      "Lovirea încheieturii/antebrațului la tragere"
+    ],
+    "safety_tips_en": [
+      "Learn the clean with a light kettlebell first"
+    ],
+    "safety_tips_ro": [
+      "Învață tragerea cu un kettlebell ușor mai întâi"
+    ],
+    "easier_variation": "kettlebell_swing",
+    "harder_variation": null,
+    "avoid_if_injury": [
+      "shoulder",
+      "wrist"
+    ]
+  },
+  {
+    "key": "rowing_erg",
+    "name_en": "Rowing (erg)",
+    "name_ro": "Vâslit (ergometru)",
+    "primary_muscle": "full_body",
+    "secondary_muscles": [
+      "quads",
+      "lats",
+      "core"
+    ],
+    "equipment": [
+      "rower"
+    ],
+    "movement_pattern": "conditioning",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Drive with the legs first.",
+      "Lean back slightly and pull the handle to the ribs.",
+      "Reverse the order on the return: arms, torso, then legs."
+    ],
+    "instructions_ro": [
+      "Împinge mai întâi cu picioarele.",
+      "Apleacă-te ușor în spate și trage mânerul spre coaste.",
+      "Inversează ordinea la revenire: brațe, trunchi, apoi picioare."
+    ],
+    "breathing_en": "Breathe rhythmically with the stroke.",
+    "breathing_ro": "Respiră ritmic odată cu mișcarea.",
+    "common_mistakes_en": [
+      "Pulling with the arms before driving with the legs"
+    ],
+    "common_mistakes_ro": [
+      "Tragerea cu brațele înaintea împingerii cu picioarele"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": null,
+    "harder_variation": null,
+    "avoid_if_injury": []
+  },
+  {
+    "key": "assault_bike",
+    "name_en": "Assault bike / echo bike",
+    "name_ro": "Bicicletă de tip assault/echo",
+    "primary_muscle": "full_body",
+    "secondary_muscles": [
+      "quads",
+      "shoulders"
+    ],
+    "equipment": [
+      "bike"
+    ],
+    "movement_pattern": "conditioning",
+    "experience_level": "beginner",
+    "unilateral": false,
+    "instructions_en": [
+      "Sit and grip the moving handles.",
+      "Pedal and pump the arms together for full-body effort."
+    ],
+    "instructions_ro": [
+      "Șezi și prinde mânerele mobile.",
+      "Pedalează și mișcă brațele împreună pentru efort total."
+    ],
+    "breathing_en": "Breathe rhythmically.",
+    "breathing_ro": "Respiră ritmic.",
+    "common_mistakes_en": [
+      "Going all-out too early and burning out"
+    ],
+    "common_mistakes_ro": [
+      "Efort maxim prea devreme, epuizare rapidă"
+    ],
+    "safety_tips_en": [],
+    "safety_tips_ro": [],
+    "easier_variation": null,
+    "harder_variation": null,
+    "avoid_if_injury": []
+  },
+  {
+    "key": "double_under",
+    "name_en": "Double under (jump rope)",
+    "name_ro": "Sărituri duble cu coarda",
+    "primary_muscle": "calves",
+    "secondary_muscles": [
+      "shoulders",
+      "core"
+    ],
+    "equipment": [
+      "jump_rope"
+    ],
+    "movement_pattern": "conditioning",
+    "experience_level": "advanced",
+    "unilateral": false,
+    "instructions_en": [
+      "Jump slightly higher than a normal skip.",
+      "Whip the rope around twice per jump using the wrists.",
+      "Land softly on the balls of the feet."
+    ],
+    "instructions_ro": [
+      "Sari puțin mai sus decât la săritura normală.",
+      "Rotește coarda de două ori pe săritură folosind încheieturile.",
+      "Aterizează moale pe vârfuri."
+    ],
+    "breathing_en": "Breathe rhythmically.",
+    "breathing_ro": "Respiră ritmic.",
+    "common_mistakes_en": [
+      "Jumping too high and tiring quickly"
+    ],
+    "common_mistakes_ro": [
+      "Săritură prea înaltă, oboseală rapidă"
+    ],
+    "safety_tips_en": [
+      "Practice single-unders first if new to jump rope"
+    ],
+    "safety_tips_ro": [
+      "Exersează sărituri simple mai întâi dacă ești începător"
+    ],
+    "easier_variation": null,
+    "harder_variation": null,
+    "avoid_if_injury": [
+      "ankle",
+      "calf"
+    ]
+  }
+]

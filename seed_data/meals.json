@@ -1,0 +1,1299 @@
+[
+  {
+    "key": "greek_yogurt_oats",
+    "name_en": "Greek yogurt + oats + honey + walnuts",
+    "name_ro": "Iaurt grecesc + fulgi de ovăz + miere + nuci",
+    "tags": [
+      "breakfast",
+      "high_protein",
+      "quick",
+      "vegetarian"
+    ],
+    "base_servings": 1,
+    "prep_time_min": 5,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "food_key": "greek_yogurt",
+        "name_en": "Greek yogurt",
+        "name_ro": "Iaurt grecesc",
+        "qty": 250,
+        "unit": "g"
+      },
+      {
+        "food_key": "oats",
+        "name_en": "Oats",
+        "name_ro": "Fulgi de ovăz",
+        "qty": 50,
+        "unit": "g"
+      },
+      {
+        "food_key": "honey",
+        "name_en": "Honey",
+        "name_ro": "Miere",
+        "qty": 15,
+        "unit": "g"
+      },
+      {
+        "food_key": "walnuts",
+        "name_en": "Walnuts",
+        "name_ro": "Nuci",
+        "qty": 15,
+        "unit": "g"
+      }
+    ],
+    "kcal_per_serving": 505,
+    "protein_g_per_serving": 32,
+    "carb_g_per_serving": 55,
+    "fat_g_per_serving": 17,
+    "fiber_g_per_serving": 6,
+    "substitutions_en": [],
+    "substitutions_ro": [],
+    "steps_en": [
+      "Mix oats into the yogurt.",
+      "Top with honey and chopped walnuts."
+    ],
+    "steps_ro": [
+      "Amestecă fulgii de ovăz în iaurt.",
+      "Adaugă deasupra miere și nuci tocate."
+    ]
+  },
+  {
+    "key": "eggs_bread_tomato",
+    "name_en": "Eggs (whole + extra whites) + whole-grain bread + tomatoes",
+    "name_ro": "Ouă (întregi + albușuri extra) + pâine integrală + roșii",
+    "tags": [
+      "breakfast",
+      "high_protein",
+      "budget",
+      "quick"
+    ],
+    "base_servings": 1,
+    "prep_time_min": 10,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "food_key": "whole_egg",
+        "name_en": "Whole eggs",
+        "name_ro": "Ouă întregi",
+        "qty": 2,
+        "unit": "unit"
+      },
+      {
+        "food_key": "egg_white",
+        "name_en": "Egg whites",
+        "name_ro": "Albușuri",
+        "qty": 3,
+        "unit": "unit"
+      },
+      {
+        "food_key": "wholegrain_bread",
+        "name_en": "Whole-grain bread",
+        "name_ro": "Pâine integrală",
+        "qty": 80,
+        "unit": "g"
+      },
+      {
+        "food_key": "tomatoes",
+        "name_en": "Tomatoes",
+        "name_ro": "Roșii",
+        "qty": 100,
+        "unit": "g"
+      }
+    ],
+    "kcal_per_serving": 430,
+    "protein_g_per_serving": 36,
+    "carb_g_per_serving": 40,
+    "fat_g_per_serving": 14,
+    "fiber_g_per_serving": 6,
+    "substitutions_en": [],
+    "substitutions_ro": [],
+    "steps_en": [
+      "Whisk whole eggs and extra whites together.",
+      "Cook in a non-stick pan over medium heat.",
+      "Serve with toasted bread and sliced tomatoes."
+    ],
+    "steps_ro": [
+      "Bate ouăle întregi împreună cu albușurile.",
+      "Gătește într-o tigaie antiaderentă la foc mediu.",
+      "Servește cu pâine prăjită și roșii feliate."
+    ]
+  },
+  {
+    "key": "chicken_rice_salad",
+    "name_en": "Grilled chicken breast + rice + salad",
+    "name_ro": "Piept de pui la grătar + orez + salată",
+    "tags": [
+      "lunch",
+      "dinner",
+      "high_protein",
+      "meal_prep"
+    ],
+    "base_servings": 1,
+    "prep_time_min": 20,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "food_key": "chicken_breast",
+        "name_en": "Chicken breast",
+        "name_ro": "Piept de pui",
+        "qty": 200,
+        "unit": "g"
+      },
+      {
+        "food_key": "white_rice",
+        "name_en": "White rice (cooked)",
+        "name_ro": "Orez fiert",
+        "qty": 200,
+        "unit": "g"
+      },
+      {
+        "food_key": "cucumber",
+        "name_en": "Cucumber",
+        "name_ro": "Castraveți",
+        "qty": 100,
+        "unit": "g"
+      },
+      {
+        "food_key": "tomatoes",
+        "name_en": "Tomatoes",
+        "name_ro": "Roșii",
+        "qty": 100,
+        "unit": "g"
+      },
+      {
+        "food_key": "olive_oil",
+        "name_en": "Olive oil",
+        "name_ro": "Ulei de măsline",
+        "qty": 10,
+        "unit": "g"
+      }
+    ],
+    "kcal_per_serving": 650,
+    "protein_g_per_serving": 55,
+    "carb_g_per_serving": 65,
+    "fat_g_per_serving": 16,
+    "fiber_g_per_serving": 4,
+    "substitutions_en": [
+      "Swap rice for potatoes or quinoa",
+      "Swap chicken for turkey breast"
+    ],
+    "substitutions_ro": [
+      "Înlocuiește orezul cu cartofi sau quinoa",
+      "Înlocuiește puiul cu piept de curcan"
+    ],
+    "steps_en": [
+      "Season and grill the chicken breast until cooked through.",
+      "Cook rice separately.",
+      "Toss cucumber and tomato with olive oil for the salad.",
+      "Plate everything together."
+    ],
+    "steps_ro": [
+      "Condimentează și grătărește pieptul de pui până e bine pătruns.",
+      "Fierbe orezul separat.",
+      "Amestecă castraveții și roșiile cu ulei de măsline pentru salată.",
+      "Asamblează totul pe farfurie."
+    ]
+  },
+  {
+    "key": "beef_potatoes_veg",
+    "name_en": "Ground beef (5% fat) + potatoes + vegetables",
+    "name_ro": "Carne tocată de vită (5% grăsime) + cartofi + legume",
+    "tags": [
+      "lunch",
+      "dinner",
+      "budget",
+      "meal_prep"
+    ],
+    "base_servings": 1,
+    "prep_time_min": 25,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "food_key": "ground_beef",
+        "name_en": "Ground beef 90/10",
+        "name_ro": "Carne tocată de vită 90/10",
+        "qty": 200,
+        "unit": "g"
+      },
+      {
+        "food_key": "potatoes",
+        "name_en": "Potatoes",
+        "name_ro": "Cartofi",
+        "qty": 300,
+        "unit": "g"
+      },
+      {
+        "food_key": "green_beans",
+        "name_en": "Green beans",
+        "name_ro": "Fasole verde",
+        "qty": 150,
+        "unit": "g"
+      }
+    ],
+    "kcal_per_serving": 650,
+    "protein_g_per_serving": 45,
+    "carb_g_per_serving": 65,
+    "fat_g_per_serving": 20,
+    "fiber_g_per_serving": 8,
+    "substitutions_en": [],
+    "substitutions_ro": [],
+    "steps_en": [
+      "Brown the ground beef in a pan.",
+      "Boil the potatoes until soft.",
+      "Steam or boil the green beans.",
+      "Plate together, season to taste."
+    ],
+    "steps_ro": [
+      "Rumenește carnea tocată într-o tigaie.",
+      "Fierbe cartofii până sunt moi.",
+      "Fierbe la abur sau în apă fasolea verde.",
+      "Asamblează pe farfurie, condimentează după gust."
+    ]
+  },
+  {
+    "key": "cottage_cheese_rye",
+    "name_en": "Cottage cheese (branza de vaci) + rye bread + cucumber",
+    "name_ro": "Brânză de vaci + pâine de secară + castraveți",
+    "tags": [
+      "snack",
+      "high_protein",
+      "quick",
+      "budget",
+      "romanian"
+    ],
+    "base_servings": 1,
+    "prep_time_min": 3,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "food_key": "cottage_cheese",
+        "name_en": "Cottage cheese",
+        "name_ro": "Brânză de vaci",
+        "qty": 200,
+        "unit": "g"
+      },
+      {
+        "food_key": "rye_bread",
+        "name_en": "Rye bread",
+        "name_ro": "Pâine de secară",
+        "qty": 60,
+        "unit": "g"
+      },
+      {
+        "food_key": "cucumber",
+        "name_en": "Cucumber",
+        "name_ro": "Castraveți",
+        "qty": 100,
+        "unit": "g"
+      }
+    ],
+    "kcal_per_serving": 365,
+    "protein_g_per_serving": 27,
+    "carb_g_per_serving": 38,
+    "fat_g_per_serving": 11,
+    "fiber_g_per_serving": 5,
+    "substitutions_en": [],
+    "substitutions_ro": [],
+    "steps_en": [
+      "Slice the cucumber.",
+      "Serve cottage cheese with rye bread and cucumber slices."
+    ],
+    "steps_ro": [
+      "Feliază castraveții.",
+      "Servește brânza de vaci cu pâine de secară și felii de castravete."
+    ]
+  },
+  {
+    "key": "whey_banana_shake",
+    "name_en": "Whey protein shake + banana",
+    "name_ro": "Shake de proteine (whey) + banană",
+    "tags": [
+      "snack",
+      "high_protein",
+      "quick",
+      "post_workout"
+    ],
+    "base_servings": 1,
+    "prep_time_min": 3,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "food_key": "whey_protein",
+        "name_en": "Whey protein",
+        "name_ro": "Proteină whey",
+        "qty": 1,
+        "unit": "unit"
+      },
+      {
+        "food_key": "banana",
+        "name_en": "Banana",
+        "name_ro": "Banană",
+        "qty": 1,
+        "unit": "unit"
+      }
+    ],
+    "kcal_per_serving": 225,
+    "protein_g_per_serving": 25,
+    "carb_g_per_serving": 30,
+    "fat_g_per_serving": 2,
+    "fiber_g_per_serving": 3,
+    "substitutions_en": [],
+    "substitutions_ro": [],
+    "steps_en": [
+      "Blend whey protein with water/milk and the banana."
+    ],
+    "steps_ro": [
+      "Amestecă proteina whey cu apă/lapte și banana."
+    ]
+  },
+  {
+    "key": "salmon_quinoa_broccoli",
+    "name_en": "Salmon or trout + quinoa/rice + broccoli",
+    "name_ro": "Somon sau păstrăv + quinoa/orez + broccoli",
+    "tags": [
+      "lunch",
+      "dinner",
+      "high_protein"
+    ],
+    "base_servings": 1,
+    "prep_time_min": 25,
+    "difficulty": "medium",
+    "ingredients": [
+      {
+        "food_key": "salmon",
+        "name_en": "Salmon",
+        "name_ro": "Somon",
+        "qty": 180,
+        "unit": "g"
+      },
+      {
+        "food_key": "quinoa",
+        "name_en": "Quinoa (cooked)",
+        "name_ro": "Quinoa (fiartă)",
+        "qty": 200,
+        "unit": "g"
+      },
+      {
+        "food_key": "broccoli",
+        "name_en": "Broccoli",
+        "name_ro": "Broccoli",
+        "qty": 150,
+        "unit": "g"
+      }
+    ],
+    "kcal_per_serving": 620,
+    "protein_g_per_serving": 44,
+    "carb_g_per_serving": 48,
+    "fat_g_per_serving": 24,
+    "fiber_g_per_serving": 7,
+    "substitutions_en": [
+      "Swap quinoa for rice",
+      "Trout works the same way as salmon"
+    ],
+    "substitutions_ro": [
+      "Înlocuiește quinoa cu orez",
+      "Păstrăvul se gătește la fel ca somonul"
+    ],
+    "steps_en": [
+      "Pan-sear or bake the salmon.",
+      "Cook quinoa according to package instructions.",
+      "Steam the broccoli.",
+      "Plate together."
+    ],
+    "steps_ro": [
+      "Prăjește sau coace somonul.",
+      "Fierbe quinoa conform instrucțiunilor.",
+      "Fierbe broccoli la abur.",
+      "Asamblează pe farfurie."
+    ]
+  },
+  {
+    "key": "turkey_sweetpotato_beans",
+    "name_en": "Turkey breast + sweet potato + green beans",
+    "name_ro": "Piept de curcan + cartof dulce + fasole verde",
+    "tags": [
+      "lunch",
+      "dinner",
+      "high_protein",
+      "low_calorie"
+    ],
+    "base_servings": 1,
+    "prep_time_min": 25,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "food_key": "turkey_breast",
+        "name_en": "Turkey breast",
+        "name_ro": "Piept de curcan",
+        "qty": 200,
+        "unit": "g"
+      },
+      {
+        "food_key": "sweet_potato",
+        "name_en": "Sweet potato",
+        "name_ro": "Cartof dulce",
+        "qty": 250,
+        "unit": "g"
+      },
+      {
+        "food_key": "green_beans",
+        "name_en": "Green beans",
+        "name_ro": "Fasole verde",
+        "qty": 150,
+        "unit": "g"
+      }
+    ],
+    "kcal_per_serving": 530,
+    "protein_g_per_serving": 52,
+    "carb_g_per_serving": 50,
+    "fat_g_per_serving": 8,
+    "fiber_g_per_serving": 8,
+    "substitutions_en": [],
+    "substitutions_ro": [],
+    "steps_en": [
+      "Season and pan-cook or grill the turkey breast.",
+      "Boil or roast the sweet potato.",
+      "Steam the green beans.",
+      "Plate together."
+    ],
+    "steps_ro": [
+      "Condimentează și gătește pieptul de curcan la tigaie sau grătar.",
+      "Fierbe sau coace cartoful dulce.",
+      "Fierbe fasolea verde la abur.",
+      "Asamblează pe farfurie."
+    ]
+  },
+  {
+    "key": "mamaliga_telemea",
+    "name_en": "Mămăligă with telemea and egg",
+    "name_ro": "Mămăligă cu telemea și ou",
+    "tags": [
+      "breakfast",
+      "lunch",
+      "romanian",
+      "budget",
+      "vegetarian"
+    ],
+    "base_servings": 1,
+    "prep_time_min": 15,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "food_key": "mamaliga",
+        "name_en": "Mămăligă (cornmeal)",
+        "name_ro": "Mămăligă",
+        "qty": 250,
+        "unit": "g"
+      },
+      {
+        "food_key": "telemea",
+        "name_en": "Telemea cheese",
+        "name_ro": "Telemea",
+        "qty": 80,
+        "unit": "g"
+      },
+      {
+        "food_key": "whole_egg",
+        "name_en": "Whole egg",
+        "name_ro": "Ou întreg",
+        "qty": 1,
+        "unit": "unit"
+      }
+    ],
+    "kcal_per_serving": 555,
+    "protein_g_per_serving": 24,
+    "carb_g_per_serving": 44,
+    "fat_g_per_serving": 30,
+    "fiber_g_per_serving": 3,
+    "substitutions_en": [
+      "Add a dollop of sour cream if not watching fat closely"
+    ],
+    "substitutions_ro": [
+      "Adaugă smântână dacă nu urmărești strict grăsimile"
+    ],
+    "steps_en": [
+      "Prepare the mămăligă (cornmeal porridge) per package instructions.",
+      "Fry or poach the egg.",
+      "Serve mămăligă topped with crumbled telemea and the egg."
+    ],
+    "steps_ro": [
+      "Prepară mămăliga conform instrucțiunilor.",
+      "Prăjește sau poșează oul.",
+      "Servește mămăliga cu telemea sfărâmată și ou deasupra."
+    ]
+  },
+  {
+    "key": "egg_white_oat_pancakes",
+    "name_en": "Egg white & oat protein pancakes",
+    "name_ro": "Clătite proteice din albușuri și ovăz",
+    "tags": [
+      "breakfast",
+      "high_protein",
+      "meal_prep",
+      "vegetarian"
+    ],
+    "base_servings": 2,
+    "prep_time_min": 15,
+    "difficulty": "medium",
+    "ingredients": [
+      {
+        "food_key": "egg_white",
+        "name_en": "Egg whites",
+        "name_ro": "Albușuri",
+        "qty": 6,
+        "unit": "unit"
+      },
+      {
+        "food_key": "oats",
+        "name_en": "Oats",
+        "name_ro": "Fulgi de ovăz",
+        "qty": 80,
+        "unit": "g"
+      },
+      {
+        "food_key": "banana",
+        "name_en": "Banana",
+        "name_ro": "Banană",
+        "qty": 1,
+        "unit": "unit"
+      }
+    ],
+    "kcal_per_serving": 245,
+    "protein_g_per_serving": 20,
+    "carb_g_per_serving": 32,
+    "fat_g_per_serving": 2,
+    "fiber_g_per_serving": 4,
+    "substitutions_en": [],
+    "substitutions_ro": [],
+    "steps_en": [
+      "Blend egg whites, oats and banana until smooth.",
+      "Cook small pancakes in a non-stick pan, 2 min per side."
+    ],
+    "steps_ro": [
+      "Blenduiește albușurile, ovăzul și banana până la o compoziție fină.",
+      "Gătește clătite mici într-o tigaie antiaderentă, 2 min pe fiecare parte."
+    ]
+  },
+  {
+    "key": "lentil_veggie_bowl",
+    "name_en": "Lentil and vegetable bowl",
+    "name_ro": "Bol cu linte și legume",
+    "tags": [
+      "lunch",
+      "dinner",
+      "vegan",
+      "vegetarian",
+      "budget",
+      "gluten_free"
+    ],
+    "base_servings": 2,
+    "prep_time_min": 30,
+    "difficulty": "medium",
+    "ingredients": [
+      {
+        "food_key": "quinoa",
+        "name_en": "Quinoa (cooked)",
+        "name_ro": "Quinoa (fiartă)",
+        "qty": 200,
+        "unit": "g"
+      },
+      {
+        "food_key": "broccoli",
+        "name_en": "Broccoli",
+        "name_ro": "Broccoli",
+        "qty": 150,
+        "unit": "g"
+      },
+      {
+        "food_key": "tomatoes",
+        "name_en": "Tomatoes",
+        "name_ro": "Roșii",
+        "qty": 100,
+        "unit": "g"
+      },
+      {
+        "food_key": "olive_oil",
+        "name_en": "Olive oil",
+        "name_ro": "Ulei de măsline",
+        "qty": 10,
+        "unit": "g"
+      }
+    ],
+    "kcal_per_serving": 380,
+    "protein_g_per_serving": 14,
+    "carb_g_per_serving": 55,
+    "fat_g_per_serving": 12,
+    "fiber_g_per_serving": 10,
+    "substitutions_en": [
+      "Add lentils or chickpeas for extra protein"
+    ],
+    "substitutions_ro": [
+      "Adaugă linte sau năut pentru proteină în plus"
+    ],
+    "steps_en": [
+      "Cook quinoa.",
+      "Steam broccoli.",
+      "Combine with fresh tomatoes and a drizzle of olive oil."
+    ],
+    "steps_ro": [
+      "Fierbe quinoa.",
+      "Fierbe broccoli la abur.",
+      "Combină cu roșii proaspete și un strop de ulei de măsline."
+    ]
+  },
+  {
+    "key": "protein_overnight_oats",
+    "name_en": "Protein overnight oats",
+    "name_ro": "Ovăz peste noapte cu proteină",
+    "tags": [
+      "breakfast",
+      "meal_prep",
+      "high_protein",
+      "quick",
+      "vegetarian"
+    ],
+    "base_servings": 1,
+    "prep_time_min": 5,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "food_key": "oats",
+        "name_en": "Oats",
+        "name_ro": "Fulgi de ovăz",
+        "qty": 60,
+        "unit": "g"
+      },
+      {
+        "food_key": "greek_yogurt",
+        "name_en": "Greek yogurt",
+        "name_ro": "Iaurt grecesc",
+        "qty": 150,
+        "unit": "g"
+      },
+      {
+        "food_key": "whey_protein",
+        "name_en": "Whey protein",
+        "name_ro": "Proteină whey",
+        "qty": 1,
+        "unit": "unit"
+      },
+      {
+        "food_key": "honey",
+        "name_en": "Honey",
+        "name_ro": "Miere",
+        "qty": 10,
+        "unit": "g"
+      }
+    ],
+    "kcal_per_serving": 470,
+    "protein_g_per_serving": 40,
+    "carb_g_per_serving": 48,
+    "fat_g_per_serving": 10,
+    "fiber_g_per_serving": 5,
+    "substitutions_en": [],
+    "substitutions_ro": [],
+    "steps_en": [
+      "Mix all ingredients in a jar.",
+      "Refrigerate overnight.",
+      "Eat cold the next morning."
+    ],
+    "steps_ro": [
+      "Amestecă toate ingredientele într-un borcan.",
+      "Lasă la frigider peste noapte.",
+      "Mănâncă rece dimineața următoare."
+    ]
+  },
+  {
+    "key": "tuna_rice_salad",
+    "name_en": "Canned tuna + rice + vegetables",
+    "name_ro": "Ton din conservă + orez + legume",
+    "tags": [
+      "lunch",
+      "budget",
+      "quick",
+      "high_protein"
+    ],
+    "base_servings": 1,
+    "prep_time_min": 12,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "food_key": "white_rice",
+        "name_en": "White rice (cooked)",
+        "name_ro": "Orez fiert",
+        "qty": 180,
+        "unit": "g"
+      },
+      {
+        "food_key": "cucumber",
+        "name_en": "Cucumber",
+        "name_ro": "Castraveți",
+        "qty": 100,
+        "unit": "g"
+      },
+      {
+        "food_key": "tomatoes",
+        "name_en": "Tomatoes",
+        "name_ro": "Roșii",
+        "qty": 100,
+        "unit": "g"
+      },
+      {
+        "food_key": "olive_oil",
+        "name_en": "Olive oil",
+        "name_ro": "Ulei de măsline",
+        "qty": 10,
+        "unit": "g"
+      }
+    ],
+    "kcal_per_serving": 480,
+    "protein_g_per_serving": 30,
+    "carb_g_per_serving": 60,
+    "fat_g_per_serving": 12,
+    "fiber_g_per_serving": 4,
+    "substitutions_en": [
+      "Note: add canned tuna (~150g) separately to the food log — not in the shared food_db yet"
+    ],
+    "substitutions_ro": [
+      "Notă: adaugă tonul din conservă (~150g) separat în jurnal — nu e încă în baza de date"
+    ],
+    "steps_en": [
+      "Cook rice.",
+      "Chop vegetables.",
+      "Mix everything with tuna (in water, drained) and olive oil."
+    ],
+    "steps_ro": [
+      "Fierbe orezul.",
+      "Toacă legumele.",
+      "Amestecă totul cu ton (în apă, scurs) și ulei de măsline."
+    ]
+  },
+  {
+    "key": "veggie_omelette",
+    "name_en": "Vegetable omelette",
+    "name_ro": "Omletă cu legume",
+    "tags": [
+      "breakfast",
+      "vegetarian",
+      "low_calorie",
+      "quick",
+      "gluten_free"
+    ],
+    "base_servings": 1,
+    "prep_time_min": 10,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "food_key": "whole_egg",
+        "name_en": "Whole eggs",
+        "name_ro": "Ouă întregi",
+        "qty": 3,
+        "unit": "unit"
+      },
+      {
+        "food_key": "tomatoes",
+        "name_en": "Tomatoes",
+        "name_ro": "Roșii",
+        "qty": 80,
+        "unit": "g"
+      },
+      {
+        "food_key": "broccoli",
+        "name_en": "Broccoli",
+        "name_ro": "Broccoli",
+        "qty": 80,
+        "unit": "g"
+      }
+    ],
+    "kcal_per_serving": 320,
+    "protein_g_per_serving": 22,
+    "carb_g_per_serving": 10,
+    "fat_g_per_serving": 20,
+    "fiber_g_per_serving": 3,
+    "substitutions_en": [],
+    "substitutions_ro": [],
+    "steps_en": [
+      "Whisk the eggs.",
+      "Sauté the vegetables briefly.",
+      "Pour eggs over, cook until set, fold."
+    ],
+    "steps_ro": [
+      "Bate ouăle.",
+      "Călește legumele scurt.",
+      "Toarnă ouăle peste, gătește până se leagă, pliază."
+    ]
+  },
+  {
+    "key": "healthy_yogurt_dessert",
+    "name_en": "High-protein yogurt & honey dessert",
+    "name_ro": "Desert din iaurt și miere, bogat în proteine",
+    "tags": [
+      "dessert",
+      "high_protein",
+      "quick",
+      "vegetarian"
+    ],
+    "base_servings": 1,
+    "prep_time_min": 5,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "food_key": "greek_yogurt",
+        "name_en": "Greek yogurt",
+        "name_ro": "Iaurt grecesc",
+        "qty": 200,
+        "unit": "g"
+      },
+      {
+        "food_key": "honey",
+        "name_en": "Honey",
+        "name_ro": "Miere",
+        "qty": 10,
+        "unit": "g"
+      },
+      {
+        "food_key": "walnuts",
+        "name_en": "Walnuts",
+        "name_ro": "Nuci",
+        "qty": 10,
+        "unit": "g"
+      }
+    ],
+    "kcal_per_serving": 245,
+    "protein_g_per_serving": 21,
+    "carb_g_per_serving": 21,
+    "fat_g_per_serving": 8,
+    "fiber_g_per_serving": 2,
+    "substitutions_en": [],
+    "substitutions_ro": [],
+    "steps_en": [
+      "Mix yogurt with honey.",
+      "Top with chopped walnuts."
+    ],
+    "steps_ro": [
+      "Amestecă iaurtul cu miere.",
+      "Adaugă deasupra nuci tocate."
+    ]
+  },
+  {
+    "key": "quick_rice_eggs",
+    "name_en": "Quick fried rice with eggs",
+    "name_ro": "Orez rapid cu ouă",
+    "tags": [
+      "dinner",
+      "quick",
+      "budget",
+      "gluten_free"
+    ],
+    "base_servings": 1,
+    "prep_time_min": 15,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "food_key": "white_rice",
+        "name_en": "White rice (cooked)",
+        "name_ro": "Orez fiert",
+        "qty": 200,
+        "unit": "g"
+      },
+      {
+        "food_key": "whole_egg",
+        "name_en": "Whole eggs",
+        "name_ro": "Ouă întregi",
+        "qty": 2,
+        "unit": "unit"
+      },
+      {
+        "food_key": "broccoli",
+        "name_en": "Broccoli",
+        "name_ro": "Broccoli",
+        "qty": 100,
+        "unit": "g"
+      }
+    ],
+    "kcal_per_serving": 430,
+    "protein_g_per_serving": 20,
+    "carb_g_per_serving": 58,
+    "fat_g_per_serving": 12,
+    "fiber_g_per_serving": 4,
+    "substitutions_en": [],
+    "substitutions_ro": [],
+    "steps_en": [
+      "Scramble the eggs in a hot pan.",
+      "Add cooked rice and broccoli, stir-fry a few minutes."
+    ],
+    "steps_ro": [
+      "Scrobește ouăle într-o tigaie fierbinte.",
+      "Adaugă orezul fiert și broccoli, călește câteva minute."
+    ]
+  },
+  {
+    "key": "preworkout_banana_oats",
+    "name_en": "Pre-workout banana oats",
+    "name_ro": "Ovăz cu banană, pre-antrenament",
+    "tags": [
+      "pre_workout",
+      "quick",
+      "vegetarian"
+    ],
+    "base_servings": 1,
+    "prep_time_min": 5,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "food_key": "oats",
+        "name_en": "Oats",
+        "name_ro": "Fulgi de ovăz",
+        "qty": 50,
+        "unit": "g"
+      },
+      {
+        "food_key": "banana",
+        "name_en": "Banana",
+        "name_ro": "Banană",
+        "qty": 1,
+        "unit": "unit"
+      },
+      {
+        "food_key": "honey",
+        "name_en": "Honey",
+        "name_ro": "Miere",
+        "qty": 10,
+        "unit": "g"
+      }
+    ],
+    "kcal_per_serving": 320,
+    "protein_g_per_serving": 8,
+    "carb_g_per_serving": 65,
+    "fat_g_per_serving": 4,
+    "fiber_g_per_serving": 5,
+    "substitutions_en": [],
+    "substitutions_ro": [],
+    "steps_en": [
+      "Mix oats with warm water or milk.",
+      "Top with sliced banana and honey.",
+      "Eat 60-90 min before training."
+    ],
+    "steps_ro": [
+      "Amestecă ovăzul cu apă sau lapte cald.",
+      "Adaugă deasupra banană feliată și miere.",
+      "Mănâncă cu 60-90 min înainte de antrenament."
+    ]
+  },
+  {
+    "key": "postworkout_chicken_rice",
+    "name_en": "Post-workout chicken and rice",
+    "name_ro": "Pui și orez, post-antrenament",
+    "tags": [
+      "post_workout",
+      "high_protein"
+    ],
+    "base_servings": 1,
+    "prep_time_min": 20,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "food_key": "chicken_breast",
+        "name_en": "Chicken breast",
+        "name_ro": "Piept de pui",
+        "qty": 180,
+        "unit": "g"
+      },
+      {
+        "food_key": "white_rice",
+        "name_en": "White rice (cooked)",
+        "name_ro": "Orez fiert",
+        "qty": 250,
+        "unit": "g"
+      }
+    ],
+    "kcal_per_serving": 555,
+    "protein_g_per_serving": 48,
+    "carb_g_per_serving": 70,
+    "fat_g_per_serving": 6,
+    "fiber_g_per_serving": 2,
+    "substitutions_en": [],
+    "substitutions_ro": [],
+    "steps_en": [
+      "Grill or pan-cook the chicken breast.",
+      "Serve over rice.",
+      "Eat within ~2 hours after training."
+    ],
+    "steps_ro": [
+      "Grătărește sau gătește la tigaie pieptul de pui.",
+      "Servește peste orez.",
+      "Mănâncă în ~2 ore după antrenament."
+    ]
+  },
+  {
+    "key": "lowcarb_beef_salad",
+    "name_en": "Low-carb beef & greens bowl",
+    "name_ro": "Bol cu vită și verdețuri, sărac în carbohidrați",
+    "tags": [
+      "dinner",
+      "low_carb",
+      "high_protein",
+      "gluten_free",
+      "lactose_free"
+    ],
+    "base_servings": 1,
+    "prep_time_min": 20,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "food_key": "ground_beef",
+        "name_en": "Ground beef 90/10",
+        "name_ro": "Carne tocată de vită 90/10",
+        "qty": 200,
+        "unit": "g"
+      },
+      {
+        "food_key": "broccoli",
+        "name_en": "Broccoli",
+        "name_ro": "Broccoli",
+        "qty": 200,
+        "unit": "g"
+      },
+      {
+        "food_key": "olive_oil",
+        "name_en": "Olive oil",
+        "name_ro": "Ulei de măsline",
+        "qty": 10,
+        "unit": "g"
+      }
+    ],
+    "kcal_per_serving": 430,
+    "protein_g_per_serving": 40,
+    "carb_g_per_serving": 10,
+    "fat_g_per_serving": 24,
+    "fiber_g_per_serving": 6,
+    "substitutions_en": [],
+    "substitutions_ro": [],
+    "steps_en": [
+      "Brown the ground beef.",
+      "Steam the broccoli.",
+      "Toss together with olive oil, season to taste."
+    ],
+    "steps_ro": [
+      "Rumenește carnea tocată.",
+      "Fierbe broccoli la abur.",
+      "Amestecă cu ulei de măsline, condimentează."
+    ]
+  },
+  {
+    "key": "highcarb_rice_bowl",
+    "name_en": "High-carb turkey rice bowl (refeed/training day)",
+    "name_ro": "Bol cu curcan și orez, bogat în carbohidrați (zi de antrenament)",
+    "tags": [
+      "dinner",
+      "high_carb",
+      "high_protein",
+      "meal_prep"
+    ],
+    "base_servings": 1,
+    "prep_time_min": 20,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "food_key": "turkey_breast",
+        "name_en": "Turkey breast",
+        "name_ro": "Piept de curcan",
+        "qty": 180,
+        "unit": "g"
+      },
+      {
+        "food_key": "white_rice",
+        "name_en": "White rice (cooked)",
+        "name_ro": "Orez fiert",
+        "qty": 350,
+        "unit": "g"
+      },
+      {
+        "food_key": "honey",
+        "name_en": "Honey",
+        "name_ro": "Miere",
+        "qty": 10,
+        "unit": "g"
+      }
+    ],
+    "kcal_per_serving": 700,
+    "protein_g_per_serving": 46,
+    "carb_g_per_serving": 110,
+    "fat_g_per_serving": 6,
+    "fiber_g_per_serving": 3,
+    "substitutions_en": [],
+    "substitutions_ro": [],
+    "steps_en": [
+      "Cook turkey breast and rice separately.",
+      "Combine, drizzle a little honey over the rice if desired."
+    ],
+    "steps_ro": [
+      "Gătește separat pieptul de curcan și orezul.",
+      "Combină, adaugă puțină miere peste orez dacă dorești."
+    ]
+  },
+  {
+    "key": "vegan_quinoa_chickpea",
+    "name_en": "Vegan quinoa & vegetable bowl",
+    "name_ro": "Bol vegan cu quinoa și legume",
+    "tags": [
+      "lunch",
+      "dinner",
+      "vegan",
+      "vegetarian",
+      "lactose_free",
+      "gluten_free",
+      "budget"
+    ],
+    "base_servings": 2,
+    "prep_time_min": 25,
+    "difficulty": "medium",
+    "ingredients": [
+      {
+        "food_key": "quinoa",
+        "name_en": "Quinoa (cooked)",
+        "name_ro": "Quinoa (fiartă)",
+        "qty": 250,
+        "unit": "g"
+      },
+      {
+        "food_key": "broccoli",
+        "name_en": "Broccoli",
+        "name_ro": "Broccoli",
+        "qty": 150,
+        "unit": "g"
+      },
+      {
+        "food_key": "tomatoes",
+        "name_en": "Tomatoes",
+        "name_ro": "Roșii",
+        "qty": 150,
+        "unit": "g"
+      },
+      {
+        "food_key": "olive_oil",
+        "name_en": "Olive oil",
+        "name_ro": "Ulei de măsline",
+        "qty": 15,
+        "unit": "g"
+      }
+    ],
+    "kcal_per_serving": 400,
+    "protein_g_per_serving": 13,
+    "carb_g_per_serving": 58,
+    "fat_g_per_serving": 14,
+    "fiber_g_per_serving": 11,
+    "substitutions_en": [
+      "Add chickpeas or lentils to raise protein"
+    ],
+    "substitutions_ro": [
+      "Adaugă năut sau linte pentru mai multă proteină"
+    ],
+    "steps_en": [
+      "Cook the quinoa.",
+      "Steam the broccoli.",
+      "Combine everything with fresh tomatoes and olive oil."
+    ],
+    "steps_ro": [
+      "Fierbe quinoa.",
+      "Fierbe broccoli la abur.",
+      "Combină cu roșii proaspete și ulei de măsline."
+    ]
+  },
+  {
+    "key": "lactose_free_chicken_potato",
+    "name_en": "Lactose-free chicken & potatoes",
+    "name_ro": "Pui și cartofi, fără lactoză",
+    "tags": [
+      "lunch",
+      "dinner",
+      "lactose_free",
+      "gluten_free",
+      "high_protein",
+      "budget"
+    ],
+    "base_servings": 1,
+    "prep_time_min": 25,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "food_key": "chicken_breast",
+        "name_en": "Chicken breast",
+        "name_ro": "Piept de pui",
+        "qty": 200,
+        "unit": "g"
+      },
+      {
+        "food_key": "potatoes",
+        "name_en": "Potatoes",
+        "name_ro": "Cartofi",
+        "qty": 300,
+        "unit": "g"
+      },
+      {
+        "food_key": "olive_oil",
+        "name_en": "Olive oil",
+        "name_ro": "Ulei de măsline",
+        "qty": 10,
+        "unit": "g"
+      }
+    ],
+    "kcal_per_serving": 560,
+    "protein_g_per_serving": 48,
+    "carb_g_per_serving": 55,
+    "fat_g_per_serving": 14,
+    "fiber_g_per_serving": 5,
+    "substitutions_en": [],
+    "substitutions_ro": [],
+    "steps_en": [
+      "Season and roast or grill the chicken breast.",
+      "Boil or roast the potatoes.",
+      "Drizzle olive oil, serve together."
+    ],
+    "steps_ro": [
+      "Condimentează și coace/grătărește pieptul de pui.",
+      "Fierbe sau coace cartofii.",
+      "Adaugă ulei de măsline, servește împreună."
+    ]
+  },
+  {
+    "key": "apple_walnuts_snack",
+    "name_en": "Apple & walnuts snack",
+    "name_ro": "Gustare cu măr și nuci",
+    "tags": [
+      "snack",
+      "quick",
+      "vegan",
+      "vegetarian",
+      "lactose_free",
+      "gluten_free",
+      "budget"
+    ],
+    "base_servings": 1,
+    "prep_time_min": 2,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "food_key": "walnuts",
+        "name_en": "Walnuts",
+        "name_ro": "Nuci",
+        "qty": 20,
+        "unit": "g"
+      }
+    ],
+    "kcal_per_serving": 180,
+    "protein_g_per_serving": 4,
+    "carb_g_per_serving": 8,
+    "fat_g_per_serving": 15,
+    "fiber_g_per_serving": 2,
+    "substitutions_en": [],
+    "substitutions_ro": [],
+    "steps_en": [
+      "Eat walnuts alongside a fresh apple (apple not yet in the shared food database — log it as a custom entry)."
+    ],
+    "steps_ro": [
+      "Mănâncă nucile alături de un măr proaspăt (mărul nu e încă în baza de date — adaugă-l ca intrare personalizată)."
+    ]
+  }
+]

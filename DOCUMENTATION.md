@@ -1,349 +1,343 @@
-# Exodus — Documentation
+# Exodus v2 — Documentation
 
-Your personal workout + nutrition coach, built in Python (Flask), running as a
-mobile web app you can add to your iPhone Home Screen. No AI API, no
-subscription, no data leaving your own computer.
+Exodus is your personal fitness/nutrition/CrossFit web app, built to run as
+an installable "app" on your iPhone (Add to Home Screen) with real
+accounts, bilingual EN/RO support, and zero recurring cost. This document
+explains what was built, how it's organized, and how to change or extend
+it later.
 
-This document explains: how to get it running, how to use it, what every
-file/function does, and exactly what to edit if you want to change something.
-
----
-
-## 1. Get it running (step by step)
-
-You need Python 3.10+ on the computer you'll run the server from (your
-laptop/desktop — the iPhone is just the screen you view it on, for now).
-
-1. Copy the `exodus/` folder to your computer.
-2. Open a terminal in that folder.
-3. Install the one dependency:
-   ```
-   pip install -r requirements.txt
-   ```
-4. Run it:
-   ```
-   python app.py
-   ```
-   You'll see something like `Running on http://0.0.0.0:5050`.
-5. Find your computer's local IP address (so your phone can reach it over WiFi):
-   - **Mac**: `ipconfig getifaddr en0` (or `en1` if on `en0` gives nothing)
-   - **Windows**: `ipconfig` → look for "IPv4 Address" under your WiFi adapter
-   - **Linux**: `hostname -I`
-   It'll look like `192.168.1.23`.
-6. On your **iPhone**, connect to the **same WiFi network**, open Safari, and go to:
-   ```
-   http://192.168.1.23:5050
-   ```
-   (replace with your actual IP).
-7. Tap the **Share button** → **Add to Home Screen**. Now you have an "Exodus"
-   icon on your phone that opens full-screen, like a real app.
-
-> Your computer needs to be on and running `python app.py` for the phone to
-> reach it — this is the "local only" setup you asked for. Section 8 below
-> covers putting it permanently on the internet later, with no code changes
-> needed.
-
-### First thing to do: check your profile
-
-Your stats (190cm, 101kg, PRs: bench 100 / deadlift 100 / squat 80 / 12 clean
-pull-ups, 4 days/week) are already pre-filled in `data/user_profile.json`. Open
-the **Settings** tab in the app to confirm everything, and correct your exact
-age/weight whenever they change (weight also updates automatically whenever
-you log it on the Progress tab).
+This is a full rewrite of the original single-user version into a proper
+multi-user app: accounts, a hosted Postgres database, a much bigger meal
+and exercise library, a barcode scanner, a CrossFit module, and a rule-based
+AI Assistant. If you're looking for the original v1 (single-user, JSON
+files, no login), it's superseded — this document only covers v2.
 
 ---
 
-## 2. What it actually does
+## 1. What's actually in this app
 
-**Dashboard** — today's prescribed workout (or "rest day"), your calorie/macro
-target for today, and a list of coach tips generated from your logged data.
+**Accounts & onboarding** — email/password signup and login, forgot/reset
+password (via email if you configure SMTP, see §8), a 4-step onboarding
+wizard that collects goal, body stats, training background, equipment,
+and diet preferences, GDPR-style data export (JSON download of everything
+tied to your account) and account deletion.
 
-**Workout tab** — a 4-day Upper/Lower split whose main lift stays fixed
-(that's what makes progression trackable) but whose *accessory* exercises
-rotate every calendar week so it doesn't feel like the same routine forever.
-Includes a log form for today's main lift (weight, reps per set, RPE) and a
-full weekly schedule showing every day's exercises, current and upcoming.
+**Goals & targets** — three goal modes (lean out, build muscle, recomp)
+with large tap-friendly buttons, calorie/protein/carb/fat/fiber/water
+targets computed from your stats (Mifflin-St Jeor BMR + activity
+multiplier), and a 10-day gradual ramp whenever you switch goals instead
+of an abrupt calorie jump.
 
-**Meals tab** — your calorie/macro targets with live progress bars showing
-how much you've logged today vs. target, a food-logging form (type a food
-name, pick a quantity and meal type, hit Add), today's logged items with the
-ability to remove any of them, plus meal ideas and your supplement stack.
+**Meals & nutrition** — a 28-recipe library tagged by diet type
+(vegetarian, vegan, lactose-free, gluten-free, high-protein, low-carb,
+etc.), full macros per serving, ingredient substitutions, step-by-step
+instructions in EN and RO, a day-plan generator that fills your remaining
+calories/macros with suggested meals, manual food logging against a
+26-item food database, a shopping list built from your planned meals
+(ingredients auto-combined across recipes), and meal favoriting/rating.
 
-**Progress tab** — log your body weight, see a weight history table + chart,
-a 14-day calorie history chart (bars vs. your target line), and your full
-workout log.
+**Barcode scanner** — scan any packaged food's barcode with your phone
+camera (via the free `html5-qrcode` library, runs entirely in the
+browser) or search by product name; looks the product up against Open
+Food Facts (free, no API key, no cost) and shows you calories/macros
+per your actual portion size plus a plain-language "fits your remaining
+macros" verdict, with one tap to log it.
 
-**Settings tab** — edit your stats, PRs, goal, training days, and switch
-language. (There's also an EN/RO button in the top-right on every page.)
+**Workouts** — pick from 10 training styles (full body, upper/lower,
+push/pull/legs, bro split, strength, hypertrophy, powerbuilding,
+bodyweight, home, custom), AI-generated weekly plans that avoid repeating
+the same accessory exercises week to week (rotates deterministically by
+ISO week number so it's still explainable, not random), a 62-exercise
+library with EN/RO instructions, breathing cues, common mistakes, safety
+tips, easier/harder variations, and injury-based exclusion (tell it about
+a knee/shoulder/back issue and it filters those exercises out and
+suggests substitutes automatically). Set-by-set logging with automatic PR
+detection (via estimated 1RM, Epley formula) and volume tracking per
+muscle group.
 
----
+**CrossFit** — a dedicated CrossFit section with 22 WODs across every
+major format (AMRAP, EMOM, For Time, Interval, Strength+Conditioning,
+Bodyweight, Partner, Equipment-Free) at 3 difficulty levels, a
+"generate me a workout" button that builds a new WOD from your equipment
+and level, score logging, and favoriting.
 
-## 3. The training plan logic
+**Progress tracking** — weight trend, estimated-1RM trend per lift,
+weekly training volume, workout consistency (days trained vs. planned),
+calorie/protein adherence over time, step tracking, and a personal
+records list — all rendered as Chart.js graphs, plus a weekly summary.
 
-### Weekly split (fixed 4 days, matching your 4x/week)
+**Readiness & recovery** — a quick daily check-in (sleep, soreness,
+stress, energy) that adjusts today's workout suggestion (e.g. suggests a
+lighter session or rest if you're clearly run down).
 
-| Day | Workout |
-|---|---|
-| Monday | Upper A — bench-focused strength |
-| Tuesday | Lower A — squat-focused strength |
-| Wednesday | Rest |
-| Thursday | Upper B — pull-ups / back, more hypertrophy volume |
-| Friday | Lower B — deadlift-focused strength |
-| Saturday / Sunday | Rest |
+**AI Assistant** — a chat-style page you can ask things like "what should
+I eat before a workout?" or "give me an alternative to squats, my knee
+hurts" — this is a **rule-based** assistant (keyword/intent matching, not
+an LLM), by design, so it stays free forever and never has an API bill.
+It recognizes common exercise nicknames in both languages and cross-
+references your injury settings when suggesting alternatives.
 
-This is defined in `logic/workout_engine.py` in `WEEKDAY_TO_SPLIT`. If you
-want different days (say you prefer training Tue/Wed/Fri/Sat), just change
-the numbers there — `0` = Monday ... `6` = Sunday.
+**Safety rules** — keyword screening (EN+RO) for red-flag phrases (chest
+pain, severe dizziness, etc.) that, if detected anywhere in the app,
+short-circuits to a "please seek medical attention" message instead of
+fitness advice; a separate check flags dangerously low calorie targets
+and nudges back toward a safe minimum instead of encouraging a crash diet.
 
-### Return-to-training ramp (because you've had a month off)
+**Bilingual EN/RO** — every screen, label, and generated message is
+available in both languages (218 translation keys), switchable in
+Settings.
 
-Coming back at your old 100kg bench / 100kg deadlift / 80kg squat numbers
-after a month off is how people tweak elbows, lower backs, and shoulders —
-tendons and connective tissue lag behind what your muscles remember. So for
-the **first 3 weeks**, Exodus deliberately prescribes lighter weights:
-
-| Week | % of your old PR | Sets x Reps |
-|---|---|---|
-| 1 | 70% | 3x8 |
-| 2 | 80% | 3x6 |
-| 3 | 85% | 4x5 |
-| 4+ | normal progression | 4x5, see below |
-
-The clock starts from `return_to_training_start_date` in your profile
-(currently set to today). This logic lives in `get_phase()` in
-`workout_engine.py`.
-
-### Normal progression (double progression)
-
-Once the ramp is done, each main lift uses a simple rule: if your **last**
-logged session hit the prescribed reps on every set at RPE 8 or below, the
-next session's target weight goes up (+2.5kg bench, +5kg squat/deadlift).
-If you missed reps or it was too hard (RPE 9+), it repeats the same weight.
-Pull-ups progress the same way but by reps first, then a note suggests adding
-a small weight once you're past your old rep PR. This logic is in
-`_next_main_lift_weight()` and `_next_pullup_target()`.
-
-**Why rule-based instead of an AI model deciding weights:** it's fully
-transparent — you can always see *why* a weight was suggested, and it costs
-nothing to run.
-
-### Weekly-rotating accessories
-
-The main lift (bench/squat/pull-ups/deadlift) never changes week to week —
-that consistency is what makes the progression math above work. But the
-*accessory* movements (the smaller exercises after the main lift) rotate
-automatically so the plan doesn't feel identical every week.
-
-Each accessory "slot" (e.g. chest, back, shoulders, calves, core) has 2-3
-interchangeable exercise options defined in `ACCESSORY_POOLS` in
-`workout_engine.py`. Which option shows up is `ISO calendar week number %
-pool size` — so it's fully deterministic (refreshing the page shows the same
-plan), guaranteed to differ from last week whenever a pool has 2+ options,
-and needs zero stored history to work. A 3-option pool repeats every 3 weeks,
-which is a normal rotation length even in real coaching programs.
-
-The Workout tab's "Weekly split" section shows the exercises for every day
-of the *current* week, main lift and rotating accessories included, so you
-can see your whole week at a glance.
+**Installable "app" feel** — a PWA manifest and home-screen icon so
+"Add to Home Screen" on iPhone gives you a real app icon and a full-screen
+experience with no Safari address bar.
 
 ---
 
-## 4. The nutrition logic & daily food logging
+## 2. What was intentionally left out (and why)
 
-`logic/nutrition_engine.py` → `calculate_targets()`:
+Kept out of scope to protect the $0 budget and the "quick to build"
+goal — these are legitimate future upgrades, not oversights:
 
-1. **BMR** (calories your body burns at rest) via the Mifflin-St Jeor formula,
-   using your current height/weight/age.
-2. **TDEE** (total daily burn) = BMR × an activity multiplier (1.55 for your
-   "moderate" setting — training 3-5x/week plus normal daily life).
-3. **Calorie target** = TDEE minus an 18% deficit. This is intentionally
-   *moderate*, not aggressive — a big deficit is the #1 cause of losing
-   strength/muscle while cutting, which conflicts with your goal of staying
-   lean **and** keeping your lifts up.
-4. **Protein**: 2.2 g per kg body weight — high, to protect muscle during
-   the deficit.
-5. **Fat**: 0.8 g per kg — enough for hormone health.
-6. **Carbs**: whatever calories are left, since carbs are what actually fuel
-   your training sessions.
+- **Admin dashboard / content management UI.** You can still edit the
+  exercise/meal/CrossFit library by editing the JSON files in
+  `seed_data/` directly (see §7) — there's just no in-app screen for it.
+- **Push notifications.** Would need a paid push service or a lot of
+  extra infrastructure; the app relies on you opening it instead.
+- **Social login (Google/Apple/Facebook).** Email+password only, to avoid
+  OAuth app-review requirements and third-party dependencies.
+- **Progress photos.** No image upload/storage was built (would need paid
+  object storage at any real scale); weight/lift/volume charts cover
+  progress tracking instead.
+- **Full OCR nutrition-label reading.** The scanner uses Open Food Facts'
+  barcode database, not on-device OCR of ingredient labels — barcode
+  coverage in Romania (including most Lidl private-label products) is
+  good but not 100%; anything unlisted falls back to manual search/entry.
+- **Deload week / mobility programming.** The workout engine handles
+  weekly exercise rotation and injury filtering, but doesn't auto-insert
+  periodized deload weeks or a dedicated mobility track — worth adding
+  later if you want it.
 
-All numbers recalculate automatically whenever your logged weight changes.
-
-Meal ideas (`MEAL_IDEAS` in the same file) are simple, common Romanian-
-accessible foods (piept de pui, brânză de vaci, ouă, orez, cartofi, etc.),
-each with a bilingual label.
-
-### Logging what you actually eat
-
-The **Meals tab** has a food log, not just a meal-idea list. Type a food name
-into the box (it autocompletes from `data/food_db.json`, ~26 common foods
-with macros per 100g or per unit), enter a quantity, pick a meal type
-(breakfast/lunch/dinner/snack), and hit Add. Exodus looks the food up,
-scales its macros by your quantity, and stores the *computed* numbers in
-`data/meal_log.json` — so editing the food database later never rewrites
-your history.
-
-The top of the Meals tab shows today's running totals against your targets
-as progress bars (green under 100%, red once you've gone over) for calories,
-protein, carbs, and fat — and the Dashboard shows the same calorie bar at a
-glance. The Progress tab adds a 14-day bar chart of logged calories against
-your target line, so you can see trends, not just today.
-
-**Adding a food that isn't in the list:** open `data/food_db.json` and add
-an entry following the existing pattern (see section 8 below).
-
-**Correcting a mistake:** every logged item on the Meals tab has a Remove
-button next to it.
+None of these block daily use. If you want any of them built next, say
+so and we can scope it the same way this build was scoped.
 
 ---
 
-## 5. Supplements
-
-`logic/supplement_engine.py` lists a short, conservative stack: creatine
-(5g/day), whey protein (only to fill your protein gap), vitamin D3 (2000-4000
-IU/day — genuinely relevant in Romania's low-sun autumn/winter), omega-3,
-magnesium, and optional caffeine pre-workout. Every recommendation includes a
-one-line "why."
-
-**This is general information, not medical advice** — the app always shows
-this disclaimer on the Meals tab. Check with a doctor before starting
-anything new, especially if you take medication.
-
----
-
-## 6. The "coach" (adaptive tips)
-
-`logic/coach_engine.py` → `analyze()` runs a few plain rules over your logged
-weight and workouts, no AI call involved:
-
-- **Losing weight too fast** (>~1.2%/week) → flags risk to muscle/strength,
-  suggests adding calories.
-- **Weight has plateaued** → suggests a small calorie cut or extra walking.
-- **Healthy pace** → tells you it's working, keep going.
-- **Missed sessions** → if you logged fewer sessions than your
-  `training_days_per_week` in the last 7 days, it says so.
-- **Strength trending down** on bench/squat/deadlift between your last two
-  logged sessions → flags to check sleep/protein/calories.
-- **Ramp phase reminder** → explains why weights look lighter than your PRs
-  right now.
-
-To add a new rule, add a new check inside `analyze()` — it just appends
-another string to the `tips` list (write both an English and Romanian
-version, see the existing pattern).
-
----
-
-## 7. File-by-file map
+## 3. Architecture overview
 
 ```
 exodus/
-├── app.py                     Flask routes — the only file that talks HTTP
-├── requirements.txt            Flask + gunicorn
-├── data/                       Your actual data, plain JSON files
-│   ├── user_profile.json       Stats, goal, PRs, language — one dict
-│   ├── weight_log.json         List of {date, weight_kg}
-│   ├── workout_log.json        List of logged sets per exercise/date
-│   ├── meal_log.json           List of logged food entries (see section 4)
-│   └── food_db.json            ~26 foods with macros per 100g/unit
-├── logic/                       All the "brain" — no Flask/HTTP code here
-│   ├── i18n.py                  EN/RO text dictionary + t(key, lang)
-│   ├── profile_store.py         Read/write the JSON files above
-│   ├── workout_engine.py        Split, ramp phase, progression, accessory rotation
-│   ├── nutrition_engine.py      TDEE/macros, meal ideas, food lookup + logging math
-│   ├── supplement_engine.py     Supplement list + doses
-│   └── coach_engine.py          Rule-based tips from your logs
-├── templates/                   HTML pages (Jinja2, rendered by Flask)
-│   ├── base.html                Shared header/nav, all pages extend this
-│   ├── index.html                Dashboard incl. today's calorie bar
-│   ├── workout.html              Today's workout + log form + full week view
-│   ├── meals.html                Targets/bars + food log form + food history + supplements
-│   ├── progress.html             Weight chart + calorie history chart + workout log
-│   └── settings.html             Edit profile form
-└── static/
-    ├── css/style.css             All styling (dark theme, mobile-first, progress bars)
-    ├── js/app.js                 Currently unused placeholder
-    ├── manifest.json             PWA metadata (Home Screen icon/name)
-    └── icons/icon.png            Home Screen icon
+├── app.py                  # Flask app factory — creates the app, registers
+│                            # blueprints, sets up DB + login, seeds data
+├── config.py                # reads DATABASE_URL (Supabase) or falls back
+│                            # to local SQLite; other app settings
+├── extensions.py            # shared SQLAlchemy `db` and Flask-Login
+│                            # `login_manager` instances
+├── models.py                 # every database table (see §4)
+├── requirements.txt
+├── routes/                  # one Blueprint per app section (see §5)
+├── logic/                   # framework-free business logic (see §6)
+├── seed_data/                # the exercise/meal/food/CrossFit libraries,
+│                            # as editable JSON (see §7)
+├── templates/                # Jinja2 HTML templates, one folder per
+│                            # section, sharing templates/base.html
+├── static/                   # CSS, JS (scanner, manifest, icon)
+├── DOCUMENTATION.md           # this file
+├── DEPLOY_RENDER.md          # how to get the app live on Render
+└── SUPABASE_SETUP.md         # how to set up the free database
 ```
 
-**Data is stored as JSON files, not a database.** For one person this is
-simpler to inspect/edit by hand and there's nothing to configure. Back these
-files up occasionally (e.g. copy the `data/` folder to iCloud Drive or the
-Files app) since a fresh reinstall or lost laptop would otherwise lose your
-history.
+**Why the logic is separated from Flask.** Every piece of "thinking" the
+app does — computing your calorie target, picking this week's exercises,
+detecting a PR, generating a CrossFit workout, matching your Assistant
+question to an answer — lives in `logic/*.py` as plain Python functions
+that take and return ordinary dicts. They never import Flask or
+SQLAlchemy. `routes/*.py` is the only place that touches the database or
+HTTP — it fetches rows, converts them to dicts (via `logic/helpers.py`),
+hands them to the relevant logic function, and saves the result back.
+
+This isn't just tidiness — it's what made this entire app testable in a
+sandboxed environment with no internet access (pip install doesn't work
+there), because every logic module could be unit-tested directly with
+plain `assert` statements, with no server or database required. It also
+means if you ever want to swap out a piece — e.g. replace the rule-based
+Assistant with a real LLM later — you only touch `logic/assistant_engine.py`
+and its one call site in `routes/assistant.py`; nothing else changes.
 
 ---
 
-## 8. Step by step: what to change for common requests
+## 4. Database (`models.py`)
 
-**Change your training days/schedule**
-→ Edit `WEEKDAY_TO_SPLIT` in `logic/workout_engine.py`.
+Every table has a `user_id` (or belongs to something that does) except
+the three shared library tables (`Exercise`, `MealTemplate`, `FoodItem`,
+`CrossfitWorkout`) which are the same for every user, seeded once from
+`seed_data/`.
 
-**Change the deficit % or activity multiplier**
-→ Edit `DEFICIT_BY_GOAL` / `ACTIVITY_MULTIPLIERS` in `logic/nutrition_engine.py`.
+| Table | Purpose |
+|---|---|
+| `User` | email, password hash, admin flag |
+| `Profile` | goal, stats, equipment, diet prefs, injuries, targets — one per user |
+| `WeightLog`, `StepLog`, `SleepLog` | daily tracking entries |
+| `ReadinessCheckin` | daily soreness/sleep/stress/energy check-in |
+| `MealLogEntry` | a logged food/meal + when |
+| `FavoriteMeal`, `MealRating` | your saved/rated meals |
+| `ShoppingListItem` | shopping list rows, combinable across meals |
+| `Exercise` | shared exercise library (EN/RO instructions etc.) |
+| `MealTemplate` | shared recipe library |
+| `FoodItem` | shared manual-log food database |
+| `WorkoutPlan` → `WorkoutDay` → `PlanExercise` | your active weekly plan and its exercises |
+| `WorkoutSetLog` | every logged set (weight, reps, RPE, date) |
+| `CrossfitWorkout` | shared WOD library |
+| `CrossfitLog`, `FavoriteCrossfit` | your CrossFit scores/favorites |
+| `PasswordResetToken` | short-lived tokens for the forgot-password flow |
 
-**Add a meal idea**
-→ Add a new dict to `MEAL_IDEAS` in `logic/nutrition_engine.py` (needs `en`,
-`ro`, `tag`, `protein_note`).
-
-**Add/change a supplement**
-→ Add a new dict to the list returned by `get_recommendations()` in
-`logic/supplement_engine.py`.
-
-**Add a food to the log's autocomplete list**
-→ Add an entry to `data/food_db.json`: `key` (unique id), `name_en`,
-`name_ro`, `unit` (`"g"` or `"unit"`), `per` (100 for grams, 1 for units),
-and `kcal`/`protein`/`carb`/`fat` for that amount. Look at an existing entry
-for the exact shape.
-
-**Change accessory exercise options / add more variety**
-→ Edit `ACCESSORY_POOLS` in `logic/workout_engine.py`. Each slot's `options`
-list can have as many exercises as you want — more options means a longer
-rotation before anything repeats.
-
-**Change how many days the calorie history chart shows**
-→ Change `days=14` in the `calorie_history()` call inside the `/progress`
-route in `app.py`.
-
-**Add a new coach rule**
-→ Add a new `if` block inside `analyze()` in `logic/coach_engine.py`,
-appending both an English and Romanian tip string.
-
-**Add a new UI language string**
-→ Add the key to *both* the `"en"` and `"ro"` blocks in `logic/i18n.py`, then
-use `{{ t('your_key') }}` in any template.
-
-**Edit your stats/PRs without opening the app**
-→ Directly edit `data/user_profile.json` (it's plain text).
+**The privacy model, in one sentence:** every query that touches personal
+data filters by `current_user.id`, so one account can never see another
+account's rows — this is enforced at the query level throughout
+`routes/*.py`, not by hiding UI elements.
 
 ---
 
-## 9. Deploying to Render (free, gives you https)
+## 5. Routes (URL map)
 
-Full click-by-click steps are in `DEPLOY_RENDER.md`. Short version:
+| Blueprint | Prefix | What it covers |
+|---|---|---|
+| `auth` | `/` | `/signup`, `/login`, `/logout`, `/forgot-password`, `/reset-password/<token>`, `/account/export`, `/account/delete` |
+| `onboarding` | `/onboarding` | `/`, `/step/<1-4>` — the setup wizard |
+| `dashboard` | `/` | `/` — home screen (today's targets, quick links) |
+| `meals` | `/meals` | library, day-plan, food logging, scanner, shopping list, favorites/ratings |
+| `workouts` | `/workouts` | today's session, set logging, plan view/generation, exercise replace, exercise library/detail, readiness check-in |
+| `crossfit` | `/crossfit` | WOD library, generate, detail, score logging, favorites |
+| `progress` | `/progress` | all charts and the weekly summary |
+| `assistant` | `/assistant` | the chat-style AI Assistant page |
+| `settings` | `/settings` | profile/goal/equipment/diet editing |
 
-1. Put the `exodus/` folder in a GitHub repo (web upload, no git required).
-2. Render → New Web Service → connect that repo.
-   - Build command: `pip install -r requirements.txt`
-   - Start command: `gunicorn app:app`
-   - Instance type: Free
-3. Render gives you a public `https://your-app.onrender.com` URL — open that
-   on your phone (works even when your computer is off) and Add to Home Screen.
-4. Free tier sleeps after 15 min of no traffic; the first request after that
-   takes ~30-60s to wake back up. Normal, not a bug.
-5. (Optional, for privacy) add a simple password check in `app.py` before
-   sharing the URL with anyone, since right now anyone with the link could
-   see your data.
+Every route (except `auth` signup/login/forgot-password and the 404
+handler) requires `@login_required` — the whole app is behind a login.
 
 ---
 
-## 10. Limitations (be aware)
+## 6. Logic engines (`logic/`)
 
-- This is **rule-based**, not a real AI model — the "coach" logic is a fixed
-  set of if/then checks, which is transparent and free but won't catch
-  everything a human coach would.
-- No authentication — fine for local-only use; add a login before deploying
-  publicly.
-- JSON files aren't a real database — perfectly fine for one user's data, but
-  don't expect this to scale to multiple users without a rewrite to something
-  like SQLite.
-- Nutrition/supplement content is general guidance, not medical advice.
+| File | What it does |
+|---|---|
+| `goal_engine.py` | goal params, 10-day ramped calorie/macro transitions, target calculation |
+| `nutrition_engine.py` | food logging, meal browsing/filtering/scaling, shopping-list generation |
+| `off_client.py` | Open Food Facts response parsing, portion scaling, "fits your macros" verdict |
+| `workout_engine.py` | weekly plan building (10 styles), week-to-week exercise rotation, replacement suggestions, e1RM/PR detection, volume-by-muscle |
+| `crossfit_engine.py` | WOD filtering/scaling, deterministic "generate a workout" logic |
+| `progress_engine.py` | every chart series + weekly summary |
+| `safety.py` | red-flag keyword screening (EN+RO), low-calorie warning, readiness-based suggestions |
+| `assistant_engine.py` | intent matching, exercise-alias recognition, the Assistant's answers |
+| `i18n.py` | the EN/RO translation dictionary (`t(key, lang)`) |
+| `seed.py` | loads `seed_data/*.json` into the database on first run |
+| `helpers.py` | converts SQLAlchemy rows → plain dicts for the logic engines |
+| `emailer.py` | optional SMTP password-reset email (see §8) |
+
+Two orphaned v1 modules (`logic/profile_store.py`, `logic/coach_engine.py`,
+`logic/supplement_engine.py`) are still in the folder from the original
+single-user build but are no longer imported anywhere in v2 — safe to
+ignore or delete, kept only because files in this workspace can't be
+auto-deleted.
+
+---
+
+## 7. Editing the content library (no code changes needed)
+
+Exercises, meals, food items, and CrossFit workouts all live as JSON in
+`seed_data/`. To add or change one:
+
+1. Open the relevant file (`seed_data/exercises.json`, `meals.json`,
+   `food_db.json`, or `crossfit_workouts.json`).
+2. Copy an existing entry as a template — every entry in a file shares
+   the same fields — and edit the values (fill in both `_en` and `_ro`
+   fields for anything that has them).
+3. Commit/upload the changed file to GitHub (see `DEPLOY_RENDER.md` Part
+   4). `logic/seed.py` only inserts rows that aren't already in the
+   database (matched by `key`), so new entries appear automatically after
+   a redeploy — but **editing an existing entry's fields won't retroactively
+   update rows already seeded into your database**; for a content edit to
+   take effect you'd currently need to delete that row from Supabase's
+   Table Editor (or wipe and reseed) so `seed_data`'s version reloads. This
+   is a fine tradeoff for occasional edits; ask if you want an "always
+   overwrite from seed_data" mode instead.
+
+---
+
+## 8. Optional: password-reset emails
+
+By default, "forgot password" still works, but the reset link only shows
+up in the server logs (fine for solo use). To have it emailed instead,
+set these environment variables on Render (Environment tab, same place as
+`DATABASE_URL`):
+
+```
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your.email@gmail.com
+SMTP_PASSWORD=<a Gmail App Password, not your real password>
+```
+
+A Gmail **App Password** is free — generate one at
+myaccount.google.com → Security → 2-Step Verification → App Passwords.
+`logic/emailer.py` checks whether these are set (`smtp_configured()`) and
+silently falls back to log-only if they're not, so this step is entirely
+optional.
+
+---
+
+## 9. Common changes — where to look
+
+| You want to... | Edit this |
+|---|---|
+| Change how calories/macros are calculated | `logic/goal_engine.py` |
+| Add a new goal mode | `logic/goal_engine.py` (`GOAL_PARAMS`, `GOAL_LABELS`, `GOAL_DESCRIPTIONS`) + `templates/settings.html` goal buttons |
+| Add exercises, meals, foods, WODs | `seed_data/*.json` (see §7) |
+| Add a new training style | `logic/workout_engine.py` (`STYLE_CONFIG`) |
+| Change PR / 1RM math | `logic/workout_engine.py` (`estimate_1rm`, `detect_pr`) |
+| Add red-flag safety keywords | `logic/safety.py` |
+| Teach the Assistant a new question type | `logic/assistant_engine.py` (`_match_intent`, `QUICK_QUESTIONS`) |
+| Add/change a translation | `logic/i18n.py` (keep EN and RO keys in sync) |
+| Change colors/fonts/layout | `static/css/style.css` |
+| Add a new page | new template in `templates/<section>/`, new route in `routes/<section>.py`, register in `app.py` if it's a new blueprint |
+
+---
+
+## 10. Testing notes
+
+This app was built and verified without ever running a live server
+locally (the build sandbox has no outbound network access, so
+`pip install` wasn't possible there). Verification instead relied on:
+
+- `python3 -m py_compile` on every `.py` file (confirms syntax/imports
+  are valid).
+- Hand-written unit tests (plain `assert`) exercising every function in
+  every `logic/*.py` engine — goal ramping, macro math, workout
+  generation and rotation, PR detection, CrossFit generation, safety
+  keyword matching (including the EN/RO fix noted below), and Assistant
+  intent matching.
+- A standalone Jinja2 rendering harness that rendered all 24 templates
+  with mocked data (both languages, empty/populated states) to catch
+  template errors before deploy.
+
+Two real bugs were caught and fixed this way: a Romanian red-flag phrase
+that only matched the singular form ("durere în piept") and missed the
+plural ("dureri în piept") — fixed by adding common variants; and the
+Assistant failing to recognize casual exercise names like "squats" or
+"bench" (it only matched full canonical names) — fixed by adding an alias
+dictionary. Both are now covered by passing tests.
+
+Once you have the app running for real (locally or on Render), it's
+worth clicking through signup → onboarding → logging a meal → logging a
+workout set → the Assistant once, just to see it live — the sandbox
+testing above catches logic and syntax errors, not visual/UX issues.
+
+---
+
+## 11. Getting it live
+
+See **`DEPLOY_RENDER.md`** (GitHub + Render, free, https) and
+**`SUPABASE_SETUP.md`** (free hosted Postgres database) for the full
+step-by-step. Short version: push this folder to GitHub, connect it to a
+free Render web service, set `DATABASE_URL` to a free Supabase Postgres
+connection string, and open the resulting `https://...onrender.com` URL
+on your iPhone and "Add to Home Screen."

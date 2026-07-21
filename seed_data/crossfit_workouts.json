@@ -1,0 +1,763 @@
+[
+  {
+    "key": "amrap_bodyweight_basics",
+    "name_en": "Bodyweight Basics AMRAP",
+    "name_ro": "AMRAP de bază, fără echipament",
+    "type": "AMRAP",
+    "difficulty": "beginner",
+    "equipment": [],
+    "target_muscles": [
+      "full_body"
+    ],
+    "est_duration_min": 12,
+    "format_en": "As many rounds as possible in 12 minutes.",
+    "format_ro": "Cât mai multe runde posibil în 12 minute.",
+    "movements": [
+      {
+        "exercise_key": "air_squat",
+        "reps": 10
+      },
+      {
+        "exercise_key": "pushup",
+        "reps": 8
+      },
+      {
+        "exercise_key": "mountain_climber",
+        "reps": 20
+      }
+    ],
+    "scaling_notes_en": "Reduce reps (e.g. 6/4/10) or use push-ups from the knees if needed.",
+    "scaling_notes_ro": "Redu repetările (ex. 6/4/10) sau folosește flotări de pe genunchi dacă e nevoie.",
+    "technique_notes_en": "Move at a steady, sustainable pace — don't sprint the first round.",
+    "technique_notes_ro": "Menține un ritm constant, sustenabil — nu sprinta în prima rundă."
+  },
+  {
+    "key": "amrap_engine_builder",
+    "name_en": "Engine Builder AMRAP",
+    "name_ro": "AMRAP pentru condiție fizică",
+    "type": "AMRAP",
+    "difficulty": "intermediate",
+    "equipment": [
+      "kettlebell",
+      "pullup_bar"
+    ],
+    "target_muscles": [
+      "full_body"
+    ],
+    "est_duration_min": 15,
+    "format_en": "As many rounds as possible in 15 minutes.",
+    "format_ro": "Cât mai multe runde posibil în 15 minute.",
+    "movements": [
+      {
+        "exercise_key": "kettlebell_swing",
+        "reps": 15
+      },
+      {
+        "exercise_key": "box_jump",
+        "reps": 10
+      },
+      {
+        "exercise_key": "inverted_row",
+        "reps": 10
+      }
+    ],
+    "scaling_notes_en": "Swap box jumps for step-ups, inverted rows for ring rows at a higher angle.",
+    "scaling_notes_ro": "Înlocuiește săriturile pe cutie cu urcări pe cutie, ramat inversat cu unghi mai ușor.",
+    "technique_notes_en": "Keep the kettlebell swing hip-driven, not squatted.",
+    "technique_notes_ro": "Menține balansarea kettlebell-ului condusă din șold, nu din genuflexiune."
+  },
+  {
+    "key": "amrap_advanced_grinder",
+    "name_en": "Advanced Grinder AMRAP",
+    "name_ro": "AMRAP avansat, de anduranță",
+    "type": "AMRAP",
+    "difficulty": "advanced",
+    "equipment": [
+      "barbell",
+      "pullup_bar"
+    ],
+    "target_muscles": [
+      "full_body"
+    ],
+    "est_duration_min": 20,
+    "format_en": "As many rounds as possible in 20 minutes.",
+    "format_ro": "Cât mai multe runde posibil în 20 minute.",
+    "movements": [
+      {
+        "exercise_key": "thruster",
+        "reps": 10,
+        "load_note": "moderate barbell load"
+      },
+      {
+        "exercise_key": "pullup",
+        "reps": 10
+      },
+      {
+        "exercise_key": "burpee",
+        "reps": 15
+      }
+    ],
+    "scaling_notes_en": "Reduce to 6-8 reps per movement and/or lighten the barbell load.",
+    "scaling_notes_ro": "Redu la 6-8 repetări per mișcare și/sau ușurează încărcătura barei.",
+    "technique_notes_en": "Break reps into small sets early to avoid failure late in the workout.",
+    "technique_notes_ro": "Împarte repetările în seturi mici de la început pentru a evita eșecul spre final."
+  },
+  {
+    "key": "emom_strength_conditioning",
+    "name_en": "Strength-Conditioning EMOM",
+    "name_ro": "EMOM forță-condiție fizică",
+    "type": "EMOM",
+    "difficulty": "intermediate",
+    "equipment": [
+      "barbell",
+      "rower"
+    ],
+    "target_muscles": [
+      "full_body"
+    ],
+    "est_duration_min": 16,
+    "format_en": "Every minute on the minute for 16 minutes, alternating movements.",
+    "format_ro": "În fiecare minut, timp de 16 minute, alternând mișcările.",
+    "movements": [
+      {
+        "exercise_key": "back_squat",
+        "reps": 5,
+        "minute": "odd"
+      },
+      {
+        "exercise_key": "rowing_erg",
+        "duration": "calories: 12-15",
+        "minute": "even"
+      }
+    ],
+    "scaling_notes_en": "Lower the squat load or reduce rowing calories to finish with rest each minute.",
+    "scaling_notes_ro": "Redu încărcătura la genuflexiune sau caloriile la vâslit pentru a termina cu odihnă în fiecare minut.",
+    "technique_notes_en": "Rest is whatever remains of the minute after finishing the work.",
+    "technique_notes_ro": "Odihna este ce rămâne din minut după terminarea lucrului."
+  },
+  {
+    "key": "emom_beginner_conditioning",
+    "name_en": "Beginner Conditioning EMOM",
+    "name_ro": "EMOM condiție fizică, începători",
+    "type": "EMOM",
+    "difficulty": "beginner",
+    "equipment": [
+      "bodyweight"
+    ],
+    "target_muscles": [
+      "full_body"
+    ],
+    "est_duration_min": 10,
+    "format_en": "Every minute on the minute for 10 minutes.",
+    "format_ro": "În fiecare minut, timp de 10 minute.",
+    "movements": [
+      {
+        "exercise_key": "air_squat",
+        "reps": 12
+      },
+      {
+        "exercise_key": "mountain_climber",
+        "reps": 16
+      }
+    ],
+    "scaling_notes_en": "Reduce reps or extend the interval to 90 seconds if unable to finish with rest.",
+    "scaling_notes_ro": "Redu repetările sau extinde intervalul la 90 secunde dacă nu reușești să termini cu odihnă.",
+    "technique_notes_en": "Focus on full range of motion over speed.",
+    "technique_notes_ro": "Concentrează-te pe amplitudine completă, nu pe viteză."
+  },
+  {
+    "key": "emom_advanced_barbell",
+    "name_en": "Advanced Barbell EMOM",
+    "name_ro": "EMOM avansat cu bara",
+    "type": "EMOM",
+    "difficulty": "advanced",
+    "equipment": [
+      "barbell",
+      "pullup_bar"
+    ],
+    "target_muscles": [
+      "full_body"
+    ],
+    "est_duration_min": 20,
+    "format_en": "Every minute on the minute for 20 minutes, 4 movements rotating.",
+    "format_ro": "În fiecare minut, timp de 20 minute, 4 mișcări care se rotesc.",
+    "movements": [
+      {
+        "exercise_key": "deadlift",
+        "reps": 5
+      },
+      {
+        "exercise_key": "pullup",
+        "reps": 7
+      },
+      {
+        "exercise_key": "thruster",
+        "reps": 8
+      },
+      {
+        "exercise_key": "box_jump",
+        "reps": 10
+      }
+    ],
+    "scaling_notes_en": "Drop to a 2-movement rotation and reduce loads if the 4-movement version can't be sustained.",
+    "scaling_notes_ro": "Redu la rotația cu 2 mișcări și scade încărcăturile dacă versiunea cu 4 mișcări nu poate fi susținută.",
+    "technique_notes_en": "Never let deadlift form break down for the sake of the clock.",
+    "technique_notes_ro": "Nu lăsa niciodată tehnica la îndreptări să se strice din cauza cronometrului."
+  },
+  {
+    "key": "fortime_short_sharp",
+    "name_en": "Short & Sharp For Time",
+    "name_ro": "Scurt și intens, contra cronometru",
+    "type": "FOR_TIME",
+    "difficulty": "intermediate",
+    "equipment": [
+      "barbell"
+    ],
+    "target_muscles": [
+      "full_body"
+    ],
+    "est_duration_min": 10,
+    "format_en": "Complete the following for time, as fast as possible with good form.",
+    "format_ro": "Completează cât mai repede posibil, cu tehnică bună.",
+    "movements": [
+      {
+        "exercise_key": "thruster",
+        "reps": 21
+      },
+      {
+        "exercise_key": "pullup",
+        "reps": 21
+      },
+      {
+        "exercise_key": "thruster",
+        "reps": 15
+      },
+      {
+        "exercise_key": "pullup",
+        "reps": 15
+      },
+      {
+        "exercise_key": "thruster",
+        "reps": 9
+      },
+      {
+        "exercise_key": "pullup",
+        "reps": 9
+      }
+    ],
+    "scaling_notes_en": "Scale the barbell load and use ring rows or banded pull-ups if needed.",
+    "scaling_notes_ro": "Redu încărcătura barei și folosește ramat cu inele sau tracțiuni asistate cu bandă dacă e nevoie.",
+    "technique_notes_en": "This is a classic 21-15-9 rep scheme — pace the first round, it's longer than it looks.",
+    "technique_notes_ro": "Este schema clasică 21-15-9 — dozează efortul în prima rundă, e mai lungă decât pare."
+  },
+  {
+    "key": "fortime_row_run",
+    "name_en": "Row & Bodyweight For Time",
+    "name_ro": "Vâslit și greutate corporală, contra cronometru",
+    "type": "FOR_TIME",
+    "difficulty": "beginner",
+    "equipment": [
+      "rower"
+    ],
+    "target_muscles": [
+      "full_body"
+    ],
+    "est_duration_min": 12,
+    "format_en": "Complete for time.",
+    "format_ro": "Completează cât mai repede.",
+    "movements": [
+      {
+        "exercise_key": "rowing_erg",
+        "duration": "500m"
+      },
+      {
+        "exercise_key": "air_squat",
+        "reps": 20
+      },
+      {
+        "exercise_key": "rowing_erg",
+        "duration": "500m"
+      },
+      {
+        "exercise_key": "air_squat",
+        "reps": 20
+      }
+    ],
+    "scaling_notes_en": "Reduce row distance to 250m per interval if needed.",
+    "scaling_notes_ro": "Redu distanța la vâslit la 250m per interval dacă e nevoie.",
+    "technique_notes_en": "Keep the rowing stroke sequence: legs, then back, then arms.",
+    "technique_notes_ro": "Menține secvența la vâslit: picioare, apoi spate, apoi brațe."
+  },
+  {
+    "key": "fortime_heavy_grinder",
+    "name_en": "Heavy Grinder For Time",
+    "name_ro": "Grinder greu, contra cronometru",
+    "type": "FOR_TIME",
+    "difficulty": "advanced",
+    "equipment": [
+      "barbell",
+      "pullup_bar"
+    ],
+    "target_muscles": [
+      "full_body"
+    ],
+    "est_duration_min": 18,
+    "format_en": "Complete for time — this one is meant to be tough.",
+    "format_ro": "Completează cât mai repede — e menit să fie greu.",
+    "movements": [
+      {
+        "exercise_key": "deadlift",
+        "reps": 15,
+        "load_note": "heavy"
+      },
+      {
+        "exercise_key": "burpee",
+        "reps": 15
+      },
+      {
+        "exercise_key": "pullup",
+        "reps": 15
+      },
+      {
+        "exercise_key": "deadlift",
+        "reps": 10,
+        "load_note": "heavy"
+      },
+      {
+        "exercise_key": "burpee",
+        "reps": 10
+      },
+      {
+        "exercise_key": "pullup",
+        "reps": 10
+      }
+    ],
+    "scaling_notes_en": "Reduce the deadlift load significantly and cut reps in half if this is your first attempt.",
+    "scaling_notes_ro": "Redu semnificativ încărcătura la îndreptări și înjumătățește repetările la prima încercare.",
+    "technique_notes_en": "Deadlift form takes priority over speed at all times here.",
+    "technique_notes_ro": "Tehnica la îndreptări are prioritate față de viteză în orice moment."
+  },
+  {
+    "key": "interval_bike_intervals",
+    "name_en": "Bike Sprint Intervals",
+    "name_ro": "Intervale sprint la bicicletă",
+    "type": "INTERVAL",
+    "difficulty": "intermediate",
+    "equipment": [
+      "bike"
+    ],
+    "target_muscles": [
+      "full_body"
+    ],
+    "est_duration_min": 15,
+    "format_en": "8 rounds of 20 seconds max effort, 40 seconds easy pace.",
+    "format_ro": "8 runde de 20 secunde efort maxim, 40 secunde ritm ușor.",
+    "movements": [
+      {
+        "exercise_key": "assault_bike",
+        "duration": "20s max effort"
+      },
+      {
+        "exercise_key": "assault_bike",
+        "duration": "40s easy"
+      }
+    ],
+    "scaling_notes_en": "Reduce to 6 rounds or lower the sprint intensity if new to interval training.",
+    "scaling_notes_ro": "Redu la 6 runde sau scade intensitatea sprintului dacă ești nou la antrenamentul pe intervale.",
+    "technique_notes_en": "True max effort only during the 20-second work windows.",
+    "technique_notes_ro": "Efort maxim real doar în ferestrele de lucru de 20 de secunde."
+  },
+  {
+    "key": "interval_row_intervals",
+    "name_en": "Row Intervals",
+    "name_ro": "Intervale la vâslit",
+    "type": "INTERVAL",
+    "difficulty": "beginner",
+    "equipment": [
+      "rower"
+    ],
+    "target_muscles": [
+      "full_body"
+    ],
+    "est_duration_min": 15,
+    "format_en": "6 rounds of 250m row, resting 90 seconds between rounds.",
+    "format_ro": "6 runde de 250m vâslit, cu 90 secunde odihnă între runde.",
+    "movements": [
+      {
+        "exercise_key": "rowing_erg",
+        "duration": "250m"
+      }
+    ],
+    "scaling_notes_en": "Reduce to 4 rounds or increase rest to 2 minutes if needed.",
+    "scaling_notes_ro": "Redu la 4 runde sau crește odihna la 2 minute dacă e nevoie.",
+    "technique_notes_en": "Aim for a consistent pace across all rounds rather than fading.",
+    "technique_notes_ro": "Urmărește un ritm constant pe toate rundele, fără să scadă spre final."
+  },
+  {
+    "key": "strength_cond_squat_conditioning",
+    "name_en": "Squat Strength + Conditioning Finisher",
+    "name_ro": "Forță la genuflexiune + finisher condiție fizică",
+    "type": "STRENGTH_CONDITIONING",
+    "difficulty": "intermediate",
+    "equipment": [
+      "barbell"
+    ],
+    "target_muscles": [
+      "quads",
+      "full_body"
+    ],
+    "est_duration_min": 25,
+    "format_en": "5x5 back squat for strength, then a conditioning finisher for time.",
+    "format_ro": "5x5 genuflexiune pentru forță, apoi un finisher de condiție fizică cronometrat.",
+    "movements": [
+      {
+        "exercise_key": "back_squat",
+        "reps": 5,
+        "sets": 5,
+        "load_note": "moderate-heavy"
+      },
+      {
+        "exercise_key": "kettlebell_swing",
+        "reps": 20
+      },
+      {
+        "exercise_key": "burpee",
+        "reps": 10
+      }
+    ],
+    "scaling_notes_en": "Reduce squat sets to 3x5 and/or scale the finisher reps down.",
+    "scaling_notes_ro": "Redu seturile la genuflexiune la 3x5 și/sau scade repetările la finisher.",
+    "technique_notes_en": "Rest 2-3 minutes between strength sets, keep the finisher fast-paced.",
+    "technique_notes_ro": "Odihnește 2-3 minute între seturile de forță, menține finisher-ul într-un ritm alert."
+  },
+  {
+    "key": "strength_cond_deadlift_conditioning",
+    "name_en": "Deadlift Strength + Conditioning Finisher",
+    "name_ro": "Forță la îndreptări + finisher condiție fizică",
+    "type": "STRENGTH_CONDITIONING",
+    "difficulty": "advanced",
+    "equipment": [
+      "barbell",
+      "rower"
+    ],
+    "target_muscles": [
+      "hamstrings",
+      "full_body"
+    ],
+    "est_duration_min": 28,
+    "format_en": "5x3 deadlift for strength, then a row/bodyweight finisher for time.",
+    "format_ro": "5x3 îndreptări pentru forță, apoi un finisher vâslit/greutate corporală cronometrat.",
+    "movements": [
+      {
+        "exercise_key": "deadlift",
+        "reps": 3,
+        "sets": 5,
+        "load_note": "heavy"
+      },
+      {
+        "exercise_key": "rowing_erg",
+        "duration": "300m"
+      },
+      {
+        "exercise_key": "air_squat",
+        "reps": 15
+      }
+    ],
+    "scaling_notes_en": "Reduce deadlift sets to 3x3 and/or scale down the finisher volume.",
+    "scaling_notes_ro": "Redu seturile la îndreptări la 3x3 și/sau scade volumul finisher-ului.",
+    "technique_notes_en": "Never chase the clock during heavy deadlift sets — form first.",
+    "technique_notes_ro": "Nu urmări niciodată cronometrul la seturile grele de îndreptări — tehnica întâi."
+  },
+  {
+    "key": "bodyweight_full_body",
+    "name_en": "No-Equipment Full Body",
+    "name_ro": "Full body, fără echipament",
+    "type": "BODYWEIGHT",
+    "difficulty": "beginner",
+    "equipment": [],
+    "target_muscles": [
+      "full_body"
+    ],
+    "est_duration_min": 15,
+    "format_en": "4 rounds, resting as needed between rounds.",
+    "format_ro": "4 runde, odihnă după nevoie între runde.",
+    "movements": [
+      {
+        "exercise_key": "air_squat",
+        "reps": 15
+      },
+      {
+        "exercise_key": "pushup",
+        "reps": 10
+      },
+      {
+        "exercise_key": "plank",
+        "duration": "30s"
+      },
+      {
+        "exercise_key": "mountain_climber",
+        "reps": 20
+      }
+    ],
+    "scaling_notes_en": "Reduce reps/hold time or rounds as needed — this is fully scalable to any level.",
+    "scaling_notes_ro": "Redu repetările/timpul de menținere sau rundele după nevoie — complet adaptabil oricărui nivel.",
+    "technique_notes_en": "Great option when you have zero equipment available.",
+    "technique_notes_ro": "Opțiune excelentă când nu ai deloc echipament disponibil."
+  },
+  {
+    "key": "bodyweight_core_finisher",
+    "name_en": "Core Finisher",
+    "name_ro": "Finisher pentru abdomen",
+    "type": "BODYWEIGHT",
+    "difficulty": "beginner",
+    "equipment": [],
+    "target_muscles": [
+      "core"
+    ],
+    "est_duration_min": 8,
+    "format_en": "3 rounds, minimal rest.",
+    "format_ro": "3 runde, odihnă minimă.",
+    "movements": [
+      {
+        "exercise_key": "plank",
+        "duration": "30s"
+      },
+      {
+        "exercise_key": "russian_twist",
+        "reps": 20
+      },
+      {
+        "exercise_key": "mountain_climber",
+        "reps": 20
+      }
+    ],
+    "scaling_notes_en": "Reduce plank hold time or reps as needed.",
+    "scaling_notes_ro": "Redu timpul de plank sau repetările după nevoie.",
+    "technique_notes_en": "Add this after a main workout, not as a standalone session.",
+    "technique_notes_ro": "Adaugă-l după un antrenament principal, nu ca sesiune de sine stătătoare."
+  },
+  {
+    "key": "partner_row_relay",
+    "name_en": "Partner Row Relay",
+    "name_ro": "Ștafetă de vâslit în pereche",
+    "type": "PARTNER",
+    "difficulty": "intermediate",
+    "equipment": [
+      "rower"
+    ],
+    "target_muscles": [
+      "full_body"
+    ],
+    "est_duration_min": 20,
+    "format_en": "Alternate 250m row intervals with a partner, 8 rounds each.",
+    "format_ro": "Alternează intervale de 250m vâslit cu un partener, 8 runde fiecare.",
+    "movements": [
+      {
+        "exercise_key": "rowing_erg",
+        "duration": "250m",
+        "note": "partner rests while you row"
+      }
+    ],
+    "scaling_notes_en": "Reduce to 5 rounds each or 200m per interval.",
+    "scaling_notes_ro": "Redu la 5 runde fiecare sau 200m per interval.",
+    "technique_notes_en": "Great for accountability and pushing pace together.",
+    "technique_notes_ro": "Excelent pentru motivare reciprocă și menținerea ritmului împreună."
+  },
+  {
+    "key": "partner_you_go_i_go",
+    "name_en": "You-Go-I-Go Bodyweight Partner WOD",
+    "name_ro": "WOD în pereche 'tu-eu' cu greutate corporală",
+    "type": "PARTNER",
+    "difficulty": "beginner",
+    "equipment": [],
+    "target_muscles": [
+      "full_body"
+    ],
+    "est_duration_min": 18,
+    "format_en": "Alternate full rounds with a partner until 6 rounds each are complete.",
+    "format_ro": "Alternează runde complete cu un partener până se termină 6 runde fiecare.",
+    "movements": [
+      {
+        "exercise_key": "air_squat",
+        "reps": 15
+      },
+      {
+        "exercise_key": "pushup",
+        "reps": 10
+      },
+      {
+        "exercise_key": "mountain_climber",
+        "reps": 20
+      }
+    ],
+    "scaling_notes_en": "Reduce reps per round or total rounds as needed.",
+    "scaling_notes_ro": "Redu repetările per rundă sau numărul de runde după nevoie.",
+    "technique_notes_en": "One partner works while the other rests — great for beginners training together.",
+    "technique_notes_ro": "Un partener lucrează cât celălalt se odihnește — excelent pentru începători care se antrenează împreună."
+  },
+  {
+    "key": "equipment_free_hotel_wod",
+    "name_en": "Hotel Room / Travel WOD",
+    "name_ro": "WOD de călătorie, fără echipament",
+    "type": "EQUIPMENT_FREE",
+    "difficulty": "beginner",
+    "equipment": [],
+    "target_muscles": [
+      "full_body"
+    ],
+    "est_duration_min": 12,
+    "format_en": "4 rounds for time, no equipment needed.",
+    "format_ro": "4 runde cronometrate, fără echipament necesar.",
+    "movements": [
+      {
+        "exercise_key": "burpee",
+        "reps": 10
+      },
+      {
+        "exercise_key": "air_squat",
+        "reps": 15
+      },
+      {
+        "exercise_key": "plank",
+        "duration": "30s"
+      }
+    ],
+    "scaling_notes_en": "Reduce reps/rounds if space is very limited.",
+    "scaling_notes_ro": "Redu repetările/rundele dacă spațiul e foarte limitat.",
+    "technique_notes_en": "Perfect for when you're away from a gym.",
+    "technique_notes_ro": "Perfect pentru când ești departe de o sală."
+  },
+  {
+    "key": "equipment_free_stairs",
+    "name_en": "Stairs Conditioning",
+    "name_ro": "Condiție fizică pe scări",
+    "type": "EQUIPMENT_FREE",
+    "difficulty": "intermediate",
+    "equipment": [],
+    "target_muscles": [
+      "quads",
+      "full_body"
+    ],
+    "est_duration_min": 15,
+    "format_en": "As many flights of stairs as possible in 15 minutes, alternating with bodyweight moves.",
+    "format_ro": "Cât mai multe etaje de scări posibil în 15 minute, alternând cu mișcări cu greutate corporală.",
+    "movements": [
+      {
+        "exercise_key": "box_jump",
+        "reps": 0,
+        "note": "substitute: stair sprints"
+      },
+      {
+        "exercise_key": "air_squat",
+        "reps": 15
+      }
+    ],
+    "scaling_notes_en": "Walk the stairs instead of running if joints are a concern.",
+    "scaling_notes_ro": "Mergi pe scări în loc să alergi dacă ai probleme articulare.",
+    "technique_notes_en": "Watch your footing, especially when fatigued.",
+    "technique_notes_ro": "Ai grijă unde calci, mai ales când ești obosit."
+  },
+  {
+    "key": "amrap_upperbody_focus",
+    "name_en": "Upper Body Focus AMRAP",
+    "name_ro": "AMRAP cu accent pe partea superioară",
+    "type": "AMRAP",
+    "difficulty": "intermediate",
+    "equipment": [
+      "dumbbell",
+      "pullup_bar"
+    ],
+    "target_muscles": [
+      "chest",
+      "lats",
+      "shoulders"
+    ],
+    "est_duration_min": 14,
+    "format_en": "As many rounds as possible in 14 minutes.",
+    "format_ro": "Cât mai multe runde posibil în 14 minute.",
+    "movements": [
+      {
+        "exercise_key": "pushup",
+        "reps": 12
+      },
+      {
+        "exercise_key": "inverted_row",
+        "reps": 12
+      },
+      {
+        "exercise_key": "lateral_raise",
+        "reps": 15,
+        "load_note": "light dumbbells"
+      }
+    ],
+    "scaling_notes_en": "Elevate hands for push-ups or raise the row bar height to regress.",
+    "scaling_notes_ro": "Ridică mâinile pentru flotări sau înălțimea barei de ramat pentru a simplifica.",
+    "technique_notes_en": "Keep shoulders healthy — stop if you feel joint pain, not just muscle fatigue.",
+    "technique_notes_ro": "Ai grijă de sănătatea umerilor — oprește-te dacă simți durere articulară, nu doar oboseală musculară."
+  },
+  {
+    "key": "emom_lowimpact",
+    "name_en": "Low-Impact EMOM",
+    "name_ro": "EMOM cu impact redus",
+    "type": "EMOM",
+    "difficulty": "beginner",
+    "equipment": [
+      "dumbbell"
+    ],
+    "target_muscles": [
+      "full_body"
+    ],
+    "est_duration_min": 12,
+    "format_en": "Every minute on the minute for 12 minutes — joint-friendly version.",
+    "format_ro": "În fiecare minut, timp de 12 minute — versiune prietenoasă cu articulațiile.",
+    "movements": [
+      {
+        "exercise_key": "glute_bridge",
+        "reps": 15
+      },
+      {
+        "exercise_key": "dumbbell_row",
+        "reps": 10
+      }
+    ],
+    "scaling_notes_en": "This version avoids jumping/impact movements entirely — good for joint issues.",
+    "scaling_notes_ro": "Această versiune evită complet mișcările cu impact/sărituri — bună pentru probleme articulare.",
+    "technique_notes_en": "A good option when knees, ankles, or lower back need a lighter day.",
+    "technique_notes_ro": "O opțiune bună când genunchii, gleznele sau spatele inferior au nevoie de o zi mai ușoară."
+  },
+  {
+    "key": "fortime_row_bike_combo",
+    "name_en": "Row + Bike Combo For Time",
+    "name_ro": "Combinație vâslit + bicicletă, contra cronometru",
+    "type": "FOR_TIME",
+    "difficulty": "advanced",
+    "equipment": [
+      "rower",
+      "bike"
+    ],
+    "target_muscles": [
+      "full_body"
+    ],
+    "est_duration_min": 16,
+    "format_en": "Complete for time.",
+    "format_ro": "Completează cât mai repede.",
+    "movements": [
+      {
+        "exercise_key": "rowing_erg",
+        "duration": "500m"
+      },
+      {
+        "exercise_key": "assault_bike",
+        "duration": "500m or 1 min"
+      },
+      {
+        "exercise_key": "burpee",
+        "reps": 20
+      }
+    ],
+    "scaling_notes_en": "Reduce distances/reps by roughly a third if this is a first attempt.",
+    "scaling_notes_ro": "Redu distanțele/repetările cu aproximativ o treime la prima încercare.",
+    "technique_notes_en": "Pace the row and bike — don't empty the tank before the burpees.",
+    "technique_notes_ro": "Dozează efortul la vâslit și bicicletă — nu te epuiza înainte de burpees."
+  }
+]

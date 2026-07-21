@@ -52,6 +52,25 @@ No credit card needed. Two accounts required: GitHub and Render. Total time:
 
 ---
 
+## Part 1.5 — Connect the real database (Supabase)
+
+Exodus v2 has real accounts (email + password, multiple users, private
+data per account), which needs a real database instead of local files. See
+**`SUPABASE_SETUP.md`** for the full walkthrough — short version:
+
+1. Create a free Supabase project, copy its Postgres connection string.
+2. Render dashboard → your `exodus` service → **Environment** tab → add
+   `DATABASE_URL` = that connection string → save.
+3. Render redeploys automatically. On first boot the app creates all
+   tables and loads the exercise/meal/CrossFit library into your new
+   database — nothing else to do.
+
+If you skip this step, the app still runs on Render using a local SQLite
+file, but (like the old v1 setup) that data isn't guaranteed to survive a
+redeploy. Do this step before you start logging real workouts/meals.
+
+---
+
 ## Part 3 — Open it on your iPhone
 
 1. Open Safari on your iPhone, go to your `https://...onrender.com` URL.
@@ -66,16 +85,12 @@ No credit card needed. Two accounts required: GitHub and Render. Total time:
 - **Free tier sleeps** after 15 minutes with no visits. The next time you
   open the app it can take 30-60 seconds to "wake up" — just wait, it's
   normal, not broken.
-- **Your data lives on Render's server now**, not your computer. Render's
-  free tier disks aren't guaranteed persistent across redeploys — if you
-  push a code update later, your logged workouts/weights in `data/*.json`
-  could reset. For now (personal use, infrequent updates) this is a fine
-  tradeoff; if it becomes annoying, the fix is switching `profile_store.py`
-  to a real database, which is a future upgrade, not needed today.
-- **No password on it yet.** Anyone with your exact `onrender.com` link
-  could open it and see your stats. The link isn't guessable, but if you
-  want to lock it down, that's a small addition to `app.py` (a login prompt)
-  — ask if you want that built in.
+- **Your data lives in your Supabase database**, not on Render and not on
+  your computer — once `DATABASE_URL` is set (Part 1.5), redeploys and
+  restarts don't touch your data at all.
+- **Real accounts now.** v2 has email/password signup and login — nobody
+  can see your stats without your password. Each account only ever sees
+  its own data (every table is scoped to your user id).
 - **Updating the app later**: edit files in your GitHub repo (or push new
   ones), Render auto-redeploys within a minute or two of a new commit.
 
