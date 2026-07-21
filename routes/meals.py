@@ -14,14 +14,15 @@ from flask_login import login_required, current_user
 
 from extensions import db
 from models import (
-    MealLogEntry, MealTemplate, FoodItem, FavoriteMeal, MealRating,
+    MealLogEntry, FavoriteMeal, MealRating,
     ShoppingListItem,
 )
-from logic.helpers import profile_to_dict, meal_to_dict, food_to_dict, meal_log_to_dict
+from logic.helpers import profile_to_dict, meal_log_to_dict
+from logic.cache import get_meals, get_foods
 from logic.goal_engine import calculate_targets, switch_goal, GOAL_LABELS, GOAL_DESCRIPTIONS
 from logic.nutrition_engine import (
     find_food, build_log_entry, daily_totals, progress_pct, MEAL_TYPES, MEAL_TAGS,
-    filter_meals, scale_meal, suggest_meals_for_remaining, recently_eaten_meal_keys,
+    filter_meals, scale_meal, suggest_day_plan, recently_eaten_meal_keys,
     generate_shopping_list,
 )
 from logic.off_client import fetch_product, scale_to_portion, goal_fit
@@ -30,11 +31,11 @@ bp = Blueprint("meals", __name__, url_prefix="/meals")
 
 
 def _all_meals():
-    return [meal_to_dict(m) for m in MealTemplate.query.all()]
+    return get_meals()
 
 
 def _all_foods():
-    return [food_to_dict(f) for f in FoodItem.query.all()]
+    return get_foods()
 
 
 @bp.route("/")
@@ -185,30 +186,24 @@ def add_meal_to_shopping(meal_key):
 @bp.route("/regenerate-day", methods=["POST"])
 @login_required
 def regenerate_day():
-    """Suggest one meal per meal-type that together roughly fit today's
-    remaining targets — a lightweight 'regenerate the whole day' feature."""
+    """Suggest a full day of meals (one per meal-type, scaled in servings
+    where needed) that together land close to today's calorie/protein
+    targets — see logic.nutrition_engine.suggest_day_plan for why this
+    isn't just 'grab the single smallest matching meal per slot' (that
+    version used to leave the day's total far under the target)."""
     profile = current_user.profile
     targets = calculate_targets(profile)
     meals = _all_meals()
     recent = recently_eaten_meal_keys(
         [meal_log_to_dict(e) for e in MealLogEntry.query.filter_by(user_id=current_user.id).all()], days=5)
 
-    remaining_kcal = targets["target_calories"]
-    remaining_protein = targets["protein_g"]
-    plan = {}
-    for slot in ["breakfast", "lunch", "dinner", "snack"]:
-        candidates = suggest_meals_for_remaining(
-            meals, remaining_kcal, remaining_protein, tags=[slot] if slot != "snack" else None,
-            recently_used_keys=recent | set(plan.keys()), limit=1)
-        if not candidates:
-            candidates = suggest_meals_for_remaining(meals, remaining_kcal, remaining_protein, limit=1)
-        if candidates:
-            m = candidates[0]
-            plan[m["key"]] = m
-            remaining_kcal -= m["kcal_per_serving"]
-            remaining_protein -= m["protein_g_per_serving"]
+    day_plan = suggest_day_plan(meals, targets["target_calories"], targets["protein_g"],
+                                 recently_used_keys=recent)
+    plan_total_kcal = sum(m["kcal_total"] for m in day_plan)
+    plan_total_protein = round(sum(m["protein_g_total"] for m in day_plan), 1)
 
-    return render_template("meals/day_plan.html", profile=profile, day_plan=list(plan.values()), targets=targets)
+    return render_template("meals/day_plan.html", profile=profile, day_plan=day_plan, targets=targets,
+                            plan_total_kcal=plan_total_kcal, plan_total_protein=plan_total_protein)
 
 
 # ---------------------------------------------------------------------------

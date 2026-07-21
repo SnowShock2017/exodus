@@ -3,6 +3,14 @@
 <h1>{{ t('nav_meals') }}</h1>
 
 <section class="card">
+  <div class="action-row">
+    <a class="btn" href="{{ url_for('meals.scanner') }}">📷 {{ t('nav_scanner') }}</a>
+    <a class="btn-secondary" href="{{ url_for('meals.shopping_list') }}">🛒 {{ t('nav_shopping') }}</a>
+  </div>
+  <p class="hint">{{ t('scanner_hint') }}</p>
+</section>
+
+<section class="card">
   <h2>{{ t('goal') }}</h2>
   <div class="goal-buttons">
     {% for key in ["lean_maintain_strength","maintenance","muscle_gain"] %}

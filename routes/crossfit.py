@@ -8,19 +8,20 @@ manage favorites.
 
 from datetime import date
 
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
 from flask_login import login_required, current_user
 
 from extensions import db
-from models import CrossfitWorkout, CrossfitLog, FavoriteCrossfit, Exercise
-from logic.helpers import profile_to_dict, crossfit_to_dict, exercise_to_dict
+from models import CrossfitLog, FavoriteCrossfit
+from logic.helpers import profile_to_dict
+from logic.cache import get_crossfit_workouts, get_exercises, get_exercise_by_key
 from logic.crossfit_engine import filter_workouts, scale_workout, generate_workout, TYPES, DIFFICULTIES
 
 bp = Blueprint("crossfit", __name__, url_prefix="/crossfit")
 
 
 def _all_workouts():
-    return [crossfit_to_dict(w) for w in CrossfitWorkout.query.all()]
+    return get_crossfit_workouts()
 
 
 @bp.route("/")
@@ -48,12 +49,12 @@ def index():
 def generate():
     profile = current_user.profile
     profile_dict = profile_to_dict(profile)
-    exercises = [exercise_to_dict(e) for e in Exercise.query.all()]
+    exercises = get_exercises()
     wtype = request.form.get("type", "AMRAP")
     duration = request.form.get("duration_min", type=int, default=15)
     wod = generate_workout(exercises, profile_dict, wtype=wtype, duration_min=duration)
     return render_template("crossfit/detail.html", profile=profile, w=wod, generated=True,
-                            movement_exercises={m["exercise_key"]: Exercise.query.filter_by(key=m["exercise_key"]).first()
+                            movement_exercises={m["exercise_key"]: get_exercise_by_key(m["exercise_key"])
                                                  for m in wod["movements"]})
 
 
@@ -61,12 +62,12 @@ def generate():
 @login_required
 def detail(key):
     profile = current_user.profile
-    w = CrossfitWorkout.query.filter_by(key=key).first_or_404()
-    w_dict = crossfit_to_dict(w)
-    target_difficulty = request.args.get("difficulty", w.difficulty)
-    movements = scale_workout(w_dict, target_difficulty) if target_difficulty != w.difficulty else w.movements
-    movement_exercises = {m["exercise_key"]: Exercise.query.filter_by(key=m["exercise_key"]).first()
-                           for m in movements}
+    w_dict = next((w for w in get_crossfit_workouts() if w["key"] == key), None)
+    if not w_dict:
+        abort(404)
+    target_difficulty = request.args.get("difficulty", w_dict["difficulty"])
+    movements = scale_workout(w_dict, target_difficulty) if target_difficulty != w_dict["difficulty"] else w_dict["movements"]
+    movement_exercises = {m["exercise_key"]: get_exercise_by_key(m["exercise_key"]) for m in movements}
     is_favorite = FavoriteCrossfit.query.filter_by(user_id=current_user.id, workout_key=key).first() is not None
     return render_template("crossfit/detail.html", profile=profile, w=w_dict, movements=movements,
                             movement_exercises=movement_exercises, target_difficulty=target_difficulty,

@@ -9,7 +9,7 @@
     <label>{{ t('injury_areas') }}</label>
     <div class="chip-group">
       {% for tag in ["knee","shoulder","lower_back","wrist","ankle","elbow","hip","neck"] %}
-        <label class="chip"><input type="checkbox" name="injury_tags" value="{{ tag }}" {{ 'checked' if tag in (profile.injury_tags or []) }}> {{ tag.replace('_',' ') }}</label>
+        <label class="chip"><input type="checkbox" name="injury_tags" value="{{ tag }}" {{ 'checked' if tag in (profile.injury_tags or []) }}> {{ t('injury_' + tag) }}</label>
       {% endfor %}
     </div>
     <label>{{ t('sleep_hours') }} <input type="number" step="0.5" name="sleep_hours" value="{{ profile.sleep_hours }}"></label>

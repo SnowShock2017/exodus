@@ -2,12 +2,25 @@
 {% block content %}
 <a class="back-link" href="{{ url_for('meals.index') }}">← {{ t('nav_meals') }}</a>
 <h1>{{ t('regenerate_day') }}</h1>
+
+{% if day_plan %}
+<section class="card">
+  <div class="badge">{{ plan_total_kcal }} / {{ targets.target_calories }} kcal · {{ plan_total_protein }} / {{ targets.protein_g }}g {{ t('protein') }}</div>
+  <div class="bar"><div class="bar-fill" style="width:{{ [((plan_total_kcal / targets.target_calories * 100) if targets.target_calories else 0)|round, 100]|min }}%"></div></div>
+  <p class="hint">{{ t('total') }}</p>
+</section>
+{% endif %}
+
 <section class="card">
   {% for m in day_plan %}
     <div class="week-day">
-      <strong>{{ m.name_ro if lang=='ro' else m.name_en }}</strong>
-      <p class="hint">{{ m.kcal_per_serving }} kcal · {{ m.protein_g_per_serving }}g protein</p>
-      <a class="btn-secondary" href="{{ url_for('meals.meal_detail', meal_key=m.key) }}">{{ t('view') }}</a>
+      <div class="week-day-header"><strong>{{ m.name_ro if lang=='ro' else m.name_en }}</strong><span>{{ t(m.slot) if m.slot in ['breakfast','lunch','dinner','snack'] else m.slot }}</span></div>
+      <p class="hint">
+        {% if m.servings and m.servings > 1 %}{{ m.servings }}x {{ t('servings') }} · {% endif %}
+        {{ m.kcal_total }} kcal · {{ m.protein_g_total }}g protein
+        {% if m.servings and m.servings > 1 %}({{ m.kcal_per_serving }} kcal {{ t('per_serving') }}){% endif %}
+      </p>
+      <a class="btn-secondary" href="{{ url_for('meals.meal_detail', meal_key=m.key, servings=m.servings) }}">{{ t('view') }}</a>
     </div>
   {% endfor %}
   {% if not day_plan %}<p>{{ t('no_food_logged') }}</p>{% endif %}

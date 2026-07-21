@@ -4,7 +4,9 @@
 
 <section class="card">
   <p class="hint">{{ t('scanner_hint') }}</p>
+  <p class="hint">{{ t('camera_permission_note') }}</p>
   <div id="reader" style="width:100%; max-width:400px;"></div>
+  <div id="scanner-status" class="flash flash-info" style="display:none;"></div>
   <button class="btn" id="start-scan">{{ t('start_camera') }}</button>
   <div class="inline-form">
     <input type="text" id="manual-barcode" placeholder="{{ t('or_enter_barcode') }}">
@@ -40,6 +42,16 @@
   <ul id="manual-results"></ul>
 </section>
 
+<script>
+  window.SCANNER_I18N = {
+    requesting: {{ t('camera_requesting')|tojson }},
+    denied: {{ t('camera_denied')|tojson }},
+    notFound: {{ t('camera_not_found')|tojson }},
+    inUse: {{ t('camera_in_use')|tojson }},
+    insecure: {{ t('camera_insecure')|tojson }},
+    generic: {{ t('camera_generic_error')|tojson }},
+  };
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
 <script src="{{ url_for('static', filename='js/scanner.js') }}"></script>
 {% endblock %}

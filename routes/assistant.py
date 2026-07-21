@@ -11,8 +11,9 @@ from datetime import date
 from flask import Blueprint, render_template, request
 from flask_login import login_required, current_user
 
-from models import MealLogEntry, MealTemplate, Exercise
-from logic.helpers import profile_to_dict, meal_to_dict, exercise_to_dict, meal_log_to_dict
+from models import MealLogEntry
+from logic.helpers import profile_to_dict, meal_log_to_dict
+from logic.cache import get_meals, get_exercises
 from logic.goal_engine import calculate_targets
 from logic.assistant_engine import answer, QUICK_QUESTIONS
 
@@ -32,8 +33,8 @@ def index():
             targets = calculate_targets(profile)
             meal_log_today = [meal_log_to_dict(e) for e in MealLogEntry.query.filter_by(
                 user_id=current_user.id, date=date.today().isoformat()).all()]
-            all_meals = [meal_to_dict(m) for m in MealTemplate.query.all()]
-            all_exercises = [exercise_to_dict(e) for e in Exercise.query.all()]
+            all_meals = get_meals()
+            all_exercises = get_exercises()
 
             response = answer(message, profile.language, profile_to_dict(profile), targets,
                                meal_log_today, all_meals, all_exercises)

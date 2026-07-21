@@ -9,14 +9,15 @@ check-in.
 
 from datetime import date
 
-from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
+from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify, abort
 from flask_login import login_required, current_user
 
 from extensions import db
 from models import (
-    Exercise, WorkoutPlan, WorkoutDay, PlanExercise, WorkoutSetLog, ReadinessCheckin,
+    WorkoutPlan, WorkoutDay, PlanExercise, WorkoutSetLog, ReadinessCheckin,
 )
-from logic.helpers import profile_to_dict, exercise_to_dict, set_log_to_dict
+from logic.helpers import profile_to_dict, set_log_to_dict
+from logic.cache import get_exercises, get_exercise_by_key
 from logic.workout_engine import (
     build_plan, default_plan_weekdays, STYLE_CONFIG, suggest_replacements,
     replacement_explanation, estimate_1rm, detect_pr, get_phase, ramp_weight,
@@ -30,7 +31,7 @@ WEEKDAY_NAMES_RO = ["Luni", "Marți", "Miercuri", "Joi", "Vineri", "Sâmbătă",
 
 
 def _all_exercises():
-    return [exercise_to_dict(e) for e in Exercise.query.all()]
+    return get_exercises()
 
 
 def _active_plan():
@@ -49,13 +50,26 @@ def today():
 
     day_exercises = []
     if day and not day.is_rest:
+        # Bulk-fetch the most recent log per exercise in ONE query instead of
+        # one query per exercise (previously N+1 — the main cause of this
+        # page taking several seconds to load). Exercise rows themselves come
+        # from the in-memory cache (logic/cache.py), so no query at all there.
+        keys = [pe.exercise_key for pe in day.exercises]
+        last_log_by_key = {}
+        if keys:
+            recent_logs = (WorkoutSetLog.query
+                           .filter(WorkoutSetLog.user_id == current_user.id,
+                                   WorkoutSetLog.exercise_key.in_(keys))
+                           .order_by(WorkoutSetLog.date.desc()).all())
+            for log in recent_logs:
+                last_log_by_key.setdefault(log.exercise_key, log)
+
         for pe in day.exercises:
-            ex_row = Exercise.query.filter_by(key=pe.exercise_key).first()
+            ex_row = get_exercise_by_key(pe.exercise_key)
             weight = pe.target_weight_kg
             if phase == "ramp" and weight:
                 weight = ramp_weight(weight, ramp_week)
-            last_log = (WorkoutSetLog.query.filter_by(user_id=current_user.id, exercise_key=pe.exercise_key)
-                        .order_by(WorkoutSetLog.date.desc()).first())
+            last_log = last_log_by_key.get(pe.exercise_key)
             day_exercises.append({"plan_exercise": pe, "exercise": ex_row, "ramped_weight": weight,
                                    "last_log": last_log})
 
@@ -197,21 +211,21 @@ def plan_day_add_exercise(day_id):
     if not day or day.plan.user_id != current_user.id:
         return redirect(url_for("workouts.plan_view"))
     exercise_key = request.form.get("exercise_key")
-    ex_row = Exercise.query.filter_by(key=exercise_key).first()
+    ex_row = get_exercise_by_key(exercise_key)
     if ex_row:
         existing_count = len(day.exercises)
         same_muscle_count = sum(
             1 for pe in day.exercises
-            if (Exercise.query.filter_by(key=pe.exercise_key).first() or Exercise(primary_muscle=None)).primary_muscle == ex_row.primary_muscle
+            if (get_exercise_by_key(pe.exercise_key) or {}).get("primary_muscle") == ex_row["primary_muscle"]
         )
         if existing_count >= 6:
             flash(("This day already has 6+ exercises — that's a lot of volume for one session." if
                    current_user.profile.language != "ro" else
                    "Ziua are deja 6+ exerciții — e mult volum pentru o sesiune."), "warning")
         if same_muscle_count >= 2:
-            flash((f"You already have {same_muscle_count} exercises for {ex_row.primary_muscle} today — "
+            flash((f"You already have {same_muscle_count} exercises for {ex_row['primary_muscle']} today — "
                    f"consider whether this adds unnecessary repetition." if current_user.profile.language != "ro" else
-                   f"Ai deja {same_muscle_count} exerciții pentru {ex_row.primary_muscle} azi — "
+                   f"Ai deja {same_muscle_count} exerciții pentru {ex_row['primary_muscle']} azi — "
                    f"ia în calcul dacă asta adaugă repetiție inutilă."), "warning")
         db.session.add(PlanExercise(
             day_id=day.id, exercise_key=exercise_key, order_index=len(day.exercises),
@@ -264,9 +278,11 @@ def replace_apply(pe_id):
 @bp.route("/exercise/<key>")
 @login_required
 def exercise_detail(key):
-    ex = Exercise.query.filter_by(key=key).first_or_404()
-    easier = Exercise.query.filter_by(key=ex.easier_variation).first() if ex.easier_variation else None
-    harder = Exercise.query.filter_by(key=ex.harder_variation).first() if ex.harder_variation else None
+    ex = get_exercise_by_key(key)
+    if not ex:
+        abort(404)
+    easier = get_exercise_by_key(ex.get("easier_variation")) if ex.get("easier_variation") else None
+    harder = get_exercise_by_key(ex.get("harder_variation")) if ex.get("harder_variation") else None
     return render_template("workouts/exercise_detail.html", profile=current_user.profile,
                             ex=ex, easier=easier, harder=harder)
 
@@ -275,11 +291,10 @@ def exercise_detail(key):
 @login_required
 def exercise_library():
     muscle = request.args.get("muscle")
-    q = Exercise.query
-    if muscle:
-        q = q.filter_by(primary_muscle=muscle)
-    exercises = q.order_by(Exercise.primary_muscle, Exercise.name_en).all()
-    muscles = sorted({e.primary_muscle for e in Exercise.query.all()})
+    all_exercises = get_exercises()
+    exercises = [e for e in all_exercises if not muscle or e["primary_muscle"] == muscle]
+    exercises.sort(key=lambda e: (e["primary_muscle"], e["name_en"]))
+    muscles = sorted({e["primary_muscle"] for e in all_exercises})
     return render_template("workouts/library.html", profile=current_user.profile,
                             exercises=exercises, muscles=muscles, active_muscle=muscle)
 

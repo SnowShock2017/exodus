@@ -10,8 +10,9 @@ from datetime import date
 from flask import Blueprint, render_template, request
 from flask_login import login_required, current_user
 
-from models import WeightLog, WorkoutSetLog, MealLogEntry, StepLog, Exercise
-from logic.helpers import profile_to_dict, exercise_to_dict
+from models import WeightLog, WorkoutSetLog, MealLogEntry, StepLog
+from logic.helpers import profile_to_dict
+from logic.cache import get_exercises
 from logic.goal_engine import calculate_targets
 from logic.progress_engine import (
     weight_series, e1rm_series, volume_series, consistency_series,
@@ -40,7 +41,7 @@ def index():
     step_logs = [{"date": s.date, "steps": s.steps} for s in
                 StepLog.query.filter_by(user_id=current_user.id).all()]
 
-    exercises_by_key = {e.key: exercise_to_dict(e) for e in Exercise.query.all()}
+    exercises_by_key = {e["key"]: e for e in get_exercises()}
     exercise_key = request.args.get("exercise", "bench_press")
 
     targets = calculate_targets(profile)

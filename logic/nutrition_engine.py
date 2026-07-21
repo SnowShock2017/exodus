@@ -158,21 +158,86 @@ def recently_eaten_meal_keys(meal_log_entries, days=5):
 
 
 def suggest_meals_for_remaining(meals, remaining_kcal, remaining_protein_g, tags=None,
-                                 recently_used_keys=None, limit=6):
+                                 recently_used_keys=None, limit=6, target_kcal=None):
     """Simple rule-based 'what should I eat' suggestion: meals that fit
     within the remaining calorie budget and help close the protein gap,
-    deprioritizing anything eaten in the last few days."""
+    deprioritizing anything eaten in the last few days.
+
+    target_kcal: the ideal size for this specific meal (e.g. a quarter of
+    the day's remaining budget), if known. Without this, scoring purely by
+    protein content tends to always pick the smallest high-protein meal in
+    the library, which systematically undershoots the day's calorie target
+    by a wide margin once you add up 3-4 "smallest possible" meals — see
+    suggest_day_plan(), which is what actually hit this bug in practice.
+    """
     recently_used_keys = recently_used_keys or set()
     candidates = filter_meals(meals, tags=tags)
     candidates = [m for m in candidates if m["kcal_per_serving"] <= max(remaining_kcal, 200)]
+    ideal_kcal = target_kcal if target_kcal is not None else remaining_kcal
 
     def score(m):
         protein_fit = min(m["protein_g_per_serving"], remaining_protein_g)
+        kcal_diff = abs(m["kcal_per_serving"] - ideal_kcal)
+        closeness_to_ideal_size = max(0.0, 100.0 - kcal_diff / 5.0)
         penalty = 50 if m["key"] in recently_used_keys else 0
-        return protein_fit - penalty
+        return protein_fit + closeness_to_ideal_size - penalty
 
     candidates.sort(key=score, reverse=True)
     return candidates[:limit]
+
+
+def suggest_day_plan(meals, target_calories, target_protein_g, recently_used_keys=None,
+                      meal_types=None, max_servings=3):
+    """Build a full day's suggested meals — one entry per meal-type slot,
+    each possibly scaled to more than one serving — so the suggested day
+    actually adds up close to the day's calorie/protein targets, instead of
+    handing back a single default-size serving per slot regardless of how
+    big the target is (that version could fall ~1000kcal short of a 3000kcal
+    target, which is exactly the bug this replaced).
+
+    Returns a list of meal dicts, each with the usual meal fields plus
+    "slot", "servings", "kcal_total", and "protein_g_total" for the scaled
+    amount actually suggested.
+    """
+    meal_types = meal_types or MEAL_TYPES
+    recently_used_keys = set(recently_used_keys or set())
+    remaining_kcal = target_calories
+    remaining_protein = target_protein_g
+    used_keys = set()
+    plan = []
+    n_slots = len(meal_types) or 1
+
+    for i, slot in enumerate(meal_types):
+        slots_left = n_slots - i
+        target_kcal_slot = max(remaining_kcal / slots_left, 200)
+        tags = [slot] if slot != "snack" else None
+
+        candidates = suggest_meals_for_remaining(
+            meals, remaining_kcal, remaining_protein, tags=tags,
+            recently_used_keys=recently_used_keys | used_keys, limit=1, target_kcal=target_kcal_slot)
+        if not candidates:
+            candidates = suggest_meals_for_remaining(
+                meals, remaining_kcal, remaining_protein,
+                recently_used_keys=recently_used_keys | used_keys, limit=1, target_kcal=target_kcal_slot)
+        if not candidates:
+            continue
+
+        m = candidates[0]
+        servings = 1
+        if m["kcal_per_serving"]:
+            servings = max(1, round(target_kcal_slot / m["kcal_per_serving"]))
+        servings = min(servings, max_servings)
+
+        kcal_total = round(m["kcal_per_serving"] * servings)
+        protein_total = round(m["protein_g_per_serving"] * servings, 1)
+
+        plan.append({**m, "slot": slot, "servings": servings,
+                     "kcal_total": kcal_total, "protein_g_total": protein_total})
+        used_keys.add(m["key"])
+        remaining_kcal -= kcal_total
+        remaining_protein -= protein_total
+
+    return plan
 
 
 # ---------------------------------------------------------------------------

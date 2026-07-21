@@ -36,8 +36,14 @@
     </label>
     <label>{{ t('equipment_available') }}</label>
     <div class="chip-group">
-      {% for eq in ["barbell","dumbbell","kettlebell","machine","cable_machine","pullup_bar","bench","rack","bike","rower","band","box","medicine_ball","landmine","dip_bars","ab_wheel","jump_rope"] %}
-        <label class="chip"><input type="checkbox" name="equipment" value="{{ eq }}" {{ 'checked' if eq in (profile.equipment or []) }}> {{ eq.replace('_',' ') }}</label>
+      {% for eq in ["barbell","dumbbell","kettlebell","machine","cable_machine","pullup_bar","bench","rack",
+                    "bike","rower","band","box","medicine_ball","landmine","dip_bars","ab_wheel","jump_rope",
+                    "smith_machine","leg_press_machine","hack_squat_machine","chest_press_machine","pec_deck_machine",
+                    "lat_pulldown_machine","seated_row_machine","leg_curl_machine","leg_extension_machine",
+                    "hip_thrust_machine","calf_raise_machine","cable_crossover","trap_bar","ez_bar","safety_squat_bar",
+                    "battle_ropes","sled","gymnastic_rings","suspension_trainer","treadmill","assault_bike",
+                    "stairmaster","foam_roller"] %}
+        <label class="chip"><input type="checkbox" name="equipment" value="{{ eq }}" {{ 'checked' if eq in (profile.equipment or []) }}> {{ t('eq_' + eq) }}</label>
       {% endfor %}
     </div>
     <button class="btn" type="submit">{{ t('continue') }}</button>

@@ -12,21 +12,70 @@
 
 let html5QrCode;
 
+function showScannerStatus(message, kind) {
+  const box = document.getElementById("scanner-status");
+  if (!box) return;
+  box.textContent = message;
+  box.className = "flash flash-" + (kind || "info");
+  box.style.display = "block";
+}
+
+function hideScannerStatus() {
+  const box = document.getElementById("scanner-status");
+  if (box) box.style.display = "none";
+}
+
+// Maps the getUserMedia/html5-qrcode error to one of our translated,
+// actionable messages instead of a raw browser alert() with a technical
+// error string — this is what used to show up as "camera has been
+// blocked" with no way to tell what to do about it.
+function describeCameraError(err) {
+  const i18n = window.SCANNER_I18N || {};
+  const name = (err && (err.name || err.message || "")).toString();
+
+  if (!window.isSecureContext) {
+    return i18n.insecure;
+  }
+  if (/NotAllowedError|PermissionDenied|Permission denied/i.test(name)) {
+    return i18n.denied;
+  }
+  if (/NotFoundError|DevicesNotFoundError/i.test(name)) {
+    return i18n.notFound;
+  }
+  if (/NotReadableError|TrackStartError|in use/i.test(name)) {
+    return i18n.inUse;
+  }
+  return i18n.generic || ("Camera error: " + name);
+}
+
 function startScanner() {
   const readerDiv = document.getElementById("reader");
   if (!readerDiv) return;
+
+  const i18n = window.SCANNER_I18N || {};
+  showScannerStatus(i18n.requesting || "Requesting camera access…", "info");
+
   html5QrCode = new Html5Qrcode("reader");
+  // The camera permission prompt is triggered by this .start() call, which
+  // only runs in response to the user tapping "Start camera" (a real user
+  // gesture) — this is the one-time permission request the browser/OS
+  // shows; we can't (and shouldn't try to) bypass or replace it, we just
+  // make sure the user understands what's about to happen and gets a
+  // clear, actionable message if it fails.
   html5QrCode.start(
     { facingMode: "environment" },
     { fps: 10, qrbox: 250 },
     (decodedText) => {
       html5QrCode.stop();
+      hideScannerStatus();
       document.getElementById("manual-barcode").value = decodedText;
       lookupBarcode(decodedText);
     },
-    () => {} // ignore per-frame scan failures
-  ).catch((err) => {
-    alert("Camera unavailable: " + err);
+    () => {} // ignore per-frame scan failures (no barcode in view yet)
+  ).then(() => {
+    hideScannerStatus();
+  }).catch((err) => {
+    showScannerStatus(describeCameraError(err), "error");
   });
 }
 

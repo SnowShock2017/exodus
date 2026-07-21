@@ -12,8 +12,9 @@ from datetime import date, timedelta
 from flask import Blueprint, render_template, redirect, url_for
 from flask_login import login_required, current_user
 
-from models import WeightLog, WorkoutSetLog, MealLogEntry, WorkoutPlan, WorkoutDay, Exercise
-from logic.helpers import profile_to_dict, exercise_to_dict, meal_log_to_dict
+from models import WeightLog, WorkoutSetLog, MealLogEntry, WorkoutPlan, WorkoutDay
+from logic.helpers import profile_to_dict, meal_log_to_dict
+from logic.cache import get_exercises
 from logic.goal_engine import calculate_targets
 from logic.nutrition_engine import daily_totals, progress_pct
 from logic.progress_engine import personal_records, consistency_series
@@ -51,7 +52,7 @@ def home():
         weekday = date.today().weekday()
         today_day = WorkoutDay.query.filter_by(plan_id=plan.id, weekday_index=weekday).first()
 
-    exercises_by_key = {e.key: exercise_to_dict(e) for e in Exercise.query.all()}
+    exercises_by_key = {e["key"]: e for e in get_exercises()}
 
     set_logs = [{"date": s.date, "exercise_key": s.exercise_key, "weight_kg": s.weight_kg,
                  "reps_done": s.reps_done, "is_warmup": s.is_warmup}

@@ -216,7 +216,8 @@
       "hamstrings"
     ],
     "equipment": [
-      "machine"
+      "machine",
+      "leg_press_machine"
     ],
     "movement_pattern": "squat",
     "experience_level": "beginner",
@@ -314,7 +315,8 @@
       "glutes"
     ],
     "equipment": [
-      "machine"
+      "machine",
+      "hack_squat_machine"
     ],
     "movement_pattern": "squat",
     "experience_level": "intermediate",
@@ -746,7 +748,8 @@
       "front_delts"
     ],
     "equipment": [
-      "machine"
+      "machine",
+      "chest_press_machine"
     ],
     "movement_pattern": "horizontal_push",
     "experience_level": "beginner",
@@ -1145,7 +1148,8 @@
       "biceps"
     ],
     "equipment": [
-      "cable_machine"
+      "cable_machine",
+      "seated_row_machine"
     ],
     "movement_pattern": "horizontal_pull",
     "experience_level": "beginner",
@@ -1357,7 +1361,8 @@
       "biceps"
     ],
     "equipment": [
-      "cable_machine"
+      "cable_machine",
+      "lat_pulldown_machine"
     ],
     "movement_pattern": "vertical_pull",
     "experience_level": "beginner",
@@ -1560,7 +1565,8 @@
       "upper_back"
     ],
     "equipment": [
-      "machine"
+      "machine",
+      "pec_deck_machine"
     ],
     "movement_pattern": "isolation",
     "experience_level": "beginner",
@@ -1908,7 +1914,8 @@
     "secondary_muscles": [],
     "equipment": [
       "machine",
-      "dumbbell"
+      "dumbbell",
+      "calf_raise_machine"
     ],
     "movement_pattern": "isolation",
     "experience_level": "beginner",
@@ -1944,7 +1951,8 @@
     "primary_muscle": "calves",
     "secondary_muscles": [],
     "equipment": [
-      "machine"
+      "machine",
+      "calf_raise_machine"
     ],
     "movement_pattern": "isolation",
     "experience_level": "beginner",
@@ -1980,7 +1988,8 @@
     "primary_muscle": "calves",
     "secondary_muscles": [],
     "equipment": [
-      "machine"
+      "machine",
+      "calf_raise_machine"
     ],
     "movement_pattern": "isolation",
     "experience_level": "intermediate",

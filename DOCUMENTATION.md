@@ -232,6 +232,7 @@ handler) requires `@login_required` — the whole app is behind a login.
 | `seed.py` | loads `seed_data/*.json` into the database on first run |
 | `helpers.py` | converts SQLAlchemy rows → plain dicts for the logic engines |
 | `emailer.py` | optional SMTP password-reset email (see §8) |
+| `cache.py` | in-memory cache for the shared exercise/meal/food/CrossFit libraries — see the performance note below |
 
 Two orphaned v1 modules (`logic/profile_store.py`, `logic/coach_engine.py`,
 `logic/supplement_engine.py`) are still in the folder from the original
@@ -240,6 +241,32 @@ ignore or delete, kept only because files in this workspace can't be
 auto-deleted.
 
 ---
+
+## 6.1 Performance: why pages were slow, and what changed
+
+Early versions of every route queried the shared exercise/meal/food/CrossFit
+tables fresh on every page load — and in a few places (`workouts.today()`,
+`crossfit.detail()`) did so once per row inside a Python loop, a classic
+N+1 pattern. Each of those is a real network round trip to Postgres; on a
+free-tier host, ten to twenty sequential round trips per page is exactly
+what a multi-second page-to-page lag looks like.
+
+`logic/cache.py` now loads those four shared tables into memory once per
+running process and serves every read from a plain dict afterward. They
+only need reloading after a fresh deploy (new process = empty cache), so
+this is safe with no staleness risk in normal use. If you ever add a way
+to edit the shared library from inside a running app, call
+`logic.cache.clear()` afterward.
+
+`config.py` also sets `pool_pre_ping` and `pool_recycle` on the database
+engine, since free-tier Postgres poolers can silently drop idle
+connections — without this, the first request after any idle period could
+fail instead of transparently reconnecting.
+
+If pages are still slow after this, check that your Render service and
+Supabase project are in the same or nearby region (Settings on each) —
+cross-region round trips add real latency that no amount of query
+optimization can remove.
 
 ## 7. Editing the content library (no code changes needed)
 

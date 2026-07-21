@@ -35,6 +35,17 @@ class Config:
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    # pool_pre_ping: check a connection is still alive before using it. Free
+    # database tiers (like Supabase's pooler) can silently drop idle
+    # connections; without this, the first request after any idle period
+    # would fail with a stale-connection error instead of quietly
+    # reconnecting. pool_recycle forces connections to be refreshed
+    # periodically for the same reason.
+    SQLALCHEMY_ENGINE_OPTIONS = {
+        "pool_pre_ping": True,
+        "pool_recycle": 280,
+    }
+
     # Set EXODUS_DEBUG=0 in production (Render env vars) to disable the
     # interactive debugger/traceback pages.
     DEBUG = os.environ.get("EXODUS_DEBUG", "1") == "1"
