@@ -4,6 +4,8 @@
 
 {% if phase == 'ramp' %}<p class="badge">{{ t('phase_ramp').replace('{week}', ramp_week|string) }}</p>{% endif %}
 
+<a class="btn-secondary" href="{{ url_for('workouts.plan_view') }}">📅 {{ t('nav_plan') }}</a>
+
 {% if not plan %}
   <section class="card">
     <p>{{ t('no_active_plan') }}</p>
