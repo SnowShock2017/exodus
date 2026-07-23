@@ -63,10 +63,22 @@
             </li>
           {% endfor %}
         </ul>
-        <details>
+        <details {{ 'open' if not day.exercises }}>
           <summary>{{ t('add_exercise') }}</summary>
           <form method="post" action="{{ url_for('workouts.plan_day_add_exercise', day_id=day.id) }}" class="inline-form">
-            <input type="text" name="exercise_key" placeholder="{{ t('exercise_key_hint') }}" required>
+            <select name="exercise_key" required>
+              <option value="" disabled selected>{{ t('add_exercise') }}…</option>
+              {% set ns = namespace(muscle="") %}
+              {% for ex in exercises %}
+                {% if ex.primary_muscle != ns.muscle %}
+                  {% if ns.muscle %}</optgroup>{% endif %}
+                  <optgroup label="{{ ex.primary_muscle.replace('_',' ')|title }}">
+                  {% set ns.muscle = ex.primary_muscle %}
+                {% endif %}
+                <option value="{{ ex.key }}">{{ ex.name_ro if lang=='ro' else ex.name_en }}</option>
+              {% endfor %}
+              {% if ns.muscle %}</optgroup>{% endif %}
+            </select>
             <button type="submit" class="btn-secondary">{{ t('add') }}</button>
           </form>
           <a class="hint" href="{{ url_for('workouts.exercise_library') }}" target="_blank">{{ t('browse_exercise_library') }}</a>

@@ -127,8 +127,9 @@ def log_set():
 @login_required
 def plan_view():
     plan = _active_plan()
+    exercises = sorted(_all_exercises(), key=lambda e: (e["primary_muscle"], e["name_en"]))
     return render_template("workouts/plan.html", profile=current_user.profile, plan=plan,
-                            styles=list(STYLE_CONFIG.keys()),
+                            styles=list(STYLE_CONFIG.keys()), exercises=exercises,
                             weekday_names_en=WEEKDAY_NAMES_EN, weekday_names_ro=WEEKDAY_NAMES_RO)
 
 

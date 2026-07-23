@@ -179,9 +179,25 @@ def build_plan(exercises, profile_dict, chosen_weekdays, style, equipment=None,
     used_keys_this_week = set()
 
     for idx in range(7):
-        if idx not in chosen_weekdays or not blueprints:
+        if idx not in chosen_weekdays:
             days_out.append({"weekday_index": idx, "is_rest": True, "label_en": "Rest",
                               "label_ro": "Odihnă", "exercises": []})
+            continue
+
+        if not blueprints:
+            # "custom" style (or any style with no blueprint days configured):
+            # still create a real, trainable (non-rest) day for every chosen
+            # weekday, just with no exercises pre-filled. The user builds it
+            # themselves from the Plan page's "Add exercise" picker. Without
+            # this branch every day silently became a rest day regardless of
+            # which weekdays were chosen, which is why "custom" used to look
+            # completely empty.
+            day_number = chosen_weekdays.index(idx) + 1
+            days_out.append({
+                "weekday_index": idx, "is_rest": False,
+                "label_en": f"Custom Day {day_number}", "label_ro": f"Zi Personalizată {day_number}",
+                "exercises": [],
+            })
             continue
 
         blueprint = blueprints[chosen_weekdays.index(idx) % len(blueprints)]

@@ -53,30 +53,57 @@ function startScanner() {
   if (!readerDiv) return;
 
   const i18n = window.SCANNER_I18N || {};
+
+  // Pre-flight checks. Each of these can fail *before* the camera prompt
+  // ever appears, and unlike the .start() promise below, a few of them
+  // throw synchronously — without these checks, a failure here could leave
+  // the page looking like nothing happened at all when you tap the button
+  // (no prompt, no error), which is exactly the symptom this fixes.
+  if (!window.isSecureContext) {
+    showScannerStatus(i18n.insecure, "error");
+    return;
+  }
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    showScannerStatus(i18n.generic || "Camera API not available in this browser.", "error");
+    return;
+  }
+  if (typeof Html5Qrcode === "undefined") {
+    // The html5-qrcode library failed to load from the CDN (blocked script,
+    // offline, ad-blocker, etc.) — without this check, "new Html5Qrcode(...)"
+    // below throws a ReferenceError that nothing catches, so the button
+    // would appear to do nothing.
+    showScannerStatus(i18n.generic || "Scanner library failed to load — check your connection, or use manual search below.", "error");
+    return;
+  }
+
   showScannerStatus(i18n.requesting || "Requesting camera access…", "info");
 
-  html5QrCode = new Html5Qrcode("reader");
-  // The camera permission prompt is triggered by this .start() call, which
-  // only runs in response to the user tapping "Start camera" (a real user
-  // gesture) — this is the one-time permission request the browser/OS
-  // shows; we can't (and shouldn't try to) bypass or replace it, we just
-  // make sure the user understands what's about to happen and gets a
-  // clear, actionable message if it fails.
-  html5QrCode.start(
-    { facingMode: "environment" },
-    { fps: 10, qrbox: 250 },
-    (decodedText) => {
-      html5QrCode.stop();
+  try {
+    html5QrCode = new Html5Qrcode("reader");
+    // The camera permission prompt is triggered by this .start() call,
+    // which only runs in response to the user tapping "Start camera" (a
+    // real user gesture) — this is the one-time permission request the
+    // browser/OS shows; we can't (and shouldn't try to) bypass or replace
+    // it, we just make sure the user understands what's about to happen
+    // and gets a clear, actionable message if it fails.
+    html5QrCode.start(
+      { facingMode: "environment" },
+      { fps: 10, qrbox: 250 },
+      (decodedText) => {
+        html5QrCode.stop();
+        hideScannerStatus();
+        document.getElementById("manual-barcode").value = decodedText;
+        lookupBarcode(decodedText);
+      },
+      () => {} // ignore per-frame scan failures (no barcode in view yet)
+    ).then(() => {
       hideScannerStatus();
-      document.getElementById("manual-barcode").value = decodedText;
-      lookupBarcode(decodedText);
-    },
-    () => {} // ignore per-frame scan failures (no barcode in view yet)
-  ).then(() => {
-    hideScannerStatus();
-  }).catch((err) => {
+    }).catch((err) => {
+      showScannerStatus(describeCameraError(err), "error");
+    });
+  } catch (err) {
     showScannerStatus(describeCameraError(err), "error");
-  });
+  }
 }
 
 async function lookupBarcode(barcode) {

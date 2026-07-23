@@ -17,6 +17,13 @@
     <a class="btn-secondary" href="{{ url_for('workouts.readiness') }}">🌡️ {{ t('nav_readiness') }}</a>
   </section>
 
+  {% if not day_exercises %}
+    <section class="card">
+      <p>{{ t('empty_training_day') }}</p>
+      <a class="btn" href="{{ url_for('workouts.plan_view') }}">{{ t('add_exercise') }} →</a>
+    </section>
+  {% endif %}
+
   {% for item in day_exercises %}
     {% set pe = item.plan_exercise %}
     {% set ex = item.exercise %}
