@@ -236,6 +236,51 @@ def plan_day_add_exercise(day_id):
     return redirect(url_for("workouts.plan_view"))
 
 
+@bp.route("/plan/day/<int:day_id>/toggle-rest", methods=["POST"])
+@login_required
+def plan_day_toggle_rest(day_id):
+    """Flip a single day between training/rest without touching any other
+    day or deleting its exercises — lets you reschedule your week (e.g.
+    turn Friday into a rest day, or turn Sunday into a training day) without
+    regenerating the whole plan, which would wipe any exercises you'd
+    manually built into a custom day."""
+    day = WorkoutDay.query.get(day_id)
+    if not day or day.plan.user_id != current_user.id:
+        return redirect(url_for("workouts.plan_view"))
+    day.is_rest = not day.is_rest
+    if not day.label or day.label in ("Rest", "Odihnă"):
+        n = WorkoutDay.query.filter(WorkoutDay.plan_id == day.plan_id,
+                                     WorkoutDay.weekday_index <= day.weekday_index,
+                                     WorkoutDay.is_rest == False).count()
+        day.label = f"Custom Day {max(n, 1)}" if current_user.profile.language != "ro" else f"Zi Personalizată {max(n, 1)}"
+    db.session.commit()
+    return redirect(url_for("workouts.plan_view"))
+
+
+@bp.route("/plan/day/<int:day_id>/move", methods=["POST"])
+@login_required
+def plan_day_move(day_id):
+    """Move a day to a different weekday. If another day in the plan
+    already occupies that weekday, the two days simply swap places (and
+    swap their exercises with them) — this is how you reschedule your
+    week (e.g. move Tuesday's session to Thursday) without losing anything
+    you've built."""
+    day = WorkoutDay.query.get(day_id)
+    if not day or day.plan.user_id != current_user.id:
+        return redirect(url_for("workouts.plan_view"))
+    new_weekday = request.form.get("weekday_index", type=int)
+    if new_weekday is None or not (0 <= new_weekday <= 6) or new_weekday == day.weekday_index:
+        return redirect(url_for("workouts.plan_view"))
+
+    other_day = WorkoutDay.query.filter_by(plan_id=day.plan_id, weekday_index=new_weekday).first()
+    if other_day:
+        other_day.weekday_index, day.weekday_index = day.weekday_index, new_weekday
+    else:
+        day.weekday_index = new_weekday
+    db.session.commit()
+    return redirect(url_for("workouts.plan_view"))
+
+
 # ---------------------------------------------------------------------------
 # Exercise replacement
 # ---------------------------------------------------------------------------
