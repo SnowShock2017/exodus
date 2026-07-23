@@ -41,6 +41,19 @@
         <strong>{{ weekday_names_ro[day.weekday_index] if lang=='ro' else weekday_names_en[day.weekday_index] }}</strong>
         <span>{{ day.label if not day.is_rest else t('rest_day') }}</span>
       </div>
+      <div class="action-row">
+        <form method="post" action="{{ url_for('workouts.plan_day_toggle_rest', day_id=day.id) }}">
+          <button type="submit" class="btn-ghost">{{ t('make_rest_day') if not day.is_rest else t('make_training_day') }}</button>
+        </form>
+        <form method="post" action="{{ url_for('workouts.plan_day_move', day_id=day.id) }}" class="inline-form">
+          <select name="weekday_index">
+            {% for i in range(7) %}
+              <option value="{{ i }}" {{ 'selected' if i == day.weekday_index }}>{{ weekday_names_ro[i] if lang=='ro' else weekday_names_en[i] }}</option>
+            {% endfor %}
+          </select>
+          <button type="submit" class="btn-ghost">{{ t('move_day') }}</button>
+        </form>
+      </div>
       {% if not day.is_rest %}
         <ul class="week-day-accessories">
           {% for pe in day.exercises %}
